@@ -9,6 +9,7 @@
   "author": "adair n myles",
   "license": "ISC",
   "dependencies": {
+    "babel-cli": "^6.26.0",
     "express": "^4.16.2"
   }
 }
