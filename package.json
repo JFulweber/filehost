@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack; node ./src/server/server.js"
+    "prestart": "webpack",
+    "start": "node ./src/server/server.js"
   },
   "author": "adair n myles",
   "license": "ISC",
