@@ -1,4 +1,4 @@
-import reACT from 'react';
+import React from 'react';
 import style from './Home.scss';
 import Particles from '../../components/Particles/Particles.jsx';
 

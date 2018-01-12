@@ -2339,7 +2339,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-ReactDOM.render(React.createElement(__WEBPACK_IMPORTED_MODULE_2__App_jsx__["a" /* default */], null), document.getElementById('root'));
+__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(React.createElement(__WEBPACK_IMPORTED_MODULE_2__App_jsx__["a" /* default */], null), document.getElementById('root'));
 
 /***/ }),
 /* 35 */
@@ -19645,10 +19645,10 @@ module.exports = camelize;
 
 class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
     render() {
-        return React.createElement(
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Switch */],
             null,
-            React.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["a" /* Route */], { exact: true, path: '/', component: __WEBPACK_IMPORTED_MODULE_2__pages_Home_Home_jsx__["a" /* default */] })
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["a" /* Route */], { exact: true, path: '/', component: __WEBPACK_IMPORTED_MODULE_2__pages_Home_Home_jsx__["a" /* default */] })
         );
     }
 }
@@ -23373,12 +23373,12 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
 
 
 
-class home extends React.Component {
+class home extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
     render() {
-        return React.createElement(
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { id: 'home-main', className: __WEBPACK_IMPORTED_MODULE_1__Home_scss___default.a.Home },
-            React.createElement(__WEBPACK_IMPORTED_MODULE_2__components_Particles_Particles_jsx__["a" /* default */], null)
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_Particles_Particles_jsx__["a" /* default */], null)
         );
     }
 }

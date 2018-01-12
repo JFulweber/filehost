@@ -1,8 +1,8 @@
-import reACT from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home/Home.jsx'
 
-export default class App extends reACT.Component {
+export default class App extends React.Component {
     render(){
         return(
             <Switch>
