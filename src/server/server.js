@@ -6,6 +6,6 @@ var app = express();
 app.use(express.static('../../dist/'))
 
 app.listen(PORT,function(){
-    console.log('hello no');
+    console.log('hello reACT');
 })
 
