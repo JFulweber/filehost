@@ -1,8 +1,8 @@
-import react from 'react';
+import React from 'react';
 import style from './Particles.scss';
 import Part from 'react-particles-js';
 
-export default class Particles extends react.Component{
+export default class Particles extends React.Component{
     render(){
         var par = {
             particles: {
@@ -15,8 +15,8 @@ export default class Particles extends react.Component{
                 }
             }
         }
-        return(
-            <Part params={par} />
+        return( 
+            <Part params={par} id='particles' className={style.particles}/>
         )
     }
 }

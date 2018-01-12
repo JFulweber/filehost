@@ -5,9 +5,11 @@ import Home from './pages/Home/Home.jsx'
 export default class App extends React.Component {
     render(){
         return(
-            <Switch>
-                <Route exact path="/" component={Home}/>
-            </Switch>
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path="/" component={Home}/>
+                </Switch>
+            </BrowserRouter>
         )
     }
 }
