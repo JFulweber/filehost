@@ -5,7 +5,7 @@ export default class home extends React.Component {
     render() {
         return(
             <div id="home-main" className={style.Home}>
-
+                
             </div>
         )
     }
