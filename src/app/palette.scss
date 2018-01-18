@@ -1,0 +1,16 @@
+/* Coolors Exported Palette - coolors.co/2f2f2f-adadad-e6e6e6-bc2727-902727 */
+
+/* RGB */
+$color1: rgba(47, 47, 47, 1);
+$color2: rgba(173, 173, 173, 1);
+$color3: rgba(230, 230, 230, 1);
+$color4: rgba(188, 39, 39, 1);
+$color5: rgba(144, 39, 39, 1);
+
+:export{
+    color-black: $color1;
+    color-gray: $color2;
+    color-white: $color3;
+    color-red: $color4;
+    color-dark-red: $color5;
+}
