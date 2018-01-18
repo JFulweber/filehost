@@ -19646,9 +19646,13 @@ module.exports = camelize;
 class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
     render() {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Switch */],
+            __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["a" /* BrowserRouter */],
             null,
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["a" /* Route */], { exact: true, path: '/', component: __WEBPACK_IMPORTED_MODULE_2__pages_Home_Home_jsx__["a" /* default */] })
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["c" /* Switch */],
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Route */], { exact: true, path: '/', component: __WEBPACK_IMPORTED_MODULE_2__pages_Home_Home_jsx__["a" /* default */] })
+            )
         );
     }
 }
@@ -19661,7 +19665,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(48);
-/* unused harmony reexport BrowserRouter */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(52);
 /* unused harmony reexport HashRouter */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(30);
@@ -19675,13 +19679,13 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(62);
 /* unused harmony reexport Redirect */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(31);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(17);
 /* unused harmony reexport Router */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(68);
 /* unused harmony reexport StaticRouter */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(70);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__matchPath__ = __webpack_require__(72);
 /* unused harmony reexport matchPath */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__withRouter__ = __webpack_require__(73);
@@ -19778,7 +19782,7 @@ BrowserRouter.propTypes = {
 };
 
 
-/* unused harmony default export */ var _unused_webpack_default_export = (BrowserRouter);
+/* harmony default export */ __webpack_exports__["a"] = (BrowserRouter);
 
 /***/ }),
 /* 49 */
@@ -23402,25 +23406,102 @@ class home extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Particles_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Particles_scss__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_particles_js__ = __webpack_require__(80);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_particles_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_particles_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__palette_scss__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__palette_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__palette_scss__);
+
 
 
 
 
 class Particles extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
-    render() {
-        var par = {
-            particles: {
-                line_linked: {
-                    shadow: {
-                        enable: true,
-                        color: "#3CA9D1",
-                        blur: 5
-                    }
-                }
+  render() {
+    var params = {
+      particles: {
+        number: {
+          value: 100,
+          density: {
+            enable: true,
+            value_area: 700
+          }
+        },
+        color: {
+          value: __WEBPACK_IMPORTED_MODULE_3__palette_scss___default.a.colorWhite
+        },
+        shape: {
+          type: "circle"
+        },
+        opacity: {
+          value: 0.5,
+          random: false
+        },
+        size: {
+          value: 2,
+          random: true
+        },
+        line_linked: {
+          enable: true,
+          distance: 200,
+          color: __WEBPACK_IMPORTED_MODULE_3__palette_scss___default.a.colorWhite,
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 7,
+          direction: "none",
+          random: true,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: {
+            enable: true,
+            mode: "bubble"
+          },
+          onclick: {
+            enable: true,
+            mode: "push"
+          },
+          resize: true
+        },
+        modes: {
+          grab: {
+            distance: 400,
+            line_linked: {
+              opacity: 1
             }
-        };
-        return React.createElement(__WEBPACK_IMPORTED_MODULE_2_react_particles_js___default.a, { params: par });
-    }
+          },
+          bubble: {
+            distance: 400,
+            size: 5,
+            duration: 2,
+            opacity: 1,
+            speed: 3
+          },
+          repulse: {
+            distance: 200,
+            duration: 0.4
+          },
+          push: {
+            particles_nb: 4
+          },
+          remove: {
+            particles_nb: 2
+          }
+        }
+      },
+      retina_detect: true
+    };
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      { className: __WEBPACK_IMPORTED_MODULE_1__Particles_scss___default.a.divParticle },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_particles_js___default.a, { params: params, id: 'particles', className: __WEBPACK_IMPORTED_MODULE_1__Particles_scss___default.a.particles })
+    );
+  }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Particles;
 
@@ -23430,6 +23511,7 @@ class Particles extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component 
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+module.exports = {"colorBlack":"#2f2f2f","colorGray":"#adadad","colorWhite":"#e6e6e6","colorRed":"#bc2727","colorDarkRed":"#902727","particles":"Particles__particles___2AYff","divParticle":"Particles__divParticle___326gx"};
 
 /***/ }),
 /* 80 */
@@ -25024,6 +25106,13 @@ class Particles extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component 
         t.default = s;
     } ]);
 });
+
+/***/ }),
+/* 81 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+module.exports = {"colorBlack":"#2f2f2f","colorGray":"#adadad","colorWhite":"#e6e6e6","colorRed":"#bc2727","colorDarkRed":"#902727"};
 
 /***/ })
 /******/ ]);
