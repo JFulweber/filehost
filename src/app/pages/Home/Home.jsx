@@ -1,12 +1,14 @@
 import React from 'react';
 import style from './Home.scss';
-import Particles from '../../components/Particles/Particles.jsx';
+import ParticleBackground from '../../components/ParticleBackground/ParticleBackground.jsx'
 
-export default class home extends React.Component {
+export default class Home extends React.Component {
     render() {
         return(
             <div id="home-main" className={style.Home}>
-                <Particles/>
+                <ParticleBackground>
+                    yes hello
+                </ParticleBackground>
             </div>
         )
     }
