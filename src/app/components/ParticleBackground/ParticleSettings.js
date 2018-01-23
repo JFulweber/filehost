@@ -49,7 +49,7 @@ export default params = {
         },
         onclick: {
           enable: true,
-          mode: "push"
+          mode: "repulse"
         },
         resize: true
       },
