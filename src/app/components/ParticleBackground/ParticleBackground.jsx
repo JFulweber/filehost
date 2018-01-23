@@ -8,7 +8,7 @@ export default class ParticleBackground extends React.Component{
         return( 
             <div id="container" className={style.container}>
                 <div className={style.divParticle}>
-                    <Part params={params} id='particles' className={style.particles}/>
+                    <Part params={params} id='particles' className={style.particles} width="1920" height="1080"/>
                 </div>
                 <div className={style.overlay}>
                     {this.props.children}
