@@ -1,12 +1,20 @@
 @import "../../palette.scss";
 
-.background{
-    position: absolute;
-    z-index: 0;
-    background-color: colorGray;
+.container{
+    position: relative;
+    width: 100vh;
+    .overlay{
+        position: absolute;
+    }
 }
 
-.foreground{
+.particles{
+    width: 100vh;
+    height: 100vh; 
+}
+
+.divParticle{
+    width: 100vh;
     position: absolute;
-    z-index: 1;
+    background-color:$color2;
 }

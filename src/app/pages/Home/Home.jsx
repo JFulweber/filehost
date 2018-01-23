@@ -7,7 +7,7 @@ export default class Home extends React.Component {
         return(
             <div id="home-main" className={style.Home}>
                 <ParticleBackground>
-                    <h1>MY NAME JEFF</h1>
+                    what is UP bro
                 </ParticleBackground>
             </div>
         )
