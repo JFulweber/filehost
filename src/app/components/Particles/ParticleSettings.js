@@ -3,7 +3,7 @@ let params = {};
 export default params = {
     particles: {
       number: {
-        value: 100,
+        value: 75,
         density: {
           enable: true,
           value_area: 700
@@ -32,7 +32,7 @@ export default params = {
       },
       move: {
         enable: true,
-        speed: 7,
+        speed: 2,
         direction: "none",
         random: true,
         straight: false,

@@ -8,7 +8,6 @@ export default class Particles extends React.Component{
         console.log(style);
         return( 
             <div className={style.divParticle}>
-                <p> whats up </p>
                 <Part params={params} id='particles' className={style.particles}/>
             </div>
         )
