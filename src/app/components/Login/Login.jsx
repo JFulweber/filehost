@@ -1,10 +1,14 @@
 import React from 'react';
-import style from './Login.scss';
+import styles from './Login.scss';
 
 export default class Login extends React.Component{
  render(){
      return(
-         <p></p>
+         <div className={styles.loginContainer}>
+             <p className={styles.username}>Username</p>
+             <input type="Username" value="" className={styles.usernameIn} placeholder="Username"/>
+             <p className={styles.password}>Password</p>
+         </div>
      )
  }
 }
