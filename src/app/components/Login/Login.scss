@@ -36,7 +36,7 @@
         color: $color4;
         display: table-row;
         padding-right: 3vh;
-        padding-top: 3vh;
+        margin-top: 3vh;
     }
     .passwordIn{
         display: table-cell;
@@ -52,6 +52,7 @@
         border-radius: 0;
         pointer-events: auto;
         vertical-align: middle;
+        margin-top: 3vh;
     }
 }
 
