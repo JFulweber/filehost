@@ -20,6 +20,6 @@ app.use(express.static('./dist/'))
 
 
 app.listen(PORT,function(){
-    console.log('hello react');
+    console.log('hello reACT');
 })
 

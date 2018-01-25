@@ -11,6 +11,8 @@
         font-size: 4vh;
         color: $color4;
         display: table-row;
+        padding-right: 3vh;
+        margin-top: 3vh;
     }
     .usernameIn{
         display: table-cell;
@@ -25,15 +27,31 @@
         vertical-align: middle;
         border-radius: 0;
         pointer-events: auto;
+        vertical-align: middle;
+        margin-top: 3vh; 
     }
     .password{
         font-family: "Ropa Sans";
         font-size: 4vh;
         color: $color4;
         display: table-row;
+        padding-right: 3vh;
+        padding-top: 3vh;
     }
     .passwordIn{
-        
+        display: table-cell;
+        margin: 0;
+        border: 3px solid $color4;
+        background: transparent;
+        color: #fff;
+        padding: 10px 6px;
+        font-size: 13px;
+        line-height: 12px;
+        box-sizing: border-box;
+        vertical-align: middle;
+        border-radius: 0;
+        pointer-events: auto;
+        vertical-align: middle;
     }
 }
 
