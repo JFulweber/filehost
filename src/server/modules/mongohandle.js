@@ -1,2 +1,2 @@
-console.log('hey whats up bro');
-//process.exit(0);
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017');
