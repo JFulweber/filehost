@@ -6,7 +6,7 @@ export default params = {
         value: 75,
         density: {
           enable: true,
-          value_area: 700
+          value_area: 1000
         }
       },
       color: {
@@ -48,7 +48,7 @@ export default params = {
           mode: "bubble"
         },
         onclick: {
-          enable: true,
+          enable: false,
           mode: "bubble"
         },
         resize: true

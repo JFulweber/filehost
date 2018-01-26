@@ -26,7 +26,7 @@ export default class Login extends React.Component {
             <div className={styles.loginContainer}>
                 <table>
                     <tbody>
-                        <tr>
+                        <tr className={styles.userRow}>
                             <td>
                                 <p className={styles.username}>Username</p>
                             </td>
@@ -34,7 +34,7 @@ export default class Login extends React.Component {
                                 <input type="username" id="username" value={this.state.username} onChange={this.usernameChange} className={styles.usernameIn} placeholder="Username" />
                             </td>
                         </tr>
-                        <tr>
+                        <tr className={styles.passRow}>
                             <td>
                                 <p className={styles.password}>Password</p>
                             </td>

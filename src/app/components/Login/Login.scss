@@ -6,13 +6,15 @@
     left: 50%;
     transform: translate(-50%, -50%);
     display: table;
+    .userRow{
+        margin-bottom: 1vh;
+    }
     .username{
         font-family: "Ropa Sans";
         font-size: 4vh;
         color: $color4;
         display: table-row;
         padding-right: 3vh;
-        margin-top: 3vh;
     }
     .usernameIn{
         display: table-cell;
@@ -27,8 +29,9 @@
         vertical-align: middle;
         border-radius: 0;
         pointer-events: auto;
-        vertical-align: middle;
-        margin-top: 3vh; 
+    }
+    .passRow{
+        margin-top: 1vh;
     }
     .password{
         font-family: "Ropa Sans";
@@ -36,7 +39,6 @@
         color: $color4;
         display: table-row;
         padding-right: 3vh;
-        margin-top: 3vh;
     }
     .passwordIn{
         display: table-cell;
@@ -51,8 +53,6 @@
         vertical-align: middle;
         border-radius: 0;
         pointer-events: auto;
-        vertical-align: middle;
-        margin-top: 3vh;
     }
 }
 
