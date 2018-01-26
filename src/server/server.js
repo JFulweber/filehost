@@ -14,9 +14,15 @@ var processes = {
         verifyInterval: 300,
         verifyTimeout: 5000,
         verify: function(port, callback){
-            var connection = mongoose.createConnection('mongodb://localhost:27017')
-            console.log(connection)
-            callback(null, connection!=null);
+            var connection = mongoose.connect('mongodb://localhost:27017')
+            connection.then((status,err)=>{
+                if(err!=undefined){
+                    callback(err,false)
+                }
+                else{
+                    callback(null, true);
+                }
+            })
         }
     },
     mongohandler: {
@@ -24,8 +30,15 @@ var processes = {
         commandArgs: [__dirname + '/modules/mongohandle.js'],
         dependsOn:['mongoInstance'],
         verify: function(port, callback){
-           /*  var req = request://localhost:27017');
-            fetch(req).then((data)=>console.log(data)); */
+            var connection = mongoose.connect('mongodb://localhost:27017')
+            connection.then((status,err)=>{
+                if(err!=undefined){
+                    callback(err,false)
+                }
+                else{
+                    callback(null, true);
+                }
+            })
         }
     },
 }
