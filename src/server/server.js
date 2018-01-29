@@ -27,7 +27,7 @@ var processes = {
     },
     mongohandler: {
         command: 'node',
-        commandArgs: [__dirname + '/modules/mongohandle.js'],
+        commandArgs: [__dirname + '/modules/mongo/mongohandle.js'],
         dependsOn:['mongoInstance'],
         verify: function(port, callback){
             var connection = mongoose.connect('mongodb://localhost:27017')
