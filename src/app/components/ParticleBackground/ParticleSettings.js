@@ -3,7 +3,7 @@ let params = {};
 export default params = {
     particles: {
       number: {
-        value: 50,
+        value: 75,
         density: {
           enable: true,
           value_area: 1000
@@ -25,7 +25,7 @@ export default params = {
       },
       line_linked: {
         enable: true,
-        distance: 100,
+        distance: 175,
         color: p.colorWhite,
         opacity: 0.4,
         width: 1
