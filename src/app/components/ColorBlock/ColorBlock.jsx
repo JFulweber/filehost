@@ -7,7 +7,8 @@ export default class ColorBlock extends React.Component{
         super(props);
         this.state={};
         this.state.color=this.props.color!=undefined?this.props.color:styles.ColorWhite;
-        this.state.width=this.props.width!=undefined?this.props.width:styles.ColorWhite;    
+        this.state.width=this.props.width!=undefined?this.props.width:styles.defWidth;
+        this.state.height=this.props.height!=undefined?this.props.width:styles.defHeight;    
     }
     
     render(){

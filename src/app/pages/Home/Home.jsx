@@ -13,7 +13,7 @@ export default class Home extends React.Component {
                     <Login/>
                     <div>
                         <ColorBlock color={palette.colorWhite}/>
-                        <ColorBlock color={palette.colorWhite}/>
+                        <ColorBlock color={palette.colorWhite} ClassName={styles.BlockLeft}'/>
                     </div>
                 </ParticleBackground>
             </div>
