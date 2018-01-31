@@ -15,7 +15,7 @@ export default class ColorBlock extends React.Component{
     
     render(){
         return(
-            <div style={{backgroundColor:this.state.color,height:this.state.height,width:this.state.width,transform:`skew(${this.state.skew}`}}/>
+            <div style={{backgroundColor:this.state.color,height:this.state.height,width:this.state.width,transform:`rotateY(${this.state.skew}`}}/>
         )
     }
 
