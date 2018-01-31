@@ -2,3 +2,12 @@
     width: 100vw;
     height: 100vh;
 }
+.blocks{
+    margin-top: 65vh;
+    .left{
+        float: left;
+    }
+    .right{
+        float: right;
+    }
+}
