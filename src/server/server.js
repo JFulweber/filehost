@@ -22,6 +22,7 @@ var processes = {
                 else{
                     callback(null, true);
                 }
+                mongoose.disconnect();                
             })
         }
     },
@@ -38,6 +39,7 @@ var processes = {
                 else{
                     callback(null, true);
                 }
+                mongoose.disconnect();
             })
         }
     },

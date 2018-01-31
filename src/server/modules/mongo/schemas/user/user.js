@@ -1,6 +1,11 @@
-var {Schema} = require('mongoose');
+var mongoose = require('mongoose');
+var {Schema} = mongoose;
 
-var User = new Schema({
+let User = new Schema({
     username: !String,
-    
+    email: !String,
+    hashedPass: !String,
+    creationDate: !Date
 })
+
+module.exports = mongoose.model('User',User);
