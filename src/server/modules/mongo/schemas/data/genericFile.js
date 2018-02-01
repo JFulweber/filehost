@@ -1,4 +1,5 @@
-var {Schema} = require('mongoose');
+var mongoose = require('mongoose');
+var {Schema} = mongoose;
 
 let File = new Schema({
     filepath: !String,
@@ -7,4 +8,4 @@ let File = new Schema({
     fileSize: Number
 })
 
-module.exports = File;
+module.exports = mongoose.model('File',File);

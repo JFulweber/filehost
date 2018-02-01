@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var {User} = require('./schemas');
+var {GenericFile, User} = require('./schemas');
 
 mongoose.connect('mongodb://localhost:27017').then((status,err)=>{
     //console.log(status);
@@ -9,14 +9,13 @@ mongoose.connect('mongodb://localhost:27017').then((status,err)=>{
     console.log(err);
 });
 
-console.log(User);
+/* var myFile = new GenericFile({
+    filepath: '/myPath/image.jpg',
+    uploader: 'intox',
+    uploadDate: Date.now(),
+    fileSize: 3000000
+})
 
-var testUser = new User({
-    username: "jeff",
-    email: "jeff@jeff.com",
-    hashedPass: "whdah38",
-    creationDate: Date.now()
-});
+myFile.save(); */
 
-var res = testUser.save();
-console.log(res);
+module.exports = mongoose;
