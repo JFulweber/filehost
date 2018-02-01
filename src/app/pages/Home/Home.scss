@@ -1,6 +1,7 @@
-.home-main{
+.Home{
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
 }
 .blocks{
     margin-top: 65vh;
@@ -13,11 +14,11 @@
     .left{
         flex: 1;
         order:1;
-        transform: translate(50%);
+        top:0px;
     }
     .right{
         flex: 1;
         order:2;
-        transform: translate(-50%);
+        top:0px;
     }
 }
