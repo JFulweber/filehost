@@ -12,8 +12,8 @@ export default class Home extends React.Component {
                 <ParticleBackground>
                     <Login/>
                     <div className={style.blocks}>
-                        <ColorBlock className={style.left} color={palette.colorRed} width='100vw' height='30vh' skew='-45deg'/>
-                        <ColorBlock className={style.right} color={palette.colorDarkRed} width='100vw' height='30vh' skew='45deg'/>
+                        <ColorBlock className={style.left} color={palette.colorRed} width='100vw' height='30vh' skew='-65deg'/>
+                        <ColorBlock className={style.right} color={palette.colorDarkRed} width='100vw' height='30vh' skew='65deg'/>
                     </div>
                 </ParticleBackground>
             </div>
