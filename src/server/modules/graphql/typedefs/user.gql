@@ -1,0 +1,21 @@
+    type Query {
+        users: [User]!
+        user(username:String!): User
+    }
+
+    type User {
+        _id: ID!
+        username: String,
+        email: String,
+        creationDate: Int
+    }
+
+    input UserInput {
+        username: String!,
+        email: String!,
+        password: String!
+    }
+
+    type Mutation {
+        addUser(new_user:UserInput!): Boolean!
+    }

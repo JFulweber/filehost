@@ -63,7 +63,22 @@ var app = express();
 
 app.use(express.static('./dist/'))
 
+var { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
+var { makeExecutableSchema } = require('graphql-tools');
+var bodyParser = require('body-parser');
 
+var {User, GenericFile} = require('./modules/mongo/schemas')
+var {typeDefs, resolvers} = require('./modules/graphql/')
+
+const schema = makeExecutableSchema({
+   typeDefs, resolvers
+});
+
+server.use('/graphql', bodyParser.json(), graphqlExpress({
+    schema, context: { User, GenericFile}
+}));
+
+server.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
 app.listen(PORT, function () {
     console.log('hello react');
