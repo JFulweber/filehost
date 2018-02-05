@@ -24,26 +24,12 @@ export default class Login extends React.Component {
 
         return (
             <div className={styles.loginContainer}>
-                <table>
-                    <tbody>
-                        <tr className={styles.userRow}>
-                            <td>
-                                <p className={styles.username}>Username</p>
-                            </td>
-                            <td>
-                                <input type="username" id="username" value={this.state.username} onChange={this.usernameChange} className={styles.usernameIn} placeholder="Username" />
-                            </td>
-                        </tr>
-                        <tr className={styles.passRow}>
-                            <td>
-                                <p className={styles.password}>Password</p>
-                            </td>
-                            <td>
-                                <input type="password" id="password" value={this.state.pass} onChange={this.passChange} className={styles.passwordIn} placeholder="Password" />
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <form>
+                    <flex>
+                        <input type="username" id="username" value={this.state.username} onChange={this.usernameChange} className={styles.usernameIn} placeholder="Username" />
+                        <input type="password" id="password" value={this.state.pass} onChange={this.passChange} className={styles.passwordIn} placeholder="Password" />
+                    </flex>
+                </form>
             </div>
         )
     }
