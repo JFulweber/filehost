@@ -74,11 +74,11 @@ const schema = makeExecutableSchema({
    typeDefs, resolvers
 });
 
-server.use('/graphql', bodyParser.json(), graphqlExpress({
+app.use('/graphql', bodyParser.json(), graphqlExpress({
     schema, context: { User, GenericFile}
 }));
 
-server.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
+app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
 app.listen(PORT, function () {
     console.log('hello react');

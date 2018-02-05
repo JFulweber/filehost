@@ -1,0 +1,23 @@
+    type Query {
+        files: [File]!
+        file(path:String!): File
+    }
+
+    type File {
+        _id: ID!
+        user: User,
+        path: String!,
+        type: String,
+        creationDate: Int
+    }
+
+    input NewFile {
+        owneruser: String!,
+        type: String,
+        size: Int!,
+        creationDate: Int
+    }
+
+    type Mutation {
+        addFile(new: NewFile!): Boolean!
+    }
