@@ -1,16 +1,16 @@
 @import '../../palette.scss';
 .container{
     margin: auto;
-    text-align: center;
+    text-align: left;
     .titlebgContainer{
         position: absolute;
         width: 100%;
         .titlebg{
-            text-align: center;
+            text-align: left;
             margin: auto;
             font-family: "Oleo Script Swash Caps";
             color: $color5;
-            font-size: 20vh;
+            font-size: 50px;
             font-weight: bold;
         }
     }
@@ -18,11 +18,11 @@
         position: absolute;
         width: 100%;
         .title{
-            text-align: center;
+            text-align: left;
             margin: auto;
             font-family: "Oleo Script Swash Caps";
             color: $color4;
-            font-size: 20vh;
+            font-size: 50px;
             font-weight: normal;
         }
     }

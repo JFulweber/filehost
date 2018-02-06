@@ -1,7 +1,15 @@
-.Home{
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+@import '../../palette.scss';
+
+body {
+    margin:0;
+    position: relative;
+    overflow-x: hidden;
+    max-width: 100%;
+    background-color: $color1
+}
+.top{
+    padding: 150px 0 100px; 
+    overflow-x: hidden;
 }
 .blocks{
     margin: auto;
