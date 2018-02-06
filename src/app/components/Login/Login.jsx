@@ -25,10 +25,8 @@ export default class Login extends React.Component {
         return (
             <div className={styles.loginContainer}>
                 <form>
-                    <flex>
-                        <input type="username" id="username" value={this.state.username} onChange={this.usernameChange} className={styles.usernameIn} placeholder="Username" />
-                        <input type="password" id="password" value={this.state.pass} onChange={this.passChange} className={styles.passwordIn} placeholder="Password" />
-                    </flex>
+                    <input type="username" id="username" value={this.state.username} onChange={this.usernameChange} className={styles.usernameIn} placeholder="Username" />
+                    <input type="password" id="password" value={this.state.pass} onChange={this.passChange} className={styles.passwordIn} placeholder="Password" />
                 </form>
             </div>
         )

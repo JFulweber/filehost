@@ -1,21 +1,9 @@
 @import "../../palette.scss";
 
 .loginContainer{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: table;
-    .userRow{
-        margin-bottom: 1vh;
-    }
-    .username{
-        font-family: "Ropa Sans";
-        font-size: 4vh;
-        color: $color4;
-        display: table-row;
-        padding-right: 3vh;
-    }
+    position: relative;
+    margin: auto;
+    display: flex;
     .usernameIn{
         display: table-cell;
         margin: 0;
@@ -29,16 +17,6 @@
         vertical-align: middle;
         border-radius: 0;
         pointer-events: auto;
-    }
-    .passRow{
-        margin-top: 1vh;
-    }
-    .password{
-        font-family: "Ropa Sans";
-        font-size: 4vh;
-        color: $color4;
-        display: table-row;
-        padding-right: 3vh;
     }
     .passwordIn{
         display: table-cell;
@@ -54,7 +32,6 @@
         border-radius: 0;
         pointer-events: auto;
     }
-
     input:focus {
         outline:none;
     }

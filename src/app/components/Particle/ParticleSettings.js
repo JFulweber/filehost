@@ -3,10 +3,10 @@ let params = {};
 export default params = {
     particles: {
       number: {
-        value: 75,
+        value: 150,
         density: {
           enable: true,
-          value_area: 1000
+          value_area: 2000
         }
       },
       color: {
@@ -36,7 +36,7 @@ export default params = {
         direction: "none",
         random: true,
         straight: false,
-        out_mode: "out",
+        out_mode: "bounce",
         bounce: false
       }
     },
