@@ -1,4 +1,6 @@
 import React from 'react';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 export default class Uploader extends React.Component{
     
@@ -28,4 +30,9 @@ export default class Uploader extends React.Component{
             </div>
         )
     }
+}
+
+class OnUpload extends React.Component{
+    // this.props.data = graphql
+
 }
