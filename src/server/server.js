@@ -82,6 +82,12 @@ app.use('/graphql', bodyParser.json(), apolloUploadExpress(), graphqlExpress({
 
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
+var path = require('path');
+
+app.get('/*', function(req,res){
+    res.sendFile(path.resolve(__dirname,'../../dist/index.html'));
+});
+
 app.listen(PORT, function () {
     console.log('hello react');
 })
