@@ -4,20 +4,17 @@ import Particle from '../../components/Particle/Particle.jsx';
 import Login from '../../components/Login/Login.jsx';
 import ColorBlock from '../../components/ColorBlock/ColorBlock.jsx';
 import palette from '../../palette.scss';
-import Title from '../../components/Title/Title.jsx';
+import MasterLayout from '../../layouts/MasterLayout/MasterLayout.jsx';
 
 export default class Home extends React.Component {
     render() {
         return (
-            <div>
-                <header>
-                    <nav><Title/></nav>
-                </header>
+            <MasterLayout>
                 <div className={style.top}>
                     <Particle/>
                     <Login/>
                 </div>
-            </div>
+            </MasterLayout>
         )
         /* <div id="home-main" className={style.Home}>
                 <ParticleBackground>

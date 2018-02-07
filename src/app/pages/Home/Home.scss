@@ -10,24 +10,5 @@ body {
 .top{
     padding: 150px 0 100px; 
     overflow-x: hidden;
-}
-.blocks{
-    margin: auto;
-    margin-top: 20vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    max-height: 100vh;
-    .left{
-        flex: 1;
-        order:1;
-        top:0px;
-    }
-    .right{
-        flex: 1;
-        order:2;
-        top:0px;
-    }
+    z-index: 10;
 }
