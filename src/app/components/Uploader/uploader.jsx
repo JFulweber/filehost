@@ -1,54 +1,32 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+var uploadsQuery = gql`query uploads {uploads {id,filename,encoding,mimetype,path}}`
 
-export default class Uploader extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.props = props;
-        this.handleChange = this.handleChange.bind(this);
-        this.submit = this.submit.bind(this);
-        this.state = {};
-        this.state.file = {};
-    }
+const UploadFile = ({ mutate }) => {
+    const handleChange = ({ target: { validity, files: [file] } }) =>
+        validity.valid &&
+        mutate({
+            variables: { file },
+            update: (proxy, { data: { singleUpload } }) => {
+                const data = proxy.readQuery({ query: uploadsQuery })
+                data.uploads.push(singleUpload)
+                proxy.writeQuery({ query: uploadsQuery, data })
+            }
+        })
 
-    handleChange(e) {
-        this.setState({ file: e.target.files });
-    }
-
-    submit(e) {
-        console.log(this.state.file);
-        e.preventDefault();
-    }
-
-    render() {
-        return (
-            <div>
-                <input type="file" onChange={this.handleChange} />
-                <button title="uwu" onClick={this.submit}>lol</button>
-                <Thing />
-            </div>
-        )
-    }
+    return <input type="file" required onChange={handleChange} />
 }
 
-
-
-var Thing = graphql(gql`
-  mutation($file: Upload!) {
-    uploadFile(file: $file) {
-      id
+export default graphql(gql`
+    mutation($file: Upload!) {
+      singleUpload(file: $file) {
+        id
+        filename
+        encoding
+        mimetype
+        path
+      }
     }
-  }
-`)(({ mutate }) => (
-        <input
-            type="file"
-            required
-            onChange={({ target: { validity, files: [file] } }) => {
-                console.log(file);
-                return validity.valid && mutate({ variables: { file } })
-                }
-            }
-        />
-    ))
+  `)(UploadFile)

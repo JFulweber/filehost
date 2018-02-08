@@ -1,17 +1,17 @@
 scalar Upload
 
-type UploadedFile {
+  type UpFile {
     id: ID!
     path: String!
     filename: String!
     mimetype: String!
     encoding: String!
-}
+  }
 
 type Query {
-    uploads: [UploadedFile]
+    uploads: [UpFile]
 }
 
 type Mutation {
-    upload (file: Upload!): Boolean
+    singleUpload (file: Upload!): UpFile!
 }
