@@ -77,7 +77,7 @@ const schema = makeExecutableSchema({
 });
 
 app.use('/graphql', bodyParser.json(), apolloUploadExpress(), graphqlExpress({
-    schema, context: { User, GenericFile}
+    schema, context: { User, GenericFile }
 }));
 
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));

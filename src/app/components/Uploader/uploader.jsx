@@ -2,9 +2,9 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
-export default class Uploader extends React.Component{
-    
-    constructor(props){
+export default class Uploader extends React.Component {
+
+    constructor(props) {
         super(props);
         this.props = props;
         this.handleChange = this.handleChange.bind(this);
@@ -12,27 +12,43 @@ export default class Uploader extends React.Component{
         this.state = {};
         this.state.file = {};
     }
-    
-    handleChange(e){
-        this.setState({file:e.target.files});
+
+    handleChange(e) {
+        this.setState({ file: e.target.files });
     }
 
-    submit(e){
-        console.log(this.state.file);        
+    submit(e) {
+        console.log(this.state.file);
         e.preventDefault();
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
-                <input type="file" onChange={this.handleChange}/>
+                <input type="file" onChange={this.handleChange} />
                 <button title="uwu" onClick={this.submit}>lol</button>
+                <Thing />
             </div>
         )
     }
 }
 
-class OnUpload extends React.Component{
-    // this.props.data = graphql
 
-}
+
+var Thing = graphql(gql`
+  mutation($file: Upload!) {
+    uploadFile(file: $file) {
+      id
+    }
+  }
+`)(({ mutate }) => (
+        <input
+            type="file"
+            required
+            onChange={({ target: { validity, files: [file] } }) => {
+                console.log(file);
+                return validity.valid && mutate({ variables: { file } })
+                }
+            }
+        />
+    ))
