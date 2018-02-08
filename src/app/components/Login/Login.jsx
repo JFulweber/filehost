@@ -23,12 +23,13 @@ export default class Login extends React.Component {
     render() {
 
         return (
-            <div className={styles.loginContainer}>
-                <form>  
+            <form className={styles.loginContainer}>
+                <div className={styles.inputContainer}>
                     <input type="username" id="username" value={this.state.username} onChange={this.usernameChange} className={styles.usernameIn} placeholder="Username" />
                     <input type="password" id="password" value={this.state.pass} onChange={this.passChange} className={styles.passwordIn} placeholder="Password" />
-                </form>
-            </div>
+                </div>
+                <input type="submit" id="submit" value="Submit" className={styles.submit} />
+            </form>
         )
     }
 }
