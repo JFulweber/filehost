@@ -1,0 +1,14 @@
+@import '../../palette.scss';
+
+.element{
+    font-size: 25px;
+    color: $color3;
+    margin: 0 10px 0 10px;
+    font-family: 'Ropa Sans';
+    border-color: transparent;
+    text-decoration: none;
+    transition: color .5s;
+}
+.element:hover{
+    color: $color4;
+}

@@ -89,6 +89,6 @@ app.get('/*', function(req,res){
 });
 
 app.listen(PORT, function () {
-    console.log('hello react');
+    console.log('hello reACT');
 })
 

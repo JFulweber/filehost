@@ -56,6 +56,12 @@
         vertical-align:middle;
         cursor:pointer;
         flex-grow: 2;
+        -webkit-transition: background-color .5s;
+        transition: background-color .5s;
+        -moz-transition: background-color .5s;
+    }
+    .submit:hover{
+        background-color: transparent;
     }
 }
 
