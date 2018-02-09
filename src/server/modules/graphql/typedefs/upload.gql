@@ -13,5 +13,5 @@ type Query {
 }
 
 type Mutation {
-    singleUpload (file: Upload!): UpFile!
+    singleUpload (file: Upload!): UpFile
 }
