@@ -84,6 +84,14 @@ app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
 var path = require('path');
 
+//TODO: find some middleware dumbass
+app.post('/upload', function(req,res){
+    req.pipe(req.busboy);
+    req.busboy.on('file', function (fieldname, file, filename) {
+        console.log(filename);
+    });
+})
+
 app.get('/*', function(req,res){
     res.sendFile(path.resolve(__dirname,'../../dist/index.html'));
 });
