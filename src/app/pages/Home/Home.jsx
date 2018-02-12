@@ -15,8 +15,7 @@ export default class Home extends React.Component {
                     <Particle />
                     <Login />
                 </div>
-                <div className={styles.about}>
-                    <About />
+                <div className={styles.placeholder}>
                 </div>
             </MasterLayout>
         )
