@@ -1,0 +1,16 @@
+@import '../../palette.scss';
+.top{
+    padding: 100px 0 300px; 
+    overflow-x: hidden;
+    z-index: 10;
+}
+.container{
+    margin: auto;
+    padding-top: 100px; 
+    text-align: center;  
+}
+h1{
+    font-family: 'Rosa Sans';
+    font-size: 50px;
+    color: $color4;
+}

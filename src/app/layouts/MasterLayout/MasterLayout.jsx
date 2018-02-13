@@ -12,11 +12,13 @@ export default class MasterLayout extends React.Component {
                         <Title title='WireFrame' className={styles.headerTitle} />
                         <div className={styles.links}>
                             <NavElement text='Home' dest='/' />
-                            <NavElement text='About' dest='/' />
-                            <NavElement text='Placeholder' dest='/' />
+                            <NavElement text='About' dest='/about' />
+                            <NavElement text='My Files' dest='/' />
                         </div>
                     </nav>
                 </header>
+                <div className={styles.spacer}>
+                </div>
                 {this.props.children}
             </div>
         )
