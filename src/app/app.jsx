@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home/Home.jsx'
 import Uploader from './components/Uploader/uploader.jsx'
+import User from './pages/User/User.jsx';
+import NotFound from './components/NotFound/NotFound.jsx';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
@@ -18,15 +20,17 @@ let client = createClient();
 
 
 export default class App extends React.Component {
-    render(){
-        return(
-            <ApolloProvider client = {client}>
-            <BrowserRouter>
-                <Switch>
-                    <Route exact path="/" component={Home}/>
-                    <Route exact path="/uploadTest" component={Uploader}/>
-                </Switch>
-            </BrowserRouter>
+    render() {
+        return (
+            <ApolloProvider client={client}>
+                <BrowserRouter>
+                    <Switch>
+                        <Route exact path='/' component={Home} />
+                        <Route exact path='/uploadTest' component={Uploader} />
+                        <Route path='/user/:name/' component={User} />
+                        <Route path='*' component={NotFound} />
+                    </Switch>
+                </BrowserRouter>
             </ApolloProvider>
         )
     }

@@ -17,6 +17,8 @@ export default class MasterLayout extends React.Component {
                         </div>
                     </nav>
                 </header>
+                <div className={styles.spacer}>
+                </div>
                 {this.props.children}
             </div>
         )
