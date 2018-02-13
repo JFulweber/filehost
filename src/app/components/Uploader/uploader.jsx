@@ -8,10 +8,14 @@ export default class Uploader extends React.Component {
     }
 
     handleChange(e) {
-        console.log(e.target.files[0]);
+        var data = new FormData();
+        data.append('file',e.target.files[0]);
+        data.append('user','jeff');
+        //console.log(e.target.files[0]);
+        console.log(data);
         fetch('/upload',{
             method: 'post',
-            body: e.target.files[0]
+            body: data
         }).then(resp=>{
             console.log(resp);
         }).catch(err=> console.log(err))

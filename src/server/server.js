@@ -83,13 +83,12 @@ app.use('/graphql', bodyParser.json(), apolloUploadExpress(), graphqlExpress({
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
 var path = require('path');
+var multer = require('multer');
+var upload = multer()
 
-//TODO: find some middleware dumbass
-app.post('/upload', function(req,res){
-    req.pipe(req.busboy);
-    req.busboy.on('file', function (fieldname, file, filename) {
-        console.log(filename);
-    });
+app.post('/upload', upload.single('file'), function(req,res){
+    console.log(req.file);
+    console.log(req.body.user);
 })
 
 app.get('/*', function(req,res){
