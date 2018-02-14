@@ -1,9 +1,9 @@
 import React from 'react';
 import MasterLayout from '../../layouts/MasterLayout/MasterLayout.jsx';
-import styles from './User.scss';
+import styles from './About.scss';
 import Particle from '../../components/Particle/Particle.jsx';
 
-export default class User extends React.Component{
+export default class About extends React.Component{
     render(){
         return(
             <MasterLayout>

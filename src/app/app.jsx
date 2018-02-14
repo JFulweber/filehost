@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home/Home.jsx'
 import Uploader from './components/Uploader/uploader.jsx'
+import About from './pages/About/About.jsx';
 import User from './pages/User/User.jsx';
 import NotFound from './components/NotFound/NotFound.jsx';
 import { ApolloProvider } from 'react-apollo';
@@ -26,6 +27,7 @@ export default class App extends React.Component {
                 <BrowserRouter>
                     <Switch>
                         <Route exact path='/' component={Home} />
+                        <Route exact path='/about' component={About} />
                         <Route exact path='/uploadTest' component={Uploader} />
                         <Route path='/user/:name/' component={User} />
                         <Route path='*' component={NotFound} />

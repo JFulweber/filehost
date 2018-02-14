@@ -5,12 +5,14 @@
     z-index: 10;
 }
 .container{
+    position: relative;
     margin: auto;
     padding-top: 100px; 
-    text-align: center;  
+    text-align: center;
+    z-index: 30;  
 }
 h1{
-    font-family: 'Rosa Sans';
-    font-size: 50px;
+    font-family: 'Ropa Sans';
+    font-size: 70px;
     color: $color4;
 }
