@@ -1,3 +1,5 @@
+//import { MongoStore } from '../../../../../../AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/connect-mongo';
+
 var { request } = require('https');
 
 var childProcess = require('child_process');
@@ -90,6 +92,21 @@ app.post('/upload', upload.single('file'), function(req,res){
     console.log(req.file);
     console.log(req.body.user);
 })
+
+var session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+app.use(session({
+    secret:'whatever',
+    saveUninitialized: true,
+    resave: true,
+    cookie: {
+        httpOnly: false
+    },
+    store: new MongoStore({
+        url: 'mongodb://localhost:27017/storedb',
+        ttl: 14 * 24 * 60 * 60 // = 14 days. Default
+    })
+}))
 
 app.get('/*', function(req,res){
     res.sendFile(path.resolve(__dirname,'../../dist/index.html'));
