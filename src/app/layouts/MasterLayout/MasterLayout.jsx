@@ -3,6 +3,7 @@ import Title from '../../components/Title/Title.jsx';
 import styles from "./MasterLayout.scss";
 import NavElement from '../../components/NavElement/NavElement.jsx';
 import ScrollTrigger from 'react-scroll-trigger';
+import p from '../../palette.scss'
 
 export default class MasterLayout extends React.Component {
     constructor(props) {
@@ -11,19 +12,18 @@ export default class MasterLayout extends React.Component {
         this.state.backgroundColor = '#666666';
         this.onEnterViewport = this.onEnterViewport.bind(this);
         this.onExitViewport = this.onExitViewport.bind(this);
-        console.log(this.state.backgroundColor);
     }
 
     onEnterViewport() {
         this.setState({
-            backgroundColor: '#000000'
+            backgroundColor: 'transparent'
         });
-        console.log('changing to #00000000')
+        console.log('changing to transparent')
     }
 
     onExitViewport() {
         this.setState({
-            backgroundColor: '#ffffff'
+            backgroundColor: p.colorDarkRed
         });
         console.log('changing to #ffffff')
     }
@@ -31,11 +31,11 @@ export default class MasterLayout extends React.Component {
     render() {
         return (
             <div>
-                <ScrollTrigger onEnter={this.onEnterViewport} onExit={this.onExitViewport}>
-                    <div id='trigger'>
-                    </div>
-                </ScrollTrigger>
                 <header>
+                    <ScrollTrigger onEnter={this.onEnterViewport} onExit={this.onExitViewport}>
+                        <div className={styles.trigger}>
+                        </div>
+                    </ScrollTrigger>
                     <nav className={styles.header} style={{ backgroundColor: this.state.backgroundColor }}>
                         <Title title='WireFrame' className={styles.headerTitle} />
                         <div className={styles.links}>
@@ -45,8 +45,10 @@ export default class MasterLayout extends React.Component {
                         </div>
                     </nav>
                 </header>
-                <div className={styles.spacer}>
-                </div>
+                <ScrollTrigger onEnter={this.onEnterViewport} onExit={this.onExitViewport}>
+                    <div className={styles.spacer}>
+                    </div>
+                </ScrollTrigger>
                 {this.props.children}
             </div>
         )

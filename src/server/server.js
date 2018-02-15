@@ -12,7 +12,7 @@ var mongoose = require('mongoose');
 var processes = {
     mongoInstance:{
         command: 'mongod',
-        commandArgs:[],
+        commandArgs:['--bind_ip_all'],
         verifyInterval: 5000,
         verifyTimeout: 5000,
         verify: function(port, callback){
