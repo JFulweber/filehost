@@ -1,4 +1,4 @@
-var mongoose = require('../../mongo/mongohandle')
+var mongoose = mongo;
 
 var resolvers = {
     Query: {
