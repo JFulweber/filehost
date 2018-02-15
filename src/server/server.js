@@ -13,7 +13,7 @@ var processes = {
     mongoInstance:{
         command: 'mongod',
         commandArgs:[],
-        verifyInterval: 300,
+        verifyInterval: 5000,
         verifyTimeout: 5000,
         verify: function(port, callback){
             var connection = mongoose.connect('mongodb://localhost:27017')
@@ -22,16 +22,16 @@ var processes = {
                     callback(err,false)
                 }
                 else{
+                    mongoose.disconnect();
                     callback(null, true);
-                }
-                mongoose.disconnect();                
+                }  
             })
         }
-    },
+    }, 
     mongohandler: {
+        dependsOn:['mongoInstance'],
         command: 'node',
         commandArgs: [__dirname + '/modules/mongo/mongohandle.js'],
-        dependsOn:['mongoInstance'],
         verify: function(port, callback){
             var connection = mongoose.connect('mongodb://localhost:27017')
             connection.then((status,err)=>{
