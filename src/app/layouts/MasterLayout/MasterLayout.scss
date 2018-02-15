@@ -11,6 +11,8 @@
     border-bottom: 2px solid $color5; 
     background-color: transparent;
     font-family: 'Rosa Sans';
+    transition: background-color 2s;
+    transition-timing-function: ease-in;
     .headerTitle{
         margin-left: 10px;
     }
