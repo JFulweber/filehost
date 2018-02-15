@@ -31,21 +31,22 @@ export default class MasterLayout extends React.Component {
     render() {
         return (
             <div>
-                
-                    <header>
-                        <nav className={styles.header} style={{ backgroundColor: this.state.backgroundColor }}>
-                            <Title title='WireFrame' className={styles.headerTitle} />
-                            <div className={styles.links}>
-                                <NavElement text='Home' dest='/' />
-                                <NavElement text='About' dest='/about' />
-                                <NavElement text='My Files' dest='/user/' />
-                            </div>
-                        </nav>
-                    </header>
                 <ScrollTrigger onEnter={this.onEnterViewport} onExit={this.onExitViewport}>
+                    <div id='trigger'>
+                    </div>
+                </ScrollTrigger>
+                <header>
+                    <nav className={styles.header} style={{ backgroundColor: this.state.backgroundColor }}>
+                        <Title title='WireFrame' className={styles.headerTitle} />
+                        <div className={styles.links}>
+                            <NavElement text='Home' dest='/' />
+                            <NavElement text='About' dest='/about' />
+                            <NavElement text='My Files' dest='/user/' />
+                        </div>
+                    </nav>
+                </header>
                 <div className={styles.spacer}>
                 </div>
-                </ScrollTrigger>
                 {this.props.children}
             </div>
         )
