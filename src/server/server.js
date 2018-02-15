@@ -22,7 +22,6 @@ var app = express();
 app.use(express.static('./dist/'))
 
 var { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
-var { apolloUploadExpress } = require('apollo-upload-server');
 var { makeExecutableSchema } = require('graphql-tools');
 
 var bodyParser = require('body-parser');
@@ -34,7 +33,7 @@ const schema = makeExecutableSchema({
    typeDefs, resolvers
 });
 
-app.use('/graphql', bodyParser.json(), apolloUploadExpress(), graphqlExpress({
+app.use('/graphql', bodyParser.json(), graphqlExpress({
     schema, context: { User, GenericFile }
 }));
 
