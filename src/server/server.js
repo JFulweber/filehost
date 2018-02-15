@@ -9,52 +9,9 @@ var mongoose = require('mongoose');
     SETTING UP MONGO CHILD PROCESS
 */
 
-var processes = {
-    mongoInstance:{
-        command: 'mongod',
-        commandArgs:['--bind_ip_all'],
-        verifyInterval: 5000,
-        verifyTimeout: 5000,
-        verify: function(port, callback){
-            var connection = mongoose.connect('mongodb://localhost:27017')
-            connection.then((status,err)=>{
-                if(err!=undefined){
-                    callback(err,false)
-                }
-                else{
-                    mongoose.disconnect();
-                    callback(null, true);
-                }  
-            })
-        }
-    }, 
-    mongohandler: {
-        dependsOn:['mongoInstance'],
-        command: 'node',
-        commandArgs: [__dirname + '/modules/mongo/mongohandle.js'],
-        verify: function(port, callback){
-            var connection = mongoose.connect('mongodb://localhost:27017')
-            connection.then((status,err)=>{
-                if(err!=undefined){
-                    callback(err,false)
-                }
-                else{
-                    callback(null, true);
-                }
-                mongoose.disconnect();
-            })
-        }
-    },
-}
+var mongoProcess = childProcess.spawn('mongod');
 
-subprocess(processes, function (error, processes) {
-   // console.log(processes)
-    if (error) {
-        console.error(error.stack);
-        process.exit(1);
-    }
-    console.log('processes started successfully!');
-});
+global.mongo = mongoose.createConnection('mongodb://localhost:27017');
 
 var express = require('express');
 

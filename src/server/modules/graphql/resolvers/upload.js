@@ -1,5 +1,5 @@
 var { GraphQLUpload } = require('apollo-upload-server');
-var mongoose = require('../../mongo/mongohandle');
+var mongoose = mongo;
 
 const processUpload = async upload => {
     const { stream, filename, mimetype, encoding } = await upload
