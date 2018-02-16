@@ -1,5 +1,12 @@
 @import '../../palette.scss';
 
+body {
+    margin:0;
+    position: relative;
+    max-width: 100%;
+    background-color: $color1
+}
+
 .header{
     position: fixed;
     top: 0;

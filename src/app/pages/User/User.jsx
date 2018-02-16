@@ -6,7 +6,7 @@ import Particle from '../../components/Particle/Particle.jsx';
 export default class User extends React.Component{
     render(){
         return(
-            <MasterLayout>
+            <MasterLayout overflow='visable'>
                 <div className={styles.top}>
                     <Particle />
                     <div className={styles.container}>

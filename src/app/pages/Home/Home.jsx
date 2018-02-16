@@ -9,7 +9,7 @@ import About from '../../components/About/About.jsx';
 export default class Home extends React.Component {
     render() {
         return (
-            <MasterLayout>
+            <MasterLayout overflow='hidden'>
                 <div className={styles.top}>
                     <Particle />
                     <Login />
