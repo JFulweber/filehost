@@ -1,5 +1,3 @@
-//import { MongoStore } from '../../../../../../AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/connect-mongo';
-
 var { request } = require('https');
 
 var childProcess = require('child_process');
