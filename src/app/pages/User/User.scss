@@ -1,3 +1,5 @@
+@import '../../palette.scss';
+
 .top{
     padding: 0 0 300px; 
     overflow-x: hidden;
@@ -6,7 +8,17 @@
 .container{
     position: relative;
     margin: auto;
-    padding-top: 100px; 
+    padding-top: 50px; 
     text-align: center;
     z-index: 30;
+    background-color: $color1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    .sideBar{
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
 }

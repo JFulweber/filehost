@@ -10,7 +10,14 @@ export default class User extends React.Component{
                 <div className={styles.top}>
                     <Particle />
                     <div className={styles.container}>
-                        
+                        <div className={styles.sideBar}>
+                            <div className={styles.userArea}>
+                                
+                            </div>
+                            <div classname={styles.fileStruc}>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </MasterLayout>
