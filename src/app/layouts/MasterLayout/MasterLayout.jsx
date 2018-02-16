@@ -9,48 +9,28 @@ export default class MasterLayout extends React.Component {
     constructor(props) {
         super(props)
         this.state = {};
-        this.state.scrollPos;
         this.state.backgroundColor = 'transparent';
-        this.onEnterViewport = this.onEnterViewport.bind(this);
-        this.onExitViewport = this.onExitViewport.bind(this);
-        this.onProgress = this.onProgress.bind(this);
+        this.onScroll = this.onScroll.bind(this);
     }
 
-    onProgress({ progress, velocity }, ref) {
-        console.log(`progress:${progress}`);
-        if(!this.state.scrollPos){
-            this.state.scrollPos = progress;
-            console.log('first time !');
+    componentDidMount() {
+        window.addEventListener('scroll', this.onScroll);
+    }
+
+    onScroll(e) {
+        let scrollTop = e.srcElement.body.scrollTop;
+        if (scrollTop >= 69) {
+            this.setState({ backgroundColor: p.colorBlack });
+        }
+        else {
+            this.setState({ backgroundColor: 'transparent' });
         }
     }
 
-    onEnterViewport() {
-        this.setState({
-            backgroundColor: 'transparent'
-        });
-        console.log('changing to transparent')
-    }
-
-    onExitViewport() {
-        this.setState({
-            backgroundColor: p.colorDarkRed
-        });
-        console.log('changing to #ffffff')
-    }
-
-    componentDidMount(){
-        window.scrollTo(0,0);
-    }
-    
     render() {
         return (
             <div>
                 <header>
-                    {/* <ScrollTrigger onEnter={this.onEnterViewport} onExit={this.onExitViewport}>
-                        <div className={styles.trigger}>
-                        </div>
-                    </ScrollTrigger> */}
-
                     <nav className={styles.header} style={{ backgroundColor: this.state.backgroundColor }}>
                         <Title title='WireFrame' className={styles.headerTitle} />
                         <div className={styles.links}>
@@ -59,14 +39,10 @@ export default class MasterLayout extends React.Component {
                             <NavElement text='My Files' dest='/user/' />
                         </div>
                     </nav>
-
                 </header>
-
                 <div className={styles.spacer}>
                 </div>
-                <ScrollTrigger onProgress={this.onProgress}>
-                    {this.props.children}
-                </ScrollTrigger>
+                {this.props.children}
             </div>
         )
     }
