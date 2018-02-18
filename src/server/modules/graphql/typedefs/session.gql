@@ -3,5 +3,5 @@ type Query {
 }
 
 type Mutation {
-    createSession(UserID: String!, Pass: String!): String!
+    createSession(UserID: String!, Pass: String!): String
 }

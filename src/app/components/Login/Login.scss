@@ -7,6 +7,7 @@
     justify-content: center;
     flex-wrap: wrap;
     max-width: min-content;
+    max-width: -moz-min-content;
     .inputContainer{
         display: flex;
         justify-content: center;

@@ -30,7 +30,10 @@ const loaders = {
 
 module.exports = {
     devServer: {
-        historyApiFallback: true
+        historyApiFallback: true,
+        contentBase: path.join(__dirname, "dist"),
+        compress: true,
+        port: 8000
     },
     context: __dirname,
     entry: './src/app/index.js',
