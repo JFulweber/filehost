@@ -24,7 +24,7 @@ var { makeExecutableSchema } = require('graphql-tools');
 
 var bodyParser = require('body-parser');
 
-var {User, GenericFile} = require('./modules/mongo/schemas')
+var {User, GenericFile, Session} = require('./modules/mongo/schemas')
 var {typeDefs, resolvers} = require('./modules/graphql/')
 
 const schema = makeExecutableSchema({
@@ -32,7 +32,7 @@ const schema = makeExecutableSchema({
 });
 
 app.use('/graphql', bodyParser.json(), graphqlExpress({
-    schema, context: { User, GenericFile }
+    schema, context: { User, GenericFile, Session }
 }));
 
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));

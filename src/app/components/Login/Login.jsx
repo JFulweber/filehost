@@ -57,7 +57,6 @@ export default class Login extends React.Component {
             )
         }
         else {
-            console.log('loginresult');
             return <this.state.loginResult />;
         }
     }
