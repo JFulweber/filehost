@@ -1,0 +1,44 @@
+@import "../../palette.scss";
+
+.top{
+    padding: 200px 0 300px; 
+    overflow-x: hidden;
+    z-index: 10;
+    body {
+        overflow-y: hidden;
+    }
+}
+.top:after{
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 777px;
+    height: 1000px;
+    width: 100%;
+    background: $color4;
+    z-index: 1;
+    -webkit-transform: skewY(-20deg);
+    transform: skewY(-20deg);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: initial;
+}
+.placeholder{
+    position: relative;
+    z-index: 2;
+    padding: 50px 0 400px; 
+}
+.placeholder:before{
+    content: "";
+    position: absolute;
+    left: 0;
+    overflow: visible;
+    width: 100%;
+    background: $color5;
+    z-index: -1;
+    top:0;
+    height:1000px;
+    -webkit-transform: skewY(20deg);
+    transform: skewY(20deg);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: initial;
+}

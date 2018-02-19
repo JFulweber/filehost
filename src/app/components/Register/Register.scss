@@ -1,0 +1,68 @@
+@import "../../palette.scss";
+
+.loginContainer{
+    position: relative;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: min-content;
+    max-width: -moz-min-content;
+    .inputContainer{
+        display: flex;
+        justify-content: center;
+        flex-wrap: nowrap;
+        .usernameIn{
+            margin: 0;
+            border: 3px solid $color4;
+            background: transparent;
+            padding: 10px 6px;
+            font-size: 20px;
+            font-family: 'Ropa Sans';
+            color: $color3;
+            line-height: 12px;
+            vertical-align: middle;
+            border-radius: 0;
+            pointer-events: auto;
+            flex-grow: 1;
+        }
+        .passwordIn{
+            margin: 0;
+            border: 3px solid $color4;
+            background: transparent;
+            padding: 10px 6px;
+            font-size: 20px;
+            font-family: 'Ropa Sans';
+            color: $color3;
+            line-height: 12px;
+            vertical-align: middle;
+            border-radius: 0;
+            pointer-events: auto;
+            flex-grow: 1;
+        }
+    }
+    input:focus {
+        outline:none;
+    }
+    .submit{
+        display:inline-block;
+        background-color: $color4;
+        border-radius: 0;
+        border: 3px solid $color4;
+        font-size: 20px;
+        font-family: 'Ropa Sans';
+        color: $color3;
+        padding: 10px;
+        box-sizing: border-box;
+        vertical-align: middle;
+        cursor: pointer;
+        flex-grow: 2;
+        -webkit-transition: background-color .5s;
+        transition: background-color .5s;
+        -moz-transition: background-color .5s;
+    }
+    .submit:hover{
+        background-color: transparent;
+    }
+}
+
