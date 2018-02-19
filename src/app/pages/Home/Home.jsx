@@ -12,7 +12,6 @@ export default class Home extends React.Component {
                 <div className={styles.top}>
                     <Particle />
                     <Login />
-                    
                 </div>
                 <div className={styles.placeholder}>
                 </div>

@@ -6,8 +6,12 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    flex-direction: column;
     max-width: min-content;
     max-width: -moz-min-content;
+    .text{
+        text-align: center;
+    }
     .inputContainer{
         display: flex;
         justify-content: center;
@@ -63,6 +67,12 @@
     }
     .submit:hover{
         background-color: transparent;
+    }
+    .link{
+        font-family: 'Ropa Sans';
+        font-size: 23px;
+        text-decoration: none;
+        color: $color4;
     }
 }
 
