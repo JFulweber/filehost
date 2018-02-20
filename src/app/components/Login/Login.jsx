@@ -4,6 +4,7 @@ import Title from '../../components/Title/Title.jsx';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import { Redirect } from 'react-router'
+import Promise from 'bluebird';
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -27,28 +28,29 @@ export default class Login extends React.Component {
     }
 
     submit(e) {
-        console.log('submitting')
-        var query = gql` mutation($UserID: String!, $Pass: String!){
-            createSession(UserID:$UserID, Pass: $Pass)
-        }`
+        var query = gql`mutation($_usernamevar: String!, $_passvar: String!){
+            createSession(username:$_usernamevar, pass: $_passvar){
+                Token
+                Username
+            }
+        }`;
         this.setState({
             loginResult: graphql(query, {
                 options: {
                     variables: {
-                        UserID: this.state.username,
-                        Pass: this.state.pass
+                        _usernamevar: this.state.username,
+                        _passvar: this.state.pass
                     }
                 }
-            })(LoginComponent(this.state))
+            })(LoginComponent)
         })
     }
 
     render() {
         if (this.state.loginResult == undefined) {
-            console.log('yep')
             return (
                 <form className={styles.loginContainer}>
-                    <Title title='Login' className={styles.text}/>
+                    <Title title='Login' className={styles.text} />
                     <div className={styles.inputContainer}>
                         <input type="username" id="username" value={this.state.username} onChange={this.usernameChange} className={styles.usernameIn} placeholder="Username" />
                         <input type="password" id="password" value={this.state.pass} onChange={this.passChange} className={styles.passwordIn} placeholder="Password" />
@@ -65,11 +67,20 @@ export default class Login extends React.Component {
 }
 
 class LoginComponent extends React.Component {
-    render() {
-        this.props.mutate().then((res)=>{
-            console.log(res);
-        })
+    constructor() {
+        super();
+        this.state = {};
+        this.state.login = 'yep';
+    }
 
-        return (<Redirect to={`/user/${this.props.data.username}`} />)
+    render() {
+
+        var stuff = Promise.promisify(this.props.mutate().then((res)=>{
+            console.log(res);
+        }))
+        
+        //console.log(this.props.data);
+
+        //return />)
     }
 }

@@ -8,5 +8,5 @@ type Session{
 }
 
 type Mutation {
-    createSession(username: String!, Pass: String!): Session!
+    createSession(username: String!, pass: String!): Session!
 }

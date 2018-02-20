@@ -13,9 +13,10 @@ var resolvers = {
             User,
             Session
         }) {
+            console.log('hello');
             return await new Promise((resolve, reject) => {
                 var DeletedSession = Session.find({
-                    UserID: args.UserID
+                    username: args.username
                 }).then((res) => {
                     res.forEach((session) => {
                         session.remove();
@@ -35,8 +36,7 @@ var resolvers = {
                         resolve(ans);
                     }).catch((e) => {
                         reject(e);
-                    })
-                    
+                    }) 
                 });
             })
         }
