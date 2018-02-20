@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Register.scss';
 import Title from '../../components/Title/Title.jsx';
 
-export default class extends React.Component {
+export default class Register extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -21,6 +21,8 @@ export default class extends React.Component {
 
     usernameChange(event) {
         // CHECK EMAIL IN USE, CHECK USERNAME IN USE
+        // @ myles: use the UsernameValid component in this.state.usernameInUse to indicate if a username is in use
+        // feel free to edit the render returns for that to do whatever 
         this.setState({ username: event.target.value })
         var checkQuery = gql`query($UserID:String!){
             usernameInUse(UserID:$UserID)
@@ -49,12 +51,20 @@ export default class extends React.Component {
     }
 
     submit(e) {
-        console.log('Lol fix this B later')
         if (this.state.passConf == this.state.pass) {
             var query = gql`mutation($email: String!, $username: String!, $pass: String!){
                 register(email:$email, username: $username, pass: $pass)
             }
             `
+            this.setState({registerResponse: graphql(query,{
+                options:{
+                    variables:{
+                        email: this.state.email,
+                        pass: this.state.pass,
+                        username: this.state.username
+                    }
+                }
+            })(RegisterResponse)});
         }
     }
 
@@ -64,7 +74,7 @@ export default class extends React.Component {
                 <Title title='Register' className={styles.text} />
                 <div className={styles.inputContainer}>
                     <input type="email" id="email" value={this.state.email} onChange={this.emailChange} className={styles.passwordIn} placeholder="Email" />
-                    <input type="username" id="username" value={this.state.username} onChange={this.usernameChange} className={styles.usernameIn} placeholder="Username" />
+                    <input type="username" id="username" value={this.state.username} onChange={this.usernameChange} className={styles.usernameIn} placeholder="Username"/>
                     <input type="password" id="password" value={this.state.pass} onChange={this.passChange} className={styles.passwordIn} placeholder="Password" />
                     <input type="passwordConf" id="passwordConf" value={this.state.passConf} onChange={this.passConfChange} className={styles.passwordIn} placeholder="Confirm Password" />
                 </div>
@@ -77,7 +87,9 @@ export default class extends React.Component {
 
 class RegisterResponse extends React.Component {
     render() {
-
+        if(this.props.data.status=="success"){
+            return(<p> You're registered reatard </p>)
+        }
     }
 }
 
