@@ -3,6 +3,7 @@ import styles from './Login.scss';
 import Title from '../../components/Title/Title.jsx';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
+import { Redirect } from 'react-router'
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -34,11 +35,11 @@ export default class Login extends React.Component {
             loginResult: graphql(query, {
                 options: {
                     variables: {
-                        UserID: 'userid',
-                        Pass: 'password'
+                        UserID: this.state.username,
+                        Pass: this.state.pass
                     }
                 }
-            })(LoginComponent)
+            })(LoginComponent(this.state))
         })
     }
 
@@ -68,10 +69,7 @@ class LoginComponent extends React.Component {
         this.props.mutate().then((res)=>{
             console.log(res);
         })
-        return (
-        <div className={styles.loginContainer}>
-            <Title title='Hello Retard'/>
-        </div>
-        )
+
+        return (<Redirect to={`/user/${this.props.data.username}`} />)
     }
 }
