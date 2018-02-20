@@ -1,9 +1,19 @@
+@import "../../palette.scss";
+
 .about{
     position: relative;
+    padding: 0;
     margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex-wrap: wrap;
     max-width: min-content;
+    text-align: center;
+    width: 200px;
+}
+.p1{
+    font-family: 'Ropa Sans';
+    color: $color4;
+    font-size: 20px;
 }
