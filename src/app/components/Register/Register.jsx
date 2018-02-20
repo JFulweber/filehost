@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './Register.scss';
 import Title from '../../components/Title/Title.jsx';
-
+import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
 export default class Register extends React.Component {
     constructor(props) {
         super(props);
