@@ -20,7 +20,20 @@ export default class extends React.Component {
     }
 
     usernameChange(event) {
+        // CHECK EMAIL IN USE, CHECK USERNAME IN USE
         this.setState({ username: event.target.value })
+        var checkQuery = gql`query($UserID:String!){
+            usernameInUse(UserID:$UserID)
+        }`;
+        this.setState({
+            usernameInUse: graphql(checkQuery,{
+                options:{
+                    variables:{
+                        UserID: this.state.username
+                    }
+                }
+            })(UsernameValid)
+        })
     }
 
     passChange(event) {
@@ -37,6 +50,12 @@ export default class extends React.Component {
 
     submit(e) {
         console.log('Lol fix this B later')
+        if (this.state.passConf == this.state.pass) {
+            var query = gql`mutation($email: String!, $username: String!, $pass: String!){
+                register(email:$email, username: $username, pass: $pass)
+            }
+            `
+        }
     }
 
     render() {
@@ -53,5 +72,24 @@ export default class extends React.Component {
                 <a href="/" className={styles.link}>Login Here</a>
             </form>
         )
+    }
+}
+
+class RegisterResponse extends React.Component {
+    render() {
+
+    }
+}
+
+class UsernameValid extends React.Component{
+    render(){
+        if(this.props.data.usernameInUse==true){
+            console.log('youre good');
+            return(<p> yep you good </p>)
+        }
+        else{
+            console.log('username in use');
+            return(<p> nope youre not good friend </p>)
+        }
     }
 }
