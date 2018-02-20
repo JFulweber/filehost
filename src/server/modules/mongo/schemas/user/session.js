@@ -2,7 +2,7 @@ var {Schema} = require('mongoose');
 var ttl = require('mongoose-ttl');
 
 let Session = new Schema({
-    UserID: !String,
+    Username: !String,
     Token: !String
 })
 

@@ -2,30 +2,27 @@ var mongoose = mongo;
 
 var resolvers = {
     Query: {
-        users: async function (parent, args, {
-            User
-        }) {
-            /*  console.log('resolving')
-             return await new Promise((resolve, reject) => {
-                 User.find({}).then(results => {
-                     resolve(results);
-                 });
-             }); */
-            return {};
+        users: async function (parent, args, {User}){
+            return await new Promise((resolve,reject)=>{
+                User.find({}).then(res=>{
+                    resolve(res);
+                })
+            })
         },
         user: async function (parent, args, {
             User
         }) {
-            /* return await new Promise((resolve, reject) => {
+            return await new Promise((resolve, reject) => {
                 User.findOne({ username: args.username }).then(result => {
                     resolve(result);
+                }).catch((err)=>{
+                    reject(err);
                 });
-            }) */
-            return {};
+            }) 
         }
     },
     Mutation: {
-        createUser: async function (parent, args, {User}) {
+        register: async function (parent, args, {User}) {
             return await new Promise((resolve, reject) => {
                 User.findOne({ email: args.new_user.email }).then((user)=>{
                     reject(false);

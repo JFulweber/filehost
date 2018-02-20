@@ -25,7 +25,7 @@ export default class Register extends React.Component {
         // feel free to edit the render returns for that to do whatever 
         this.setState({ username: event.target.value })
         var checkQuery = gql`query($UserID:String!){
-            usernameInUse(UserID:$UserID)
+            user(UserID:$UserID)
         }`;
         this.setState({
             usernameInUse: graphql(checkQuery,{

@@ -1,6 +1,6 @@
     type Query {
         users: [User]!
-        user(username:String!): User
+        user(UserID:String!): User
     }
 
     type User {
@@ -18,5 +18,5 @@
     }
 
     type Mutation {
-        createUser(new_user:UserInput!): Boolean!
+        register(new_user:UserInput!): Boolean!
     }

@@ -1,12 +1,13 @@
 var mongoose = mongo;
 var jwt = require('jsonwebtoken');
 var Promise = require('bluebird');
-function TokenGenerator() {
-
-}
 
 var resolvers = {
-    Query: {},
+    Query: {
+        authenticate: async function(parent, args, {User}){
+            return true;
+        }
+    },
     Mutation: {
         createSession: async function (parent, args, {
             User,
@@ -22,16 +23,16 @@ var resolvers = {
                 });
                 DeletedSession.then(() => {
                     var token = jwt.sign({
-                        UserID: args.UserID
+                        Username: args.username
                     }, 'thisisnotmyrealsecretdontworryaboutit', {
                         expiresIn: "2d"
                     });
                     var NewSession = new Session({
-                        UserID: args.UserID,
+                        Username: args.username,
                         Token: token
                     });
                     NewSession.save().then((ans) => {
-                        resolve(token);
+                        resolve(ans);
                     }).catch((e) => {
                         reject(e);
                     })
