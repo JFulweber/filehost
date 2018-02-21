@@ -7,5 +7,5 @@ import Particle from './Particle/Particle.jsx';
 import Register from './Register/Register.jsx';
 import Title from './Title/Title.jsx';
 import Uploader from './Uploader/Uploader.jsx';
-
-module.export = {About, Login, Logout, NavElement, NotFound, Particle, Register, Title, Uploader};
+ 
+export {About, Login, Logout, NavElement, NotFound, Particle, Register, Title, Uploader};

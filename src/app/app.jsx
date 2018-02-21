@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home/Home.jsx'
 import About from './pages/About/About.jsx';
 import User from './pages/User/User.jsx';
-import {NotFound, Uploader, Logout} from './components/';
+import {NotFound, Logout, Uploader} from './components';
 import Register from './pages/Register/Register.jsx';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';

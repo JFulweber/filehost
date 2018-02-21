@@ -20,6 +20,8 @@ export default class MasterLayout extends React.Component {
         console.log(localStorage.getItem('token'));
         if(localStorage.getItem('token')==null || localStorage.getItem('token')==undefined){
             this.setState({style:{visibility:"hidden"}});
+        }else{
+            this.setState({style:{visibility:"shown"}});
         }
     }
 
