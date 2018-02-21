@@ -31,6 +31,15 @@ body {
         flex-grow: 2;
         padding: 0 10px 0 20px;
     }
+    .logout{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-end;
+        flex-grow: 2;
+        padding: 0 10px 0 20px;
+    }
 }
 .spacer{
     content: "";

@@ -40,6 +40,9 @@ export default class MasterLayout extends React.Component {
                             <NavElement text='About' dest='/about' />
                             <NavElement text='My Files' dest='/user/' />
                         </div>
+                     <div className={styles.logout}>
+                         <NavElement text='Logout' dest='/logout' />
+                     </div>
                     </nav>
                 </header>
                 <div className={styles.spacer}>

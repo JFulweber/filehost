@@ -30,6 +30,7 @@ export default class App extends React.Component {
                         <Route exact path='/about' component={About} />
                         <Route exact path='/uploadTest' component={Uploader} />
                         <Route path='/user/:name/' component={User} />
+                        <Route exact path='/logout' component={Logout} />
                         <Route path='*' component={NotFound} />
                     </Switch>
                 </BrowserRouter>
