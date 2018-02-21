@@ -23,9 +23,6 @@ export default class Uploader extends React.Component {
     }
 
     render() {
-        var whatever = cookie.load('connect.sid');
-        console.log(whatever);
-        localStorage.setItem('test','hey whats up hello');
         return <input type="file" required onChange={this.handleChange} />
     }
 }
