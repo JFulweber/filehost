@@ -8,4 +8,4 @@ import Register from './Register/Register.jsx';
 import Title from './Title/Title.jsx';
 import Uploader from './Uploader/Uploader.jsx';
 
-module.exports = {About, Login, Logout, NavElement, NotFound, Particle, Register, Title, Uploader};
+module.export = {About, Login, Logout, NavElement, NotFound, Particle, Register, Title, Uploader};
