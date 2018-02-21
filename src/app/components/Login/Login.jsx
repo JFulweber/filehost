@@ -67,20 +67,20 @@ export default class Login extends React.Component {
 }
 
 class LoginComponent extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {};
-        this.state.login = 'yep';
+        this.props.mutate().then((res)=>{
+            this.setState({username:res.data.createSession.Username})
+            localStorage.setItem('username', this.state.username);
+            localStorage.setItem('token', res.data.createSession.Token);
+        })
     }
 
     render() {
-
-        var stuff = Promise.promisify(this.props.mutate().then((res)=>{
-            console.log(res);
-        }))
-        
-        //console.log(this.props.data);
-
-        //return />)
+        if(this.state.username!=undefined){
+            return(<Redirect to={`/user/${this.state.username}`}/>);
+        }
+        return(<Title title="logign in d[:)]-|-<[: "/>);
     }
 }
