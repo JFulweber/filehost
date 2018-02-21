@@ -70,9 +70,10 @@ class LoginComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.state.login = 'yep';
         this.props.mutate().then((res)=>{
             this.setState({username:res.data.createSession.Username})
+            localStorage.setItem('username', this.state.username);
+            localStorage.setItem('token', res.data.createSession.Token);
         })
     }
 
