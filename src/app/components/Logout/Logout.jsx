@@ -5,6 +5,7 @@ import styles from "./Logout.scss";
 
 export default class Logout extends React.Component {
     render() {
+        console.log('beep beep img a sheep :)')
         return (
             <MasterLayout>
                 <Title title='LogginG Out..' />

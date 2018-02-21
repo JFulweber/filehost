@@ -17,6 +17,10 @@ export default class MasterLayout extends React.Component {
     componentDidMount() {
         window.addEventListener('scroll', this.onScroll);
         document.body.style.overflow = this.state.overflow;
+        console.log(localStorage.getItem('token'));
+        if(localStorage.getItem('token')==null || localStorage.getItem('token')==undefined){
+            this.setState({style:{visibility:"hidden"}});
+        }
     }
 
     onScroll(e) {
@@ -40,7 +44,7 @@ export default class MasterLayout extends React.Component {
                             <NavElement text='About' dest='/about' />
                             <NavElement text='My Files' dest='/user/' />
                         </div>
-                     <div className={styles.logout}>
+                     <div className={styles.logout} style = {this.state.style}>
                          <NavElement text='Logout' dest='/logout' />
                      </div>
                     </nav>
