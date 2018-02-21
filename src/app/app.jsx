@@ -5,6 +5,7 @@ import Uploader from './components/Uploader/uploader.jsx'
 import About from './pages/About/About.jsx';
 import User from './pages/User/User.jsx';
 import NotFound from './components/NotFound/NotFound.jsx';
+import Logout from './components/Logout/Logout.jsx';
 import Register from './pages/Register/Register.jsx';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';

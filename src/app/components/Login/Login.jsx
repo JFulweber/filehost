@@ -81,6 +81,6 @@ class LoginComponent extends React.Component {
         if(this.state.username!=undefined){
             return(<Redirect to={`/user/${this.state.username}`}/>);
         }
-        return(<Title title="logign in d[:)]-|-<[: "/>);
+        return(<Title title="Logging In..." className={styles.redirect}/>);
     }
 }
