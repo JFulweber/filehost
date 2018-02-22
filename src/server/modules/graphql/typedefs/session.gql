@@ -1,5 +1,5 @@
 type Query {
-    authenticate(token:String!) : Boolean!
+    authenticate(token:String!, username: String!) : Boolean!
 }
 
 type Session{
