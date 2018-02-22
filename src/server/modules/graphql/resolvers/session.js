@@ -2,9 +2,11 @@ var mongoose = mongo;
 var jwt = require('jsonwebtoken');
 var Promise = require('bluebird');
 
+
 var resolvers = {
     Query: {
         authenticate: async function(parent, args, {Session}){
+            
             return await new Promise((resolve,reject)=>{
                 // is a mongo backend necessary for jwt? can we not just check the authetnication and verify the sig of the jwt?
                 // TODO: look into that
