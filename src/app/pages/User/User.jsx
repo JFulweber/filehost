@@ -14,7 +14,7 @@ export default class User extends React.Component{
                             <div className={styles.userArea}>
                                 
                             </div>
-                            <div classname={styles.fileStruc}>
+                            <div className={styles.fileStruc}>
 
                             </div>
                         </div>

@@ -9,11 +9,12 @@
     justify-content: center;
     flex-wrap: wrap;
     max-width: min-content;
+    max-width: 75%;
     text-align: center;
-    width: 200px;
 }
 .p1{
     font-family: 'Ropa Sans';
     color: $color4;
-    font-size: 20px;
+    font-size: 30px;
+    padding: 0 100px 0 100px;
 }
