@@ -63,10 +63,6 @@ export default class Home extends React.Component {
 
 class RedirectComponent extends React.Component {
     render() {
-        console.log('have i been made');
-        console.log(this.props);
-        console.log('^ thats my data budddy')
-        console.log(this.props.data);
         if(this.props.data.loading == 1){
             console.log('loadin...')
         }
