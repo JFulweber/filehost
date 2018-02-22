@@ -6,6 +6,8 @@ import styles from './Logout.scss';
 
 export default class Logout extends React.Component {
     render() {
+        localStorage.clear("token");
+        localStorage.clear("username");
         return (
             <MasterLayout>
                  <div className={styles.top}>
