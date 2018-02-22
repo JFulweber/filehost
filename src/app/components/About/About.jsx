@@ -6,8 +6,9 @@ export default class About extends React.Component {
     render() {
         return (
             <div className={styles.about}>
-                <Title title="About"/>
+                <Title title="About" />
                 <p className={styles.p1}>This website is a file host esque project called 'WireFrame'. Its basically a dropbox clone that we are useing to learn more about how to make proper webpages.</p>
+                <p className={styles.p1}>The tools we're using include React, GraphQL, Apollo, and MongoDB.</p>
             </div>
         )
     }
