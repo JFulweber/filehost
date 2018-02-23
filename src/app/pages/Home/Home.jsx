@@ -12,7 +12,7 @@ export default class Home extends React.Component {
     constructor(props) {
         super(props)
         this.state = {};
-        this.state.redirect = "huuuuaaa";
+        this.state.redirect = "";
     }
 
     componentDidMount() {
@@ -33,9 +33,7 @@ export default class Home extends React.Component {
     }
 
     render() {
-        if (this.state.redirect!="huuuuaaa") {
-            console.log('am i the intermediate???? tf');
-            console.log(this.state.redirect);
+        if (this.state.redirect!="") {
             return (
                 <MasterLayout overflow='hidden'>
                     <div className={styles.top}>
@@ -47,7 +45,6 @@ export default class Home extends React.Component {
                 </MasterLayout>
             )
         }
-        console.log('zozzle copter lol');
         return (
             <MasterLayout overflow='hidden'>
                 <div className={styles.top}>
@@ -63,12 +60,8 @@ export default class Home extends React.Component {
 
 class RedirectComponent extends React.Component {
     render() {
-        if(this.props.data.loading == 1){
-            console.log('loadin...')
-        }
-        else{
-            console.log('LOADED');
-            console.log(this.props.data);
+        if(this.props.data.loading == true){
+            return (<Title title={"waiting to load"}/>)
         }
         if(this.props.data.authenticate==false){
             localStorage.clear("token")

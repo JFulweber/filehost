@@ -12,12 +12,7 @@ var resolvers = {
                 // TODO: look into that
                 try{
                     var decoded = jwt.verify(args.token,secret);
-                    if(Date.now()>=decoded.exp+1000*60*60*24*2){
-                        resolve(false);
-                    }
-                    else{
-                        resolve(true);
-                    }
+                    resolve(true);
                 }catch(e){
                     resolve(false);
                 }
@@ -36,7 +31,21 @@ var resolvers = {
             Session
         }) {
             return await new Promise((resolve, reject) => {
-                var DeletedSession = Session.find({
+                var token = jwt.sign({
+                    Username: args.username
+                }, secret, {
+                    expiresIn: '1m'
+                });
+                var NewSession = new Session({
+                    Username: args.username,
+                    Token: token
+                });
+                if(token)
+                {
+                    resolve(NewSession);
+                }
+                else reject("no token idk");
+                /* var DeletedSession = Session.find({
                     username: args.username
                 }).then((res) => {
                     res.forEach((session) => {
@@ -44,22 +53,14 @@ var resolvers = {
                     })
                 });
                 DeletedSession.then(() => {
-                    var token = jwt.sign({
-                        Username: args.username
-                    }, secret, {
-                        expiresIn: "2d"
-                    });
-                    var NewSession = new Session({
-                        Username: args.username,
-                        Token: token,
-                        
-                    });
+                    
+                    
                     NewSession.save().then((ans) => {
                         resolve(ans);
                     }).catch((e) => {
                         reject(e);
                     }) 
-                });
+                }); */
             })
         }
     }

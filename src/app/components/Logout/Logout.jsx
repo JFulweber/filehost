@@ -3,6 +3,7 @@ import MasterLayout from '../../layouts/MasterLayout/MasterLayout.jsx';
 import Title from '../../components/Title/Title.jsx';
 import Particle from '../../components/Particle/Particle.jsx';
 import styles from './Logout.scss';
+import {Redirect} from 'react-router'
 
 export default class Logout extends React.Component {
     render() {
@@ -11,8 +12,9 @@ export default class Logout extends React.Component {
         return (
             <MasterLayout>
                  <div className={styles.top}>
-                    <Particle />
+                    {/* <Particle /> */}
                     <Title title='Logging Out...' className={styles.logout}/>
+                    <Redirect to='/'/>
                 </div>
             </MasterLayout>
         )

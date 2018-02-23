@@ -36,6 +36,7 @@ export default class MasterLayout extends React.Component {
     }
 
     render() {
+        console.log('i got rendered yay :333333');
         return (
             <div>
                 <header>
