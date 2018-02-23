@@ -1,7 +1,7 @@
 var mongoose = mongo;
 var jwt = require('jsonwebtoken');
 var Promise = require('bluebird');
-
+var secret = 'hellohellohellobigpenor'
 
 var resolvers = {
     Query: {
@@ -10,6 +10,19 @@ var resolvers = {
             return await new Promise((resolve,reject)=>{
                 // is a mongo backend necessary for jwt? can we not just check the authetnication and verify the sig of the jwt?
                 // TODO: look into that
+                try{
+                    var decoded = jwt.verify(args.token,secret);
+                    if(Date.now()>=decoded.exp+1000*60*60*24*2){
+                        resolve(false);
+                    }
+                    else{
+                        resolve(true);
+                    }
+                }catch(e){
+                    resolve(false);
+                }
+                //console.log(decoded);
+                
                 Session.findOne({Token: args.token, Username: args.username}, function(err, result){
                     if(!result) resolve(false);
                     resolve(true);
@@ -33,7 +46,7 @@ var resolvers = {
                 DeletedSession.then(() => {
                     var token = jwt.sign({
                         Username: args.username
-                    }, 'good lord that code doesn\'t like that at all', {
+                    }, secret, {
                         expiresIn: "2d"
                     });
                     var NewSession = new Session({

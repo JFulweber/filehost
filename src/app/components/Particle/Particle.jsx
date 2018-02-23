@@ -5,10 +5,17 @@ import params from './ParticleSettings.js';
 
 export default class Particle extends React.Component{
     render(){
-        return( 
-            <div className={style.container}>    
-                <Part params={params} className={style.canvas}/>
-            </div>
-        )
+        try{
+            return( 
+                <div className={style.container}>    
+                    <Part params={params} className={style.canvas}/>
+                </div>
+            )
+        }
+        catch(error){
+            console.log(error);
+            return <Part params={params} className={style.canvas}/>
+        }
+        
     }
 }
