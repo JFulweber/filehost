@@ -2,4 +2,3 @@ node_modules/**
 dist/bundle.js
 dist/styles.css
 log/**
-package-lock.json
