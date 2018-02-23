@@ -28,6 +28,7 @@ export default class Login extends React.Component {
     }
 
     submit(e) {
+        if(this.state.username==""||this.state.password=="")
         var query = gql`mutation($_usernamevar: String!, $_passvar: String!){
             createSession(username:$_usernamevar, pass: $_passvar){
                 Token
@@ -71,9 +72,9 @@ class LoginComponent extends React.Component {
         super(props);
         this.state = {};
         this.props.mutate().then((res)=>{
-            this.setState({username:res.data.createSession.Username})
             localStorage.setItem('username', this.state.username);
             localStorage.setItem('token', res.data.createSession.Token);
+            this.setState({username:res.data.createSession.Username})
         })
     }
 
