@@ -72,6 +72,7 @@ class LoginComponent extends React.Component {
         super(props);
         this.state = {};
         this.props.mutate().then((res)=>{
+            console.log(this.state.username);
             localStorage.setItem('username', this.state.username);
             localStorage.setItem('token', res.data.createSession.Token);
             this.setState({username:res.data.createSession.Username})
