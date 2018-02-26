@@ -28,10 +28,15 @@ export default class Login extends React.Component {
     }
 
     submit(e) {
-        if(this.state.username==""||this.state.password==""){
-            alert('yea stop that u big meanie :U');
+        if( this.state.username==''){
+            alert('Please enter a username.');
+        }
+        else if(this.state.pass==''){
+            alert('Please enter a passwod. I swear if you made your password blank I will hurt you.');
         }
         else{
+            console.log(`username :${this.state.username}`);
+            console.log(`pass: ${this.state.pass}`)
             var query = gql`mutation($_usernamevar: String!, $_passvar: String!){
                 createSession(username:$_usernamevar, pass: $_passvar){
                     Token
