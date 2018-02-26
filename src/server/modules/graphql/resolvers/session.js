@@ -12,6 +12,9 @@ var resolvers = {
                 // TODO: look into that
                 try{
                     var decoded = jwt.verify(args.token,secret);
+                    if(decoded.username=='undefined'){
+                        resolve(false);
+                    }
                     resolve(true);
                 }catch(e){
                     resolve(false);
@@ -40,8 +43,9 @@ var resolvers = {
                     Username: args.username,
                     Token: token
                 });
-                if(token)
+                if(token && args.username != "undefined")
                 {
+                    console.log(args.username);
                     resolve(NewSession);
                 }
                 else reject("no token idk");
