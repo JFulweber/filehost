@@ -28,23 +28,27 @@ export default class Login extends React.Component {
     }
 
     submit(e) {
-        if(this.state.username==""||this.state.password=="") return;
-        var query = gql`mutation($_usernamevar: String!, $_passvar: String!){
-            createSession(username:$_usernamevar, pass: $_passvar){
-                Token
-                Username
-            }
-        }`;
-        this.setState({
-            loginResult: graphql(query, {
-                options: {
-                    variables: {
-                        _usernamevar: this.state.username,
-                        _passvar: this.state.pass
-                    }
+        if(this.state.username==""||this.state.password==""){
+            alert('yea stop that u big meanie :U');
+        }
+        else{
+            var query = gql`mutation($_usernamevar: String!, $_passvar: String!){
+                createSession(username:$_usernamevar, pass: $_passvar){
+                    Token
+                    Username
                 }
-            })(LoginComponent)
-        })
+            }`;
+            this.setState({
+                loginResult: graphql(query, {
+                    options: {
+                        variables: {
+                            _usernamevar: this.state.username,
+                            _passvar: this.state.pass
+                        }
+                    }
+                })(LoginComponent)
+            })
+        }
     }
 
     render() {
