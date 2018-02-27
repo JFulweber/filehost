@@ -61,7 +61,8 @@ export default class Home extends React.Component {
 class RedirectComponent extends React.Component {
     render() {
         if(this.props.data.loading == true){
-            return (<Title title={"waiting to load"}/>)
+            //TODO: style this
+            return (<Title title={"Redirecting"}/>)
         }
         if(this.props.data.authenticate==false){
             localStorage.clear("token")

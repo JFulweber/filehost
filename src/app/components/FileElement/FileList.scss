@@ -1,0 +1,17 @@
+.file{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    .name{
+        font-family: 'Ropa Sans';
+        font-size: 12px;
+    }
+    .size{
+        font-family: 'Ropa Sans';
+        font-size: 12px;
+    }
+    .type{
+        font-family: 'Ropa Sans';
+        font-size: 12px;
+    }
+}
