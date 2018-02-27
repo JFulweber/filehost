@@ -39,6 +39,7 @@ var resolvers = {
                 }, secret, {
                     expiresIn: '1m'
                 });
+                User.findOne({username:args.username, pass})
                 var NewSession = new Session({
                     Username: args.username,
                     Token: token

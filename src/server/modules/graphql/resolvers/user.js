@@ -25,13 +25,16 @@ var resolvers = {
         register: async function (parent, args, {User}) {
             return await new Promise((resolve, reject) => {
                 User.findOne({ email: args.new_user.email }).then((user)=>{
-                    reject(false);
-                }).catch((err)=>{
+                    if(user)
+                        reject(false);
                     args.new_user.creationDate = Date.now();
+                    args.new_user.hashedPass = require('../../hasher')(args.new_user.hashedPass);
                     var myUser = new User(args.new_user);
                     myUser.save().then(()=>{
                         resolve(true)
-                    })
+                    }).catch()
+                }).catch((err)=>{
+                    reject(false);
                 })
             });
         }

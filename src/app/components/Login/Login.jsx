@@ -28,10 +28,15 @@ export default class Login extends React.Component {
     }
 
     submit(e) {
-        if(this.state.username==""||this.state.password==""){
-            alert('yea stop that u big meanie :U');
+        if( this.state.username==''){
+            alert('Please enter a username.');
+        }
+        else if(this.state.pass==''){
+            alert('Please enter a passwod. I swear if you made your password blank I will hurt you.');
         }
         else{
+            console.log(`username :${this.state.username}`);
+            console.log(`pass: ${this.state.pass}`)
             var query = gql`mutation($_usernamevar: String!, $_passvar: String!){
                 createSession(username:$_usernamevar, pass: $_passvar){
                     Token
@@ -54,13 +59,13 @@ export default class Login extends React.Component {
     render() {
         if (this.state.loginResult == undefined) {
             return (
-                <form className={styles.loginContainer}>
+                <form className={styles.loginContainer} onSubmit={this.submit} >
                     <Title title='Login' className={styles.text} />
                     <div className={styles.inputContainer}>
                         <input type="username" id="username" value={this.state.username} onChange={this.usernameChange} className={styles.usernameIn} placeholder="Username" />
                         <input type="password" id="password" value={this.state.pass} onChange={this.passChange} className={styles.passwordIn} placeholder="Password" />
                     </div>
-                    <input type="button" id="submit" value="Login" className={styles.submit} onClick={this.submit} />
+                    <input type="submit" id="submit" value="Login" className={styles.submit} />
                     <a href="/register" className={styles.link}>Register Here</a>
                 </form>
             )

@@ -7,7 +7,6 @@
         _id: ID!
         username: String,
         email: String,
-        password: String,
         creationDate: Int
     }
 
