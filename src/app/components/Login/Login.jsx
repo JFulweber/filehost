@@ -59,13 +59,13 @@ export default class Login extends React.Component {
     render() {
         if (this.state.loginResult == undefined) {
             return (
-                <form className={styles.loginContainer}>
+                <form className={styles.loginContainer} onSubmit={this.submit} >
                     <Title title='Login' className={styles.text} />
                     <div className={styles.inputContainer}>
                         <input type="username" id="username" value={this.state.username} onChange={this.usernameChange} className={styles.usernameIn} placeholder="Username" />
                         <input type="password" id="password" value={this.state.pass} onChange={this.passChange} className={styles.passwordIn} placeholder="Password" />
                     </div>
-                    <input type="button" id="submit" value="Login" className={styles.submit} onClick={this.submit} />
+                    <input type="submit" id="submit" value="Login" className={styles.submit} />
                     <a href="/register" className={styles.link}>Register Here</a>
                 </form>
             )
