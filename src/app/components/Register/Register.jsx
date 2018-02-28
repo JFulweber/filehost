@@ -52,11 +52,13 @@ export default class Register extends React.Component {
     }
 
     submit(e) {
+        console.log('esketit');
+        e.preventDefault();
         if (this.state.passConf == this.state.pass) {
+            console.log('passconf right');
             var query = gql`mutation($email: String!, $username: String!, $pass: String!){
                 register(email:$email, username: $username, pass: $pass)
-            }
-            `
+            }`
             this.setState({registerResponse: graphql(query,{
                 options:{
                     variables:{
@@ -67,11 +69,14 @@ export default class Register extends React.Component {
                 }
             })(RegisterResponse)});
         }
+        else{
+            console.log('pass conf was wrong');
+        }
     }
 
     render() {
         return (
-            <form className={styles.loginContainer}>
+            <form className={styles.loginContainer} onSubmit={this.submit}>
                 <Title title='Register' className={styles.text} />
                 <div className={styles.inputContainer}>
                     <input type="email" id="email" value={this.state.email} onChange={this.emailChange} className={styles.passwordIn} placeholder="Email" />
@@ -79,8 +84,9 @@ export default class Register extends React.Component {
                     <input type="password" id="password" value={this.state.pass} onChange={this.passChange} className={styles.passwordIn} placeholder="Password" />
                     <input type="passwordConf" id="passwordConf" value={this.state.passConf} onChange={this.passConfChange} className={styles.passwordIn} placeholder="Confirm Password" />
                 </div>
-                <input type="button" id="submit" value="Register" className={styles.submit} onClick={this.submit} />
+                <input type="submit" id="submit" value="Register" className={styles.submit}  />
                 <a href="/" className={styles.link}>Login Here</a>
+                {this.state.registerResponse?<this.state.registerResponse/>:null}
             </form>
         )
     }
@@ -88,6 +94,7 @@ export default class Register extends React.Component {
 
 class RegisterResponse extends React.Component {
     render() {
+        console.log('yep');
         if(this.props.data.status=="success"){
             return(<p> You're registered reatard </p>)
         }
