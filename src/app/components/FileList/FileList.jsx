@@ -13,6 +13,10 @@ export default class FileList extends React.Component{
         return(
             <div className={styles.fileContainer}>
                 <FileElement fileName='Test1' fileSize='10000000 MB' type='png'/>
+                <FileElement fileName='Test2' fileSize='10000000 MB' type='png'/>
+                <FileElement fileName='JEff' fileSize='10000000 MB' type='png'/>
+                <FileElement fileName='fidj' fileSize='10000000 MB' type='png'/>
+
             </div>
         )
     }
