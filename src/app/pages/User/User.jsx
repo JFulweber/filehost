@@ -16,7 +16,7 @@ export default class User extends React.Component {
                                 <FileList />
                             </div>
                             <div className={styles.fileStruc}>
-                            //TODO: Make the file structor
+                            {/* TODO: Make the file structor */}
                             </div>
                         </div>
                     </div>

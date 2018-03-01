@@ -17,7 +17,6 @@ export default class MasterLayout extends React.Component {
     componentDidMount() {
         window.addEventListener('scroll', this.onScroll);
         document.body.style.overflow = this.state.overflow;
-        console.log(localStorage.getItem('token'));
         if(localStorage.getItem('token')==null || localStorage.getItem('token')==undefined){
             this.setState({style:{visibility:"hidden"}});
         }else{
@@ -36,7 +35,6 @@ export default class MasterLayout extends React.Component {
     }
 
     render() {
-        console.log('i got rendered yay :333333');
         return (
             <div>
                 <header>
