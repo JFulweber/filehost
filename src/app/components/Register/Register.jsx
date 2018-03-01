@@ -52,7 +52,10 @@ export default class Register extends React.Component {
     }
 
     submit(e) {
+        console.log('esketit');
+        e.preventDefault();
         if (this.state.passConf == this.state.pass) {
+            console.log('passconf right');
             var query = gql`mutation($email: String!, $username: String!, $pass: String!){
                 register(email:$email, username: $username, pass: $pass)
             }
@@ -68,6 +71,9 @@ export default class Register extends React.Component {
                     }
                 })(RegisterResponse)
             });
+        }
+        else{
+            console.log('pass conf was wrong');
         }
     }
 
