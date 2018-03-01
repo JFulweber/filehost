@@ -29,9 +29,9 @@ export default class Register extends React.Component {
             user(UserID:$UserID)
         }`;
         this.setState({
-            usernameInUse: graphql(checkQuery,{
-                options:{
-                    variables:{
+            usernameInUse: graphql(checkQuery, {
+                options: {
+                    variables: {
                         UserID: this.state.username
                     }
                 }
@@ -57,52 +57,59 @@ export default class Register extends React.Component {
                 register(email:$email, username: $username, pass: $pass)
             }
             `
-            this.setState({registerResponse: graphql(query,{
-                options:{
-                    variables:{
-                        email: this.state.email,
-                        pass: this.state.pass,
-                        username: this.state.username
+            this.setState({
+                registerResponse: graphql(query, {
+                    options: {
+                        variables: {
+                            email: this.state.email,
+                            pass: this.state.pass,
+                            username: this.state.username
+                        }
                     }
-                }
-            })(RegisterResponse)});
+                })(RegisterResponse)
+            });
         }
     }
 
     render() {
-        return (
-            <form className={styles.loginContainer}>
-                <Title title='Register' className={styles.text} />
-                <div className={styles.inputContainer}>
-                    <input type="email" id="email" value={this.state.email} onChange={this.emailChange} className={styles.passwordIn} placeholder="Email" />
-                    <input type="username" id="username" value={this.state.username} onChange={this.usernameChange} className={styles.usernameIn} placeholder="Username"/>
-                    <input type="password" id="password" value={this.state.pass} onChange={this.passChange} className={styles.passwordIn} placeholder="Password" />
-                    <input type="passwordConf" id="passwordConf" value={this.state.passConf} onChange={this.passConfChange} className={styles.passwordIn} placeholder="Confirm Password" />
-                </div>
-                <input type="button" id="submit" value="Register" className={styles.submit} onClick={this.submit} />
-                <a href="/" className={styles.link}>Login Here</a>
-            </form>
-        )
+        if (this.state.registerResponse) {
+            return <this.state.registerResponse />
+        }
+        else {
+            return (
+                <form className={styles.loginContainer}>
+                    <Title title='Register' className={styles.text} />
+                    <div className={styles.inputContainer}>
+                        <input type="email" id="email" value={this.state.email} onChange={this.emailChange} className={styles.passwordIn} placeholder="Email" />
+                        <input type="username" id="username" value={this.state.username} onChange={this.usernameChange} className={styles.usernameIn} placeholder="Username" />
+                        <input type="password" id="password" value={this.state.pass} onChange={this.passChange} className={styles.passwordIn} placeholder="Password" />
+                        <input type="passwordConf" id="passwordConf" value={this.state.passConf} onChange={this.passConfChange} className={styles.passwordIn} placeholder="Confirm Password" />
+                    </div>
+                    <input type="button" id="submit" value="Register" className={styles.submit} onClick={this.submit} />
+                    <a href="/" className={styles.link}>Login Here</a>
+                </form>
+            )
+        }
     }
 }
 
 class RegisterResponse extends React.Component {
     render() {
-        if(this.props.data.status=="success"){
-            return(<p> You're registered reatard </p>)
+        if (this.props.data.status == "success") {
+            return (<p> You're registered reatard </p>)
         }
     }
 }
 
-class UsernameValid extends React.Component{
-    render(){
-        if(this.props.data.usernameInUse==true){
+class UsernameValid extends React.Component {
+    render() {
+        if (this.props.data.usernameInUse == true) {
             console.log('youre good');
-            return(<p> yep you good </p>)
+            return (<p> yep you good </p>)
         }
-        else{
+        else {
             console.log('username in use');
-            return(<p> nope youre not good friend </p>)
+            return (<p> nope youre not good friend </p>)
         }
     }
 }

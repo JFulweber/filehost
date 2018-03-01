@@ -12,6 +12,7 @@ var resolvers = {
         user: async function (parent, args, {
             User
         }) {
+            reject(null);
             return await new Promise((resolve, reject) => {
                 User.findOne({ username: args.username }).then(result => {
                     resolve(result);
