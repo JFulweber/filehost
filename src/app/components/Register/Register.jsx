@@ -57,7 +57,7 @@ export default class Register extends React.Component {
         if (this.state.passConf == this.state.pass) {
             console.log('passconf right');
             var query = gql`mutation($email: String!, $username: String!, $pass: String!){
-                register(email:$email, username: $username, pass: $pass)
+                register(email:$email, username: $username, password: $pass)
             }
             `
             this.setState({
@@ -100,9 +100,23 @@ export default class Register extends React.Component {
 }
 
 class RegisterResponse extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {};
+    }
+    
     render() {
-        if (this.props.data.status == "success") {
-            return (<p> You're registered reatard </p>)
+        if(!this.state.response)
+        this.props.mutate().then((res)=>{
+            console.log(res);
+            this.setState({response:res});
+        })
+        if(this.state.response){
+            return <p> ok cool </p>
+        }
+        else{
+            console.log(this.state)
+            return <p> not cool </p>
         }
     }
 }

@@ -14,7 +14,7 @@ export default class MasterLayout extends React.Component {
         this.onScroll = this.onScroll.bind(this);
     }
 
-    componentDidMount() {
+/*     componentDidMount() {
         window.addEventListener('scroll', this.onScroll);
         document.body.style.overflow = this.state.overflow;
         if(localStorage.getItem('token')==null || localStorage.getItem('token')==undefined){
@@ -32,7 +32,7 @@ export default class MasterLayout extends React.Component {
         else {
             this.setState({ backgroundColor: 'transparent' });
         }
-    }
+    } */
 
     render() {
         return (

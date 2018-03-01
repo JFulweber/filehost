@@ -26,18 +26,29 @@ var resolvers = {
         register: async function (parent, args, {User}) {
             return await new Promise((resolve, reject) => {
                 console.log('running register');
-                User.findOne({ email: args.new_user.email }).then((user)=>{
+                var res = User.findOne({ email: args.email }).then((user)=>{
+                    console.log("yeah hello???");
                     if(user)
                         reject(false);
-                    args.new_user.creationDate = Date.now();
-                    args.new_user.hashedPass = require('../../hasher')(args.new_user.hashedPass);
-                    var myUser = new User(args.new_user);
+                    console.log(user);
+                    args.creationDate = Date.now();
+                    args.hashedPass = require('../../hasher')(args.hashedPass);
+                    var myUser = new User(args);
                     myUser.save().then(()=>{
                         resolve(true)
-                    }).catch()
+                    }).catch(()=>{
+                        reject(false);
+                    })
                 }).catch((err)=>{
+                    console.log(err);
                     reject(false);
                 })
+                res.then((a)=>{
+                    console.log(a);
+                }).catch((e)=>{
+                    console.log(e)
+                })
+                console.log('hello???');
             });
         }
     }

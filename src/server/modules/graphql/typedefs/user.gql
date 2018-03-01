@@ -17,5 +17,5 @@
     }
 
     type Mutation {
-        register(new_user:UserInput!): Boolean!
+        register(email: String! password: String! username: String!): Boolean!
     }

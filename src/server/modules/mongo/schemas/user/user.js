@@ -1,5 +1,4 @@
-var mongoose = require('mongoose');
-var {Schema} = mongoose;
+var {Schema} = require('mongoose');
 
 let User = new Schema({
     username: !String,
@@ -8,4 +7,4 @@ let User = new Schema({
     creationDate: !Date
 })
 
-module.exports = mongoose.model('User',User);
+module.exports = mongo.model('User',User);
