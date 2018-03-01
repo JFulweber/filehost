@@ -9,7 +9,6 @@ export default class User extends React.Component {
         return (
             <MasterLayout overflow='visable'>
                 <div className={styles.top}>
-                    <Particle />
                     <div className={styles.container}>
                         <div className={styles.sideBar}>
                             <div className={styles.userArea}>
