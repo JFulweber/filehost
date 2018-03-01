@@ -12,6 +12,7 @@ var resolvers = {
         user: async function (parent, args, {
             User
         }) {
+            reject(null);
             return await new Promise((resolve, reject) => {
                 User.findOne({ username: args.username }).then(result => {
                     resolve(result);
@@ -24,6 +25,7 @@ var resolvers = {
     Mutation: {
         register: async function (parent, args, {User}) {
             return await new Promise((resolve, reject) => {
+                console.log('running register');
                 User.findOne({ email: args.new_user.email }).then((user)=>{
                     if(user)
                         reject(false);
