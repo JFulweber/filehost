@@ -2,16 +2,21 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    justify-content: space-around;
+    width: 100%;
     .name{
         font-family: 'Ropa Sans';
         font-size: 12px;
+        text-align: left;
     }
     .size{
         font-family: 'Ropa Sans';
         font-size: 12px;
+        text-align: left;
     }
     .type{
         font-family: 'Ropa Sans';
         font-size: 12px;
+        text-align: left;
     }
 }

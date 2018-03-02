@@ -9,18 +9,16 @@ export default class MasterLayout extends React.Component {
     constructor(props) {
         super(props)
         this.state = {};
-        this.state.backgroundColor = 'transparent';
+        this.state.backgroundColor = this.props.backgroundColor != undefined ? this.props.backgroundColor : 'transparent';
         this.state.overflow = this.props.overflow != undefined ? this.props.overflow : 'hidden';
-      //  this.onScroll = this.onScroll.bind(this);
     }
 
-     componentDidMount() {
-        //window.addEventListener('scroll', this.onScroll);
+    componentDidMount() {
         document.body.style.overflow = this.state.overflow;
-        if(localStorage.getItem('token')==null || localStorage.getItem('token')==undefined){
-            this.setState({style:{visibility:"hidden"}});
-        }else{
-            this.setState({style:{visibility:"shown"}});
+        if (localStorage.getItem('token') == null || localStorage.getItem('token') == undefined) {
+            this.setState({ style: { visibility: "hidden" } });
+        } else {
+            this.setState({ style: { visibility: "shown" } });
         }
     }
 
@@ -35,9 +33,9 @@ export default class MasterLayout extends React.Component {
                             <NavElement text='About' dest='/about' />
                             <NavElement text='My Files' dest='/user/' />
                         </div>
-                     <div className={styles.logout} style = {this.state.style}>
-                         <NavElement text='Logout' dest='/logout' />
-                     </div>
+                        <div className={styles.logout} style={this.state.style}>
+                            <NavElement text='Logout' dest='/logout' />
+                        </div>
                     </nav>
                 </header>
                 <div className={styles.spacer}>
