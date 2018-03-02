@@ -12,9 +12,10 @@ var resolvers = {
         user: async function (parent, args, {
             User
         }) {
-            reject(null);
             return await new Promise((resolve, reject) => {
-                User.findOne({ username: args.username }).then(result => {
+                console.log(args);
+                User.findOne({ username: args.UserID }).then(result => {
+                    console.log(result)
                     resolve(result);
                 }).catch((err)=>{
                     reject(err);
@@ -25,30 +26,25 @@ var resolvers = {
     Mutation: {
         register: async function (parent, args, {User}) {
             return await new Promise((resolve, reject) => {
-                console.log('running register');
-                var res = User.findOne({ email: args.email }).then((user)=>{
-                    console.log("yeah hello???");
-                    if(user)
-                        reject(false);
-                    console.log(user);
+                User.findOne({ email: args.email }).then((user)=>{
+                    if(user){
+                        resolve(false);
+                        return;
+                    }
                     args.creationDate = Date.now();
                     args.hashedPass = require('../../hasher')(args.hashedPass);
                     var myUser = new User(args);
                     myUser.save().then(()=>{
+                        console.log('saved');
                         resolve(true)
-                    }).catch(()=>{
-                        reject(false);
+                    }).catch((err)=>{
+                        console.log('not saved');
+                        reject(err);
                     })
                 }).catch((err)=>{
                     console.log(err);
-                    reject(false);
+                    reject(err);
                 })
-                res.then((a)=>{
-                    console.log(a);
-                }).catch((e)=>{
-                    console.log(e)
-                })
-                console.log('hello???');
             });
         }
     }
