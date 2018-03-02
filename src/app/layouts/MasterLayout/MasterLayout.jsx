@@ -32,7 +32,7 @@ export default class MasterLayout extends React.Component {
         else {
             this.setState({ backgroundColor: 'transparent' });
         }
-    } */
+    } 
 
     render() {
         return (
