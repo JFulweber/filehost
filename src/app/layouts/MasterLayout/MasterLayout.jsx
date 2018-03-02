@@ -14,8 +14,8 @@ export default class MasterLayout extends React.Component {
       //  this.onScroll = this.onScroll.bind(this);
     }
 
-/*     componentDidMount() {
-        window.addEventListener('scroll', this.onScroll);
+     componentDidMount() {
+        //window.addEventListener('scroll', this.onScroll);
         document.body.style.overflow = this.state.overflow;
         if(localStorage.getItem('token')==null || localStorage.getItem('token')==undefined){
             this.setState({style:{visibility:"hidden"}});
