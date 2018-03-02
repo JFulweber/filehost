@@ -24,16 +24,6 @@ export default class MasterLayout extends React.Component {
         }
     }
 
-    onScroll(e) {
-        let scrollTop = e.srcElement.body.scrollTop;
-        if (scrollTop >= 69) {
-            this.setState({ backgroundColor: p.colorBlack });
-        }
-        else {
-            this.setState({ backgroundColor: 'transparent' });
-        }
-    } 
-
     render() {
         return (
             <div>
