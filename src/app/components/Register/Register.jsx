@@ -110,6 +110,8 @@ class RegisterResponse extends React.Component {
         this.props.mutate().then((res)=>{
             console.log(res);
             this.setState({response:res});
+        }).catch((err)=>{
+            console.log(err)
         })
         if(this.state.response){
             return <p> ok cool </p>

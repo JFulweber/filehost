@@ -11,7 +11,7 @@ export default class MasterLayout extends React.Component {
         this.state = {};
         this.state.backgroundColor = 'transparent';
         this.state.overflow = this.props.overflow != undefined ? this.props.overflow : 'hidden';
-        this.onScroll = this.onScroll.bind(this);
+      //  this.onScroll = this.onScroll.bind(this);
     }
 
 /*     componentDidMount() {
