@@ -26,13 +26,16 @@ export default class Register extends React.Component {
         // feel free to edit the render returns for that to do whatever 
         this.setState({ username: event.target.value })
         var checkQuery = gql`query($UserID:String!){
-            user(UserID:$UserID)
+            user(UserID:$UserID){
+                _id
+            }
         }`;
+        console.log(event.target.value);
         this.setState({
             usernameInUse: graphql(checkQuery, {
                 options: {
                     variables: {
-                        UserID: this.state.username
+                        UserID: event.target.value
                     }
                 }
             })(UsernameValid)
@@ -52,10 +55,8 @@ export default class Register extends React.Component {
     }
 
     submit(e) {
-        console.log('esketit');
         e.preventDefault();
         if (this.state.passConf == this.state.pass) {
-            console.log('passconf right');
             var query = gql`mutation($email: String!, $username: String!, $pass: String!){
                 register(email:$email, username: $username, password: $pass)
             }
@@ -73,7 +74,7 @@ export default class Register extends React.Component {
             });
         }
         else{
-            console.log('pass conf was wrong');
+            alert('Your passwords are not the same.');
         }
     }
 
@@ -86,6 +87,7 @@ export default class Register extends React.Component {
                 <form className={styles.loginContainer}>
                     <Title title='Register' className={styles.text} />
                     <div className={styles.inputContainer}>
+                        {this.state.usernameInUse?<this.state.usernameInUse/>:null}
                         <input type="email" id="email" value={this.state.email} onChange={this.emailChange} className={styles.passwordIn} placeholder="Email" />
                         <input type="username" id="username" value={this.state.username} onChange={this.usernameChange} className={styles.usernameIn} placeholder="Username" />
                         <input type="password" id="password" value={this.state.pass} onChange={this.passChange} className={styles.passwordIn} placeholder="Password" />
@@ -106,32 +108,32 @@ class RegisterResponse extends React.Component {
     }
     
     render() {
-        if(!this.state.response)
-        this.props.mutate().then((res)=>{
-            console.log(res);
-            this.setState({response:res});
-        }).catch((err)=>{
-            console.log(err)
-        })
-        if(this.state.response){
-            return <p> ok cool </p>
+        if(!this.state.response){
+            this.props.mutate().then((res)=>{
+                this.setState({response:res});
+            }).catch((err)=>{
+                console.log(err)
+            })
+            return <p> Loading ... </p>
         }
         else{
-            console.log(this.state)
-            return <p> not cool </p>
+            if(this.state.response.data.register==true){
+                return <p> Successfully registered </p>
+            }
+            else if(this.state.response.data.register==false){
+                return <p> User already exists </p>
+            }
         }
     }
 }
 
 class UsernameValid extends React.Component {
     render() {
-        if (this.props.data.usernameInUse == true) {
-            console.log('youre good');
-            return (<p> yep you good </p>)
+        if (this.props.data.user==null) {
+            return (<p> Username is not in use </p>)
         }
         else {
-            console.log('username in use');
-            return (<p> nope youre not good friend </p>)
+            return (<p> Username is in use. </p>)
         }
     }
 }
