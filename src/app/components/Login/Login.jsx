@@ -6,6 +6,7 @@ import { graphql } from 'react-apollo';
 import { Redirect } from 'react-router'
 import Promise from 'bluebird';
 
+
 export default class Login extends React.Component {
     constructor(props) {
         super(props);
