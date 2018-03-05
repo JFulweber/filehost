@@ -3,6 +3,11 @@ import styles from './Register.scss';
 import Title from '../../components/Title/Title.jsx';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
+import { createApolloFetch } from 'apollo-fetch';
+ 
+const uri = 'http://localhost:3000/graphql';
+const apolloFetch = createApolloFetch({ uri });
+
 export default class Register extends React.Component {
     constructor(props) {
         super(props);
@@ -25,20 +30,30 @@ export default class Register extends React.Component {
         // @ myles: use the UsernameValid component in this.state.usernameInUse to indicate if a username is in use
         // feel free to edit the render returns for that to do whatever 
         this.setState({ username: event.target.value })
-        var checkQuery = gql`query($UserID:String!){
-            user(UserID:$UserID){
+        
+        var query = `query{
+            user(UserID:"${event.target.value}"){
                 _id
             }
         }`;
-        console.log(event.target.value);
-        this.setState({
-            usernameInUse: graphql(checkQuery, {
-                options: {
-                    variables: {
-                        UserID: event.target.value
+        var variables = {
+            name: event.target.username
+        }
+        apolloFetch({query,variables:variables}).then((res)=>{
+            if(res!=null){
+                this.setState({
+                    usernameInUse: {
+                        borderColor:"red"
                     }
-                }
-            })(UsernameValid)
+                })
+            }
+            else{
+                this.setState({
+                    usernameInUse: {
+                        borderColor:"green"
+                    }
+                })
+            }
         })
     }
 
@@ -89,7 +104,7 @@ export default class Register extends React.Component {
                     <div className={styles.inputContainer}>
                         {this.state.usernameInUse?<this.state.usernameInUse/>:null}
                         <input type="email" id="email" value={this.state.email} onChange={this.emailChange} className={styles.passwordIn} placeholder="Email" />
-                        <input type="username" id="username" value={this.state.username} onChange={this.usernameChange} className={styles.usernameIn} placeholder="Username" />
+                        <input type="username" id="username" value={this.state.username} onChange={this.usernameChange} className={styles.usernameIn} placeholder="Username" /> //TODO: do this
                         <input type="password" id="password" value={this.state.pass} onChange={this.passChange} className={styles.passwordIn} placeholder="Password" />
                         <input type="passwordConf" id="passwordConf" value={this.state.passConf} onChange={this.passConfChange} className={styles.passwordIn} placeholder="Confirm Password" />
                     </div>
