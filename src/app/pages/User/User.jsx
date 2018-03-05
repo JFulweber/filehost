@@ -10,14 +10,17 @@ export default class User extends React.Component {
         return (
             <MasterLayout overflow='visable' backgroundColor={p.colorBlack}>
                 <div className={styles.top}>
-                    <div className={styles.container}>
-                        <div className={styles.sideBar}>
-                            <div className={styles.fileStruc}>
-                                {/* TODO: Make the file structor */}
-                            </div>
+                    <div className={styles.sideBar}>
+                        <div className={styles.fileStruc}>
+
                         </div>
-                        <div className={styles.fileListContainer}>
-                            <FileList />
+                    </div>
+                    <div className={styles.content}>
+                        <div className={styles.topBar}>
+                            
+                        </div>
+                        <div className={styles.files}>
+
                         </div>
                     </div>
                 </div>

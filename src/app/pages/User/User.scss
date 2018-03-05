@@ -7,28 +7,30 @@
     background-color: $color2;
     height: 100%;
 }
-.container{
-    position: relative;
-    margin: auto;
-    padding-top: 50px; 
-    text-align: center;
-    z-index: 30;
-    background-color: $color1;
+.sideBar{
+    position: fixed;
+    width: 15%;
+    height: 100%;
+    background-color: #414141;
+    z-index: 5;
+}
+.content{
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    width: 80%;
-    .sideBar{
-        display: flex;
-        flex-wrap: nowrap;
-        flex-direction: column;
+    flex-direction: column;
+    justify-content: flex-start;
+    .topBar{
         flex-grow: 1;
+        background-color: #545454;
+        min-height: 3%;
+        width: 100%;
+        top: 90px;
+        position: fixed;
+        z-index: 3;
     }
-    .fileListContainer{
-        display: flex;
-        flex-wrap: nowrap;
-        flex-direction: column;
-        flex-grow: 4;
+    .files{
+        flex-grow: 2;
+        background-color: #676767;
+        height: 100%
     }
+
 }
