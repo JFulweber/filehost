@@ -15,7 +15,6 @@ var resolvers = {
             return await new Promise((resolve, reject) => {
                 console.log(args);
                 User.findOne({ username: args.UserID }).then(result => {
-                    console.log(result)
                     resolve(result);
                 }).catch((err)=>{
                     reject(err);

@@ -17,7 +17,8 @@ export default class Register extends React.Component {
         this.state.email = '';
         this.state.passConf = '';
         this.state.loggedIn = false;
-
+        this.state.style = {};
+        this.state.style.borderColor = "white"
         this.usernameChange = this.usernameChange.bind(this);
         this.passChange = this.passChange.bind(this);
         this.emailChange = this.emailChange.bind(this);
@@ -40,16 +41,16 @@ export default class Register extends React.Component {
             name: event.target.username
         }
         apolloFetch({query,variables:variables}).then((res)=>{
-            if(res!=null){
+            if(res.data.user!=null){
                 this.setState({
-                    usernameInUse: {
+                    style: {
                         borderColor:"red"
                     }
                 })
             }
             else{
                 this.setState({
-                    usernameInUse: {
+                    style: {
                         borderColor:"green"
                     }
                 })
@@ -104,7 +105,7 @@ export default class Register extends React.Component {
                     <div className={styles.inputContainer}>
                         {this.state.usernameInUse?<this.state.usernameInUse/>:null}
                         <input type="email" id="email" value={this.state.email} onChange={this.emailChange} className={styles.passwordIn} placeholder="Email" />
-                        <input type="username" id="username" value={this.state.username} onChange={this.usernameChange} className={styles.usernameIn} placeholder="Username" /> //TODO: do this
+                        <input type="username" id="username" value={this.state.username} onChange={this.usernameChange} className={styles.usernameIn} style = {{borderColor: this.state.style.borderColor}} placeholder="Username" />
                         <input type="password" id="password" value={this.state.pass} onChange={this.passChange} className={styles.passwordIn} placeholder="Password" />
                         <input type="passwordConf" id="passwordConf" value={this.state.passConf} onChange={this.passConfChange} className={styles.passwordIn} placeholder="Confirm Password" />
                     </div>
