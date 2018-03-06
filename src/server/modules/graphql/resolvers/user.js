@@ -30,17 +30,21 @@ var resolvers = {
                         resolve(false);
                         return;
                     }
-                    args.creationDate = Date.now();
-                    args.hashedPass = require('../../hasher')(args.hashedPass);
-                    var myUser = new User(args);
+                    var userargs = args;
+                    userargs.creationDate = Date.now();
+                    // TODO: fix this
+                    userargs.hashedPass = require('../../hasher')(args.hashedPass);
+                    var myUser = new User(userargs);
                     myUser.save().then(()=>{
                         console.log('saved');
+                        console.log(myUser);
                         resolve(true)
                     }).catch((err)=>{
                         console.log('not saved');
                         reject(err);
                     })
                 }).catch((err)=>{
+                    console.log('err below')
                     console.log(err);
                     reject(err);
                 })

@@ -2,27 +2,27 @@ var mongoose = mongo;
 var jwt = require('jsonwebtoken');
 var Promise = require('bluebird');
 var secret = 'hellohellohellobigpenor'
-
+var hasher = require('../../hasher')
 var resolvers = {
     Query: {
-        authenticate: async function(parent, args, {Session}){
-            
-            return await new Promise((resolve,reject)=>{
+        authenticate: async function (parent, args, { Session }) {
+
+            return await new Promise((resolve, reject) => {
                 // is a mongo backend necessary for jwt? can we not just check the authetnication and verify the sig of the jwt?
                 // TODO: look into that
-                try{
-                    var decoded = jwt.verify(args.token,secret);
-                    if(decoded.username=='undefined'){
+                try {
+                    var decoded = jwt.verify(args.token, secret);
+                    if (decoded.username == 'undefined') {
                         resolve(false);
                     }
                     resolve(true);
-                }catch(e){
+                } catch (e) {
                     resolve(false);
                 }
                 //console.log(decoded);
-                
-                Session.findOne({Token: args.token, Username: args.username}, function(err, result){
-                    if(!result) resolve(false);
+
+                Session.findOne({ Token: args.token, Username: args.username }, function (err, result) {
+                    if (!result) resolve(false);
                     resolve(true);
                 });
             })
@@ -34,37 +34,27 @@ var resolvers = {
             Session
         }) {
             return await new Promise((resolve, reject) => {
-                var token = jwt.sign({
-                    Username: args.username
-                }, secret, {
-                    expiresIn: '1m'
-                });
-                var NewSession = new Session({
-                    Username: args.username,
-                    Token: token
-                });
-                if(token && args.username != "undefined")
-                {
-                    console.log(args.username);
-                    resolve(NewSession);
-                }
-                else reject("no token idk");
-                /* var DeletedSession = Session.find({
-                    username: args.username
-                }).then((res) => {
-                    res.forEach((session) => {
-                        session.remove();
+                /* YESSIR */
+                User.findOne({ username: args.username, hashedPass: hasher(args.pass) })
+                    .then(user => {
+                        if (user == null) {
+                            resolve(null);
+                            return;
+                        }
+                        console.log(user);
+                        var token = jwt.sign({
+                            Username: args.username
+                        }, secret, {
+                                expiresIn: '1m'
+                            });
+                        var NewSession = new Session({
+                            Username: args.username,
+                            Token: token
+                        });
+                        if (token && args.username != "undefined") {
+                            resolve(NewSession);
+                        }
                     })
-                });
-                DeletedSession.then(() => {
-                    
-                    
-                    NewSession.save().then((ans) => {
-                        resolve(ans);
-                    }).catch((e) => {
-                        reject(e);
-                    }) 
-                }); */
             })
         }
     }
