@@ -1,24 +1,29 @@
 .file{
     display: table;
     width: 100%;
+    padding: 5px 0 5px 0;
+    border-style: solid none solid none;
+    border-width: 2px 0 0px 0;
+    border-color: #414141;
+    border-collapse: separate;
     .name{
         display: table-cell;
         font-family: 'Ropa Sans';
-        font-size: 16px;
+        font-size: 20px;
         text-align: left;
         width: 20%;
     }
     .size{
         display: table-cell;
         font-family: 'Ropa Sans';
-        font-size: 16px;
+        font-size: 20px;
         text-align: left;
         width: 20%;
     }
     .type{
         display: table-cell;
         font-family: 'Ropa Sans';
-        font-size: 16px;
+        font-size: 20px;
         text-align: left;
         width: 20%;
     }

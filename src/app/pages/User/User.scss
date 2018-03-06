@@ -1,36 +1,55 @@
 @import '../../palette.scss';
 
 .top{
-    padding: 0 0 300px; 
-    overflow-x: hidden;
     z-index: 10;
     background-color: $color2;
     height: 100%;
+    overflow: hidden;
 }
 .sideBar{
     position: fixed;
-    width: 15%;
+    width: 270px;
     height: 100%;
     background-color: #414141;
     z-index: 5;
 }
+.topBar{
+    flex-grow: 1;
+    background-color: #545454;
+    height: 20px;
+    width: 100%;
+    top: 90px;
+    position: fixed;
+    z-index: 4;
+}
 .content{
+    padding: 18px 0 0 270px;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    .topBar{
-        flex-grow: 1;
-        background-color: #545454;
-        min-height: 3%;
-        width: 100%;
-        top: 90px;
-        position: fixed;
-        z-index: 3;
+    overflow: hidden;
+    .head{
+        display: table;
+        .name{
+           display: table-cell;
+           text-align: left; 
+        }
+        .size{
+            display: table-cell;
+           text-align: left; 
+        }
+        .type{
+            display: table-cell;
+            text-align: left; 
+        }
     }
     .files{
         flex-grow: 2;
+        overflow-x: scroll;
         background-color: #676767;
-        height: 100%
+        height: 100%;
+        z-index: 3;
     }
 
 }
