@@ -80,8 +80,12 @@ export default class Login extends React.Component {
 class LoginComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {username: undefined};
         this.props.mutate().then((res)=>{
+            if(res.data.createSession == null) {
+                this.setState({username: null});
+                return;
+            }
             localStorage.setItem('username', res.data.createSession.Username);
             localStorage.setItem('token', res.data.createSession.Token);
             this.setState({username:res.data.createSession.Username})
@@ -89,8 +93,11 @@ class LoginComponent extends React.Component {
     }
 
     render() {
-        if(this.state.username!=undefined){
+        if(this.state.username!=null && this.state.username != undefined){
             return(<Redirect to={`/user/${this.state.username}`}/>);
+        }
+        else if(this.state.username==null){
+            return(<Title title="Wrong username or password"/>)
         }
         return(<Title title="Logging In..." className={styles.redirect}/>);
     }

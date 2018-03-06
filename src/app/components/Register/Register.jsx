@@ -4,10 +4,21 @@ import Title from '../../components/Title/Title.jsx';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import { createApolloFetch } from 'apollo-fetch';
- 
+import p from '../../palette.scss'; 
+
 const uri = 'http://localhost:3000/graphql';
 const apolloFetch = createApolloFetch({ uri });
 
+apolloFetch.use(({ request, options }, next) => {
+    /* if (!options.headers) {
+      options.headers = {};  // Create the headers object if needed.
+    }
+    options.headers['authorization'] = 'created token';
+   */
+    console.log(options.method);
+    next();
+});
+  
 export default class Register extends React.Component {
     constructor(props) {
         super(props);
@@ -42,6 +53,7 @@ export default class Register extends React.Component {
         }
         apolloFetch({query,variables:variables}).then((res)=>{
             if(res.data.user!=null){
+                // username exists on server
                 this.setState({
                     style: {
                         borderColor:"red"
@@ -49,9 +61,10 @@ export default class Register extends React.Component {
                 })
             }
             else{
+                // username doesn't exist
                 this.setState({
                     style: {
-                        borderColor:"green"
+                        borderColor:p["color4"]
                     }
                 })
             }
@@ -72,7 +85,11 @@ export default class Register extends React.Component {
 
     submit(e) {
         e.preventDefault();
-        if (this.state.passConf == this.state.pass) {
+        if(this.state.style.borderColor == "red"){
+            alert("Username is in use already, please try something else.");
+            return;
+        }
+        if (this.state.passConf == this.state.pass && this.state.pass.length != 0 && this.state.email.length != 0) {
             var query = gql`mutation($email: String!, $username: String!, $pass: String!){
                 register(email:$email, username: $username, password: $pass)
             }
@@ -90,7 +107,7 @@ export default class Register extends React.Component {
             });
         }
         else{
-            alert('Your passwords are not the same.');
+            alert('Make sure all fields are corectly filled out.');
         }
     }
 
@@ -137,7 +154,7 @@ class RegisterResponse extends React.Component {
                 return <p> Successfully registered </p>
             }
             else if(this.state.response.data.register==false){
-                return <p> User already exists </p>
+                return <p> Email already exists </p>
             }
         }
     }
