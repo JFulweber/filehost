@@ -18,7 +18,7 @@ export default class Register extends React.Component {
         this.state.passConf = '';
         this.state.loggedIn = false;
         this.state.style = {};
-        this.state.style.borderColor = "white"
+        this.state.style.borderColor = "green"
         this.usernameChange = this.usernameChange.bind(this);
         this.passChange = this.passChange.bind(this);
         this.emailChange = this.emailChange.bind(this);
