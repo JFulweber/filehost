@@ -29,7 +29,7 @@ export default class Register extends React.Component {
         this.state.passConf = '';
         this.state.loggedIn = false;
         this.state.style = {};
-        this.state.style.borderColor = "green"
+        this.state.style.borderColor = p["color4"]
         this.usernameChange = this.usernameChange.bind(this);
         this.passChange = this.passChange.bind(this);
         this.emailChange = this.emailChange.bind(this);
@@ -85,7 +85,7 @@ export default class Register extends React.Component {
 
     submit(e) {
         e.preventDefault();
-        if(this.state.style.borderColor == "red"){
+        if(this.state.style.borderColor != p["color4"]){
             alert("Username is in use already, please try something else.");
             return;
         }
@@ -124,7 +124,7 @@ export default class Register extends React.Component {
                         <input type="email" id="email" value={this.state.email} onChange={this.emailChange} className={styles.passwordIn} placeholder="Email" />
                         <input type="username" id="username" value={this.state.username} onChange={this.usernameChange} className={styles.usernameIn} style = {{borderColor: this.state.style.borderColor}} placeholder="Username" />
                         <input type="password" id="password" value={this.state.pass} onChange={this.passChange} className={styles.passwordIn} placeholder="Password" />
-                        <input type="passwordConf" id="passwordConf" value={this.state.passConf} onChange={this.passConfChange} className={styles.passwordIn} placeholder="Confirm Password" />
+                        <input type="password" id="passwordConf" value={this.state.passConf} onChange={this.passConfChange} className={styles.passwordIn} placeholder="Confirm Password" />
                     </div>
                     <input type="button" id="submit" value="Register" className={styles.submit} onClick={this.submit} />
                     <a href="/" className={styles.link}>Login Here</a>
