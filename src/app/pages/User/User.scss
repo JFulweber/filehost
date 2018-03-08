@@ -46,10 +46,21 @@
     }
     .files{
         flex-grow: 2;
-        overflow-x: scroll;
+        overflow-y: scroll;
         background-color: #676767;
         height: 100%;
         z-index: 3;
     }
-
+}
+::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+::-webkit-scrollbar-track {
+    color: $color1;
+    border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    color: $color3;
 }
