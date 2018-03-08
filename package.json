@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node ./src/server/server.js",
     "prestart": "webpack",
-    "start": "node ./src/server/server.js"
+    "start": "node ./src/server/server.js",
+    "dev": "node ./src/server/server.js | webpack-dev-server"
   },
   "author": "adair n myles",
   "license": "ISC",

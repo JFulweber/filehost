@@ -1,4 +1,5 @@
 var mongoose = mongo;
+var hasher = require('../../hasher')
 
 var resolvers = {
     Query: {
@@ -33,11 +34,12 @@ var resolvers = {
                     var userargs = args;
                     userargs.creationDate = Date.now();
                     // TODO: fix this
-                    userargs.hashedPass = require('../../hasher')(args.hashedPass);
+                    userargs.hashedPass = hasher(args.password).generate();
+                    console.log(userargs);
                     var myUser = new User(userargs);
+                    //console.log(myUser);
                     myUser.save().then(()=>{
                         console.log('saved');
-                        console.log(myUser);
                         resolve(true)
                     }).catch((err)=>{
                         console.log('not saved');
