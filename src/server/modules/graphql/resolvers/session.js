@@ -2,7 +2,9 @@ var mongoose = mongo;
 var jwt = require('jsonwebtoken');
 var Promise = require('bluebird');
 var secret = 'hellohellohellobigpenor'
-var hasher = require('../../hasher')
+var hasher = require('../../hasher');
+var verify = hasher().verify;
+
 var resolvers = {
     Query: {
         authenticate: async function (parent, args, { Session }) {
@@ -35,8 +37,10 @@ var resolvers = {
         }) {
             return await new Promise((resolve, reject) => {
                 /* YESSIR */
-                User.findOne({ username: args.username, hashedPass: hasher(args.pass) })
+                User.findOne({ username: args.username})
                     .then(user => {
+                        var verifyRes = verify(args.password, user.hashedPass);
+                        console.log(verifyRes);
                         if (user == null) {
                             resolve(null);
                             return;

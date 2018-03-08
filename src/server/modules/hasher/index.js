@@ -12,7 +12,9 @@ function passwordHasher(pass){
             });
         },
         verify: function(givenPass,hash){
-            return password.verify(givenPass,hash)
+            console.log('in verify');
+            console.log(password.verify(givenPass,hash));
+            return password.verify(givenPass,hash);
         }
     }
 }
