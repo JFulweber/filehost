@@ -13,7 +13,10 @@ export default class User extends React.Component {
 
                 </div>
                 <div className={styles.content}>
-                    <div className={styles.topBar}>
+                    <div className={styles.header}>
+                        <h1 className={styles.name}>Name</h1>
+                        <h1 className={styles.size}>Size</h1>
+                        <h1 className={styles.type}>Type</h1>
                     </div>
                     <div className={styles.files}>
                         <FileList />
