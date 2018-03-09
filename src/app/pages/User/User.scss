@@ -28,39 +28,24 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    overflow: hidden;
-    .head{
-        display: table;
-        .name{
-           display: table-cell;
-           text-align: left; 
-        }
-        .size{
-            display: table-cell;
-           text-align: left; 
-        }
-        .type{
-            display: table-cell;
-            text-align: left; 
-        }
-    }
-    .files{
-        flex-grow: 2;
-        overflow-y: scroll;
-        background-color: #676767;
-        height: 100%;
-        z-index: 3;
-    }
 }
-::-webkit-scrollbar {
+.files{
+    flex-grow: 1;
+    background-color: #676767;
+    z-index: 3;
+    overflow-y: scroll;
+}
+/* ::-webkit-scrollbar {
     width: 12px;
+    color: $color3;
 }
  
 ::-webkit-scrollbar-track {
-    color: $color1;
+    color: transparent;
     border-radius: 10px;
 }
  
 ::-webkit-scrollbar-thumb {
-    color: $color3;
-}
+    background-color: #414141;
+    border-radius: 20px;
+} */

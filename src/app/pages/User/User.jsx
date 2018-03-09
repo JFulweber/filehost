@@ -9,25 +9,14 @@ export default class User extends React.Component {
     render() {
         return (
             <MasterLayout overflow='hidden' backgroundColor={p.colorBlack}>
-                <div className={styles.top}>
-                    <div className={styles.sideBar}>
-                        <div className={styles.fileStruc}>
+                <div className={styles.sideBar}>
 
-                        </div>
-                    </div>
+                </div>
+                <div className={styles.content}>
                     <div className={styles.topBar}>
-
                     </div>
-                    <div className={styles.content}>
-
-                        <div className={styles.files}>
-                            <div className={styles.head}>
-                                <h1 className={styles.name}>Name</h1>
-                                <h1 className={styles.size}>Size</h1>
-                                <h1 className={styles.type}>Type</h1>
-                            </div>
-                            <FileList />
-                        </div>
+                    <div className={styles.files}>
+                        <FileList />
                     </div>
                 </div>
             </MasterLayout>
