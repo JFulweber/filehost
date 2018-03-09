@@ -20,7 +20,6 @@ export default class Home extends React.Component {
             var query = gql`query($token: String!){
                 authenticate(token: $token)
             }`
-            console.log('pre-graphql call');
             var gqlcomp = graphql(query, {
                 options: {
                     variables: {

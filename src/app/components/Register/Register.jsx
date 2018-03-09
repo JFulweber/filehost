@@ -10,12 +10,6 @@ const uri = 'http://localhost:3000/graphql';
 const apolloFetch = createApolloFetch({ uri });
 
 apolloFetch.use(({ request, options }, next) => {
-    /* if (!options.headers) {
-      options.headers = {};  // Create the headers object if needed.
-    }
-    options.headers['authorization'] = 'created token';
-   */
-    console.log(options.method);
     next();
 });
   
@@ -145,7 +139,7 @@ class RegisterResponse extends React.Component {
             this.props.mutate().then((res)=>{
                 this.setState({response:res});
             }).catch((err)=>{
-                console.log(err)
+                throw err;
             })
             return <p> Loading ... </p>
         }

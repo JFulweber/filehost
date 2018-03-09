@@ -14,7 +14,6 @@ var resolvers = {
             User
         }) {
             return await new Promise((resolve, reject) => {
-                console.log(args);
                 User.findOne({ username: args.UserID }).then(result => {
                     resolve(result);
                 }).catch((err)=>{
@@ -33,21 +32,14 @@ var resolvers = {
                     }
                     var userargs = args;
                     userargs.creationDate = Date.now();
-                    // TODO: fix this
-                    userargs.hashedPass = hasher(args.password).generate();
-                    console.log(userargs);
+                    userargs.hashedPass = hasher.generate(args.password);
                     var myUser = new User(userargs);
-                    //console.log(myUser);
                     myUser.save().then(()=>{
-                        console.log('saved');
                         resolve(true)
                     }).catch((err)=>{
-                        console.log('not saved');
                         reject(err);
                     })
                 }).catch((err)=>{
-                    console.log('err below')
-                    console.log(err);
                     reject(err);
                 })
             });
