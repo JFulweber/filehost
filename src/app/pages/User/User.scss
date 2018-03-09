@@ -1,11 +1,5 @@
 @import '../../palette.scss';
 
-.top{
-    z-index: 10;
-    background-color: $color2;
-    height: 100%;
-    overflow: hidden;
-}
 .sideBar{
     position: fixed;
     width: 270px;
@@ -33,19 +27,4 @@
     flex-grow: 1;
     background-color: #676767;
     z-index: 3;
-    overflow-y: scroll;
 }
-/* ::-webkit-scrollbar {
-    width: 12px;
-    color: $color3;
-}
- 
-::-webkit-scrollbar-track {
-    color: transparent;
-    border-radius: 10px;
-}
- 
-::-webkit-scrollbar-thumb {
-    background-color: #414141;
-    border-radius: 20px;
-} */

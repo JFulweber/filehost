@@ -8,7 +8,7 @@ import p from '../../palette.scss';
 export default class User extends React.Component {
     render() {
         return (
-            <MasterLayout overflow='hidden' backgroundColor={p.colorBlack}>
+            <MasterLayout overflow='visible' backgroundColor={p.colorBlack}>
                 <div className={styles.sideBar}>
 
                 </div>
