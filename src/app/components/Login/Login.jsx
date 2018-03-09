@@ -36,8 +36,6 @@ export default class Login extends React.Component {
             alert('Please enter a passwod. I swear if you made your password blank I will hurt you.');
         }
         else{
-            console.log(`username :${this.state.username}`);
-            console.log(`pass: ${this.state.pass}`)
             var query = gql`mutation($_usernamevar: String!, $_passvar: String!){
                 createSession(username:$_usernamevar, pass: $_passvar){
                     Token

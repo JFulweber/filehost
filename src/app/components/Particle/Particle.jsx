@@ -13,7 +13,6 @@ export default class Particle extends React.Component{
             )
         }
         catch(error){
-            console.log(error);
             return <Part params={params} className={style.canvas}/>
         }
         

@@ -59,8 +59,8 @@ var multer = require('multer');
 var upload = multer()
 
 app.post('/upload', upload.single('file'), function(req,res){
-    console.log(req.file);
-    console.log(req.body.user);
+/*     console.log(req.file);
+    console.log(req.body.user); */
 })
 
 var session = require('express-session');
@@ -83,6 +83,6 @@ app.get('/*', function(req,res){
 });
 
 app.listen(PORT, function () {
-    console.log('hello reACT');
+    console.log('We\'re up and running!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 })
 

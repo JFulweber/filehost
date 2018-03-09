@@ -12,14 +12,13 @@ export default class Uploader extends React.Component {
         var data = new FormData();
         data.append('file', e.target.files[0]);
         data.append('user', 'jeff');
-        //console.log(e.target.files[0]);
-        console.log(data);
+        //console.log(e.target.files[0]); <-- this is the file accessible
         fetch('/upload', {
             method: 'post',
             body: data
         }).then(resp => {
-            console.log(resp);
-        }).catch(err => console.log(err))
+           // need to do anything?
+        }).catch(err => {if(err) throw err})
     }
 
     render() {

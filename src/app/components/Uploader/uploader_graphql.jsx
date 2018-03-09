@@ -20,20 +20,15 @@ const UploadFile = ({ mutate }) => {
         mutate({
             variables: { file },
             update: (proxy, { data: { singleUpload } }) => {
-                console.log(singleUpload)
                 let data = undefined;
                 try{
                     data = proxy.readQuery({ query: uploadsQuery });
                 }
                 catch(exception){
-                    console.log(exception)
                     data = {uploads:[]};
                 }
-                console.log('did I hit this?');
                 data.uploads.push(singleUpload)
-                console.log(data)
                 proxy.writeQuery({ query: uploadsQuery, data })
-                console.log('idk here lol')
             }
         })
     return <input type="file" required onChange={handleChange} />

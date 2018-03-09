@@ -2,21 +2,22 @@ var password = require('password-hash');
 var Promise = require('bluebird');
 var secret = "whatever bro";
 
-function passwordHasher(pass){
-    return{
-        generate: function(){
-            return password.generate(pass,{
-                algorithm: "sha256",
-                saltLength: 32,
-                iterations: 5
-            });
-        },
-        verify: function(givenPass,hash){
-            console.log('in verify');
-            console.log(password.verify(givenPass,hash));
-            return password.verify(givenPass,hash);
+var exports = {
+    generate: function (pass) {
+        return password.generate(pass, {
+            algorithm: "sha256",
+            saltLength: 32,
+            iterations: 5
+        });
+    },
+    verify: function (givenPass, hash) {
+        try{
+            var ret = password.verify(givenPass,hash)
+        }catch(e){
+            ret = null;
         }
+        return ret;
     }
 }
 
-module.exports = passwordHasher;
+module.exports = exports;

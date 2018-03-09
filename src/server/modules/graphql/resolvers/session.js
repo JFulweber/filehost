@@ -3,15 +3,13 @@ var jwt = require('jsonwebtoken');
 var Promise = require('bluebird');
 var secret = 'hellohellohellobigpenor'
 var hasher = require('../../hasher');
-var verify = hasher().verify;
+var verify = hasher.verify;
 
 var resolvers = {
     Query: {
         authenticate: async function (parent, args, { Session }) {
 
             return await new Promise((resolve, reject) => {
-                // is a mongo backend necessary for jwt? can we not just check the authetnication and verify the sig of the jwt?
-                // TODO: look into that
                 try {
                     var decoded = jwt.verify(args.token, secret);
                     if (decoded.username == 'undefined') {
@@ -21,12 +19,6 @@ var resolvers = {
                 } catch (e) {
                     resolve(false);
                 }
-                //console.log(decoded);
-
-                Session.findOne({ Token: args.token, Username: args.username }, function (err, result) {
-                    if (!result) resolve(false);
-                    resolve(true);
-                });
             })
         }
     },
@@ -36,27 +28,29 @@ var resolvers = {
             Session
         }) {
             return await new Promise((resolve, reject) => {
-                /* YESSIR */
                 User.findOne({ username: args.username})
                     .then(user => {
-                        var verifyRes = verify(args.password, user.hashedPass);
-                        console.log(verifyRes);
+                        var verifyRes = verify(args.pass, user.hashedPass);
                         if (user == null) {
                             resolve(null);
                             return;
                         }
-                        console.log(user);
-                        var token = jwt.sign({
-                            Username: args.username
-                        }, secret, {
-                                expiresIn: '1m'
+                        if(verifyRes===true){
+                            var token = jwt.sign({
+                                Username: args.username
+                            }, secret, {
+                                    expiresIn: '1h'
+                                });
+                            var NewSession = new Session({
+                                Username: args.username,
+                                Token: token
                             });
-                        var NewSession = new Session({
-                            Username: args.username,
-                            Token: token
-                        });
-                        if (token && args.username != "undefined") {
-                            resolve(NewSession);
+                            if (token && args.username != "undefined") {
+                                resolve(NewSession);
+                            }
+                        }
+                        else{
+                            resolve(null);
                         }
                     })
             })
