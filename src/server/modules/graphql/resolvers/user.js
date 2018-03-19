@@ -1,5 +1,6 @@
 var mongoose = mongo;
 var hasher = require('../../hasher')
+var verify = hasher.verify;
 
 var resolvers = {
     Query: {
@@ -43,6 +44,30 @@ var resolvers = {
                     reject(err);
                 })
             });
+        },
+        changeInfo: async function (parent,args,{User}){
+            return await new Promise((resolve,reject)=>{
+                if(!args.email || !args.password){
+                    resolve(false);
+                    return;
+                }
+                User.findOne({email:args.email}).then(user=>{
+                    var verifyRes = verify(args.pass, user.hashedPass);
+                    if(verifyRes == true){
+                        if(args.newPass){
+                            user.hashedPass =  hasher.generate(args.newPass);
+                        }
+                        if(args.newEmail){
+                            user.email = args.newEmail;
+                        }
+                    }
+                    else{
+                        resolve(false);
+                        return;
+                    }
+                    user.save().then(()=>resolve(true));
+                })
+            })
         }
     }
 }
