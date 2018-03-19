@@ -18,4 +18,5 @@
 
     type Mutation {
         register(email: String! password: String! username: String!): Boolean!
+        changeInfo(email:String! pass: String! newEmail: String newPass: String): Boolean!
     }
