@@ -6,25 +6,15 @@
     height: 100%;
     background-color: #414141;
     z-index: 5;
-}
-.topBar{
-    flex-grow: 1;
-    background-color: #545454;
-    height: 20px;
-    width: 100%;
-    top: 92px;
-    position: fixed;
-    z-index: 4;
-}  
+}   
 .header{
     background-color: #545454;
     top: 92px;
-    width: 100%;
     position: fixed;
     display: table;
-    width: 100%;
     padding-left: 20px;
     z-index: 5;
+    width: 83%;
     .name{
         display: table-cell;
         text-align: left;
@@ -57,7 +47,7 @@
     flex-direction: column;
     justify-content: flex-start;
     .files{
-        flex-grow: 1;
+        width: 100%;
         background-color: #676767;
         z-index: 3;
     }
