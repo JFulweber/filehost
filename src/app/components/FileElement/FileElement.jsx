@@ -13,9 +13,9 @@ export default class FileElement extends React.Component{
     render(){
         return(
             <div className={styles.file}>
-                <h1 id='title' className={styles.name}>{this.props.fileName}</h1>
-                <h1 id='size' className={styles.size}>{this.props.fileSize}</h1>
-                <h1 id='type' className={styles.type}>{this.props.type}</h1>
+                <h1 id='title' className={styles.name}>{this.state.fileName}</h1>
+                <h1 id='size' className={styles.size}>{this.state.fileSize}</h1>
+                <h1 id='type' className={styles.type}>{this.state.type}</h1>
             </div>
         )
     }
