@@ -7,7 +7,8 @@
         _id: ID!
         username: String,
         email: String,
-        creationDate: Int
+        creationDate: Int,
+        approved: Boolean!
     }
 
     input UserInput {

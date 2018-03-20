@@ -1,5 +1,5 @@
     type Query {
-        files: [File]!
+        files(path:String): File[]
         file(path:String!): File
     }
 
