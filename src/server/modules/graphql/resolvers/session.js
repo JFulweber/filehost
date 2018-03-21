@@ -7,7 +7,7 @@ var verify = hasher.verify;
 
 var resolvers = {
     Query: {
-        authenticate: async function (parent, args, { Session }) {
+        authenticate: async function (parent, args) {
             return await new Promise((resolve, reject) => {
                 try {
                     var decoded = jwt.verify(args.token, secret);

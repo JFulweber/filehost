@@ -38,7 +38,7 @@ export default class Register extends React.Component {
         this.setState({ username: event.target.value })
         
         var query = `query{
-            user(UserID:"${event.target.value}"){
+            user(UserID:"   ${event.target.value}"){
                 _id
             }
         }`;
