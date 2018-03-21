@@ -8,7 +8,6 @@ var verify = hasher.verify;
 var resolvers = {
     Query: {
         authenticate: async function (parent, args, { Session }) {
-
             return await new Promise((resolve, reject) => {
                 try {
                     var decoded = jwt.verify(args.token, secret);
@@ -20,7 +19,7 @@ var resolvers = {
                     resolve(false);
                 }
             })
-        }
+        },
     },
     Mutation: {
         createSession: async function (parent, args, {

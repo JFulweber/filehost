@@ -1,18 +1,17 @@
     type Query {
-        files(path:String): [File]
-        file(path:String!): File
+        files(path:String! token:String!): [File]
+        file(path:String! token:String!): File
     }
 
     type File {
-        _id: ID!
-        user: User,
+        # _id: ID!,
         path: String!,
         type: String,
-        creationDate: Int
+        # creationDate: Int,
+        size: Int
     }
 
     input NewFile {
-        owneruser: String!,
         type: String,
         size: Int!,
         creationDate: Int
