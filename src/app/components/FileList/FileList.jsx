@@ -20,12 +20,12 @@ export default class FileList extends React.Component {
         this.state.items = [];
         this.getItems = this.getItems.bind(this);
     }
-    //(?<="Username":").+?(?=")
     componentDidMount() {
         this.getItems();
     }
 
     getItems() {
+        var items = [];
         var query = `query{
             files(path:"${this.state.dir}" token:"${localStorage.getItem("token")}"){
                 path
@@ -50,8 +50,18 @@ export default class FileList extends React.Component {
                 } else {
                     size = undefined;
                 }
-                console.log(size);
+                var reg = new RegExp("(?!.*?\/).*");
+                var reg2 = new RegExp("[^\.]*");
+                var name = reg.exec(file.path);
+                name = reg2.exec(name);
+                if (file.type == "dir") {
+                    items.push(<FileFolder folderName={name} />);
+                } else {
+                    var type = file.type.substring(1);
+                    items.push(<FileElement fileName={name} fileSize={size} type={type} />);
+                }
             })
+            this.setState({ items: items });
         })
     }
 
