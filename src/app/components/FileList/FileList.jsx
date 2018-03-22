@@ -37,8 +37,20 @@ export default class FileList extends React.Component {
             name: event.target.username
         }
         apolloFetch({ query, variables: variables }).then((res) => {
-            res.data.files.forEach(file=>{
-
+            res.data.files.forEach(file => {
+                var size = 0;
+                if (file.size < 1000) {
+                    size = file.size + " B";
+                } else if (file.size < 1000000) {
+                    size = (Math.ceil(file.size / 1000)) + " KB";
+                } else if (file.size < 1000000000) {
+                    size = Math.ceil(file.size / 1000000) + " MB";
+                } else if (file.size < 1000000000000) {
+                    size = Math.ceil(file.size / 1000000000) + " GB";
+                } else {
+                    size = undefined;
+                }
+                console.log(size);
             })
         })
     }

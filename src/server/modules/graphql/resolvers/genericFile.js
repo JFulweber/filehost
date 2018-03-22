@@ -14,15 +14,16 @@ var resolvers = {
                     var info = jwt.verify(args.token, secret);
                     console.log(info);
                     // goes from this files directory to the root of the workspace directory
-                    var path = _path.resolve(__dirname + "../../../../../../users/" + info.Username + '/' + args.path);
-                    console.log(path);
-                    fs.readdir(path, (err, files) => {
+                    var gpath = _path.resolve(__dirname + "../../../../../../users/" + info.Username + '/' + args.path);
+                    console.log(gpath);
+                    fs.readdir(gpath, (err, files) => {
                         var editedFiles = [];
                         console.log(files);
                         files.forEach((file) => {
-                            var path = path+'/'+file;
+                            var path = gpath+'/'+file;
+                            console.log(path);
                             var fileStats = fs.statSync(path);
-                            if(fileStats.isDirectory){
+                            if(fileStats.isDirectory()){
                                 editedFiles.push({
                                     path: path,
                                     type: "dir",
