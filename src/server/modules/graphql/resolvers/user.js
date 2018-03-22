@@ -70,11 +70,11 @@ var resolvers = {
                 })
             })
         },
-        approve: async function(parent,args,{User}){
+        /* approve: async function(parent,args,{User}){
             return await new Promise((resolve,reject)=>{
                 
             })
-        }
+        } */
     }
 }
 
