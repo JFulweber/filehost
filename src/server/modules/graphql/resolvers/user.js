@@ -1,7 +1,7 @@
 var mongoose = mongo;
-var hasher = require('../../hasher')
+var hasher = require('../../hasher');
 var verify = hasher.verify;
-
+var email = require('../../email');
 var resolvers = {
     Query: {
         users: async function (parent, args, {User}){
@@ -60,6 +60,7 @@ var resolvers = {
                         if(args.newEmail){
                             user.email = args.newEmail;
                         }
+
                     }
                     else{
                         resolve(false);
@@ -67,6 +68,11 @@ var resolvers = {
                     }
                     user.save().then(()=>resolve(true));
                 })
+            })
+        },
+        approve: async function(parent,args,{User}){
+            return await new Promise((resolve,reject)=>{
+                
             })
         }
     }
