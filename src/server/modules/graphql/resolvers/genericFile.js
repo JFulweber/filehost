@@ -20,12 +20,21 @@ var resolvers = {
                         var editedFiles = [];
                         console.log(files);
                         files.forEach((file) => {
-                            console.log(file);
-                            editedFiles.push({
-                                path: path + '/' + file,
-                                type: file.substring(file.lastIndexOf('.')),
-                                size: fs.statSync(path + '/' + file).size
-                            })
+                            var path = path+'/'+file;
+                            var fileStats = fs.statSync(path);
+                            if(fileStats.isDirectory){
+                                editedFiles.push({
+                                    path: path,
+                                    type: "dir",
+                                    size: 0
+                                })
+                            }else{
+                                editedFiles.push({
+                                    path: path,
+                                    type: file.substring(file.lastIndexOf('.')) != file ? file.substring(file.lastIndexOf('.')) : "typeless",
+                                    size: fileStats.size
+                                })
+                            }
                         })
                         resolve(editedFiles);
                     });
