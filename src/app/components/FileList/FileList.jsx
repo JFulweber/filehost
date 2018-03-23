@@ -54,10 +54,15 @@ export default class FileList extends React.Component {
                 var reg2 = new RegExp("[^\.]*");
                 var name = reg.exec(file.path);
                 name = reg2.exec(name);
-                if (file.type == "dir") {
-                    items.push(<FileFolder folderName={name} />);
+                var type = "";
+                if (file.type == "typeless") {
+                    type = "File";
                 } else {
-                    var type = file.type.substring(1);
+                    type = file.type.substring(1);
+                }
+                if (file.type == "dir") {
+                    items.push(<FileFolder folderName={name}/>);
+                } else {
                     items.push(<FileElement fileName={name} fileSize={size} type={type} />);
                 }
             })
