@@ -16,6 +16,10 @@ var resolvers = {
                     var gpath = _path.resolve(__dirname + "../../../../../../users/" + info.Username + '/' + args.path);
                     fs.readdir(gpath, (err, files) => {
                         var editedFiles = [];
+                        if(files==undefined){
+                            console.log(gpath);
+                            return;
+                        }
                         files.forEach((file) => {
                             var path = gpath+'/'+file;
                             var fileStats = fs.statSync(path);

@@ -6,7 +6,7 @@ export default class FileFolder extends React.Component {
         super(props);
         this.state = {};
         this.state.folderName = this.props.folderName != undefined ? this.props.folderName : 'undefined';
-            this.onClick = this.onClick.bind(this);
+        this.onClick = this.onClick.bind(this);
     }
 
     render() {
@@ -18,6 +18,6 @@ export default class FileFolder extends React.Component {
     }
 
     onClick() {
-        console.log("test");
+            this.props.clicked(this.state.folderName==".."?"..":this.state.folderName[0]);
     }
 }

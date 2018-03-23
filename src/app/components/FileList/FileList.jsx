@@ -16,16 +16,25 @@ export default class FileList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.state.dir = '/';
-        this.state.items = [];
+        this.state.dir = '';
+        this.state.items = null;
         this.getItems = this.getItems.bind(this);
+        this.elementClicked = this.elementClicked.bind(this);
     }
-    componentDidMount() {
-        this.getItems();
+
+    elementClicked(s) {
+        if (s == "..") {
+            this.setState({ dir: this.state.dir.substring(0, this.state.dir.lastIndexOf('/')), items: null });
+        } else {
+            this.setState({ dir: this.state.dir+"/"+s, items: null });
+        }
     }
 
     getItems() {
         var items = [];
+        if (this.state.dir != "") {
+            items.push(<FileFolder folderName=".." clicked={this.elementClicked} />);
+        }
         var query = `query{
             files(path:"${this.state.dir}" token:"${localStorage.getItem("token")}"){
                 path
@@ -50,10 +59,12 @@ export default class FileList extends React.Component {
                 } else {
                     size = undefined;
                 }
-                var reg = new RegExp("(?!.*?\/).*");
-                var reg2 = new RegExp("[^\.]*");
-                var name = reg.exec(file.path);
-                name = reg2.exec(name);
+                if (!file.path.includes("..")) {
+                    var reg = new RegExp("(?!.*?\/).*");
+                    var reg2 = new RegExp("[^\.]*");
+                    var name = reg.exec(file.path);
+                    name = reg2.exec(name);
+                }
                 var type = "";
                 if (file.type == "typeless") {
                     type = "File";
@@ -61,7 +72,7 @@ export default class FileList extends React.Component {
                     type = file.type.substring(1);
                 }
                 if (file.type == "dir") {
-                    items.push(<FileFolder folderName={name}/>);
+                    items.push(<FileFolder folderName={name} clicked={this.elementClicked} />);
                 } else {
                     items.push(<FileElement fileName={name} fileSize={size} type={type} />);
                 }
@@ -71,6 +82,7 @@ export default class FileList extends React.Component {
     }
 
     render() {
+        if (this.state.items == null) this.getItems();
         return (
             <div className={styles.fileContainer}>
                 <div className={styles.header}>
