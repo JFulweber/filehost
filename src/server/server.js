@@ -2,7 +2,11 @@ var { request } = require('https');
 
 var childProcess = require('child_process');
 var mongoose = require('mongoose');
-var yes = require('../server/modules/email')
+var email = require('../server/modules/email');
+
+console.log((()=>{
+    return false;
+}) ? "true":"false");
 /*
     SETTING UP MONGO CHILD PROCESS
 */
