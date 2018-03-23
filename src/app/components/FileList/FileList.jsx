@@ -37,7 +37,9 @@ export default class FileList extends React.Component {
             name: event.target.username
         }
         apolloFetch({ query, variables: variables }).then((res) => {
+            var i = 0;
             res.data.files.forEach(file => {
+                console.log(file);
                 var size = 0;
                 if (file.size < 1000) {
                     size = file.size + " B";
@@ -61,12 +63,14 @@ export default class FileList extends React.Component {
                     type = file.type.substring(1);
                 }
                 if (file.type == "dir") {
-                    items.push(<FileFolder folderName={name}/>);
+                    items.push(<FileFolder folderName={name} key={++i}/>);
                 } else {
-                    items.push(<FileElement fileName={name} fileSize={size} type={type} />);
+                    var type = file.type.substring(1);
+                    items.push(<FileElement fileName={name} fileSize={size} type={type} key={++i}/>);
                 }
-            })
+            });
             this.setState({ items: items });
+
         })
     }
 

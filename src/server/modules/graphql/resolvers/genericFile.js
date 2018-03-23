@@ -12,10 +12,12 @@ var resolvers = {
             return await new Promise((resolve, reject) => {
                 try {
                     var info = jwt.verify(args.token, secret);
+                    console.log(info);
                     // goes from this files directory to the root of the workspace directory
                     var gpath = _path.resolve(__dirname + "../../../../../../users/" + info.Username + '/' + args.path);
                     fs.readdir(gpath, (err, files) => {
                         var editedFiles = [];
+                        console.log(files);
                         files.forEach((file) => {
                             var path = gpath+'/'+file;
                             var fileStats = fs.statSync(path);
