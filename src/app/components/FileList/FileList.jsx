@@ -48,7 +48,6 @@ export default class FileList extends React.Component {
         apolloFetch({ query, variables: variables }).then((res) => {
             var i = 0;
             res.data.files.forEach(file => {
-                console.log(file);
                 var size = 0;
                 if (file.size < 1000) {
                     size = file.size + " B";
@@ -76,7 +75,6 @@ export default class FileList extends React.Component {
                 if (file.type == "dir") {
                     items.push(<FileFolder folderName={name} clicked={this.elementClicked} key={++i}/>);
                 } else {
-                    var type = file.type.substring(1);
                     items.push(<FileElement fileName={name} fileSize={size} type={type} key={++i}/>);
                 }
             });
