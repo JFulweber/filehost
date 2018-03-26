@@ -3,6 +3,7 @@ import styles from './FileList.scss';
 import FileElement from '../../components/FileElement/FileElement.jsx';
 import FileFolder from '../../components/FileFolder/FileFolder.jsx';
 import { createApolloFetch } from 'apollo-fetch';
+import Dropzone from 'react-dropzone';
 
 const uri = 'http://localhost:3000/graphql';
 const apolloFetch = createApolloFetch({ uri });
@@ -26,11 +27,26 @@ export default class FileList extends React.Component {
         if (s == "..") {
             this.setState({ dir: this.state.dir.substring(0, this.state.dir.lastIndexOf('/')), items: null });
         } else {
-            this.setState({ dir: this.state.dir+"/"+s, items: null });
+            this.setState({ dir: this.state.dir + "/" + s, items: null });
         }
     }
 
-    getItems() {
+    getItems(){
+        var query = `query{
+            files(path:"${this.state.dir}" token:"${localStorage.getItem("token")}"){
+                path
+                type
+                size
+            }
+        }`;
+        apolloFetch({query}).then((res) => {
+            res.data.files.forEach(file=>{
+                console.log(file.type);
+            })
+        });
+    }
+
+    /* getItems() {
         var items = [];
         if (this.state.dir != "") {
             items.push(<FileFolder folderName=".." clicked={this.elementClicked} />);
@@ -73,15 +89,15 @@ export default class FileList extends React.Component {
                     type = file.type.substring(1);
                 }
                 if (file.type == "dir") {
-                    items.push(<FileFolder folderName={name} clicked={this.elementClicked} key={++i}/>);
+                    items.push(<FileFolder folderName={name} clicked={this.elementClicked} key={++i} />);
                 } else {
-                    items.push(<FileElement fileName={name} fileSize={size} type={type} key={++i}/>);
+                    items.push(<FileElement fileName={name} fileSize={size} type={type} key={++i} />);
                 }
             });
             this.setState({ items: items });
 
         })
-    }
+    } */
 
     render() {
         if (this.state.items == null) this.getItems();

@@ -10,7 +10,7 @@ export default class User extends React.Component {
         return (
             <MasterLayout overflow='visible' backgroundColor={p.colorBlack}>
                 <div className={styles.sideBar}>
-
+                    
                 </div>
                 <div className={styles.content}>
                     <div className={styles.files}>
