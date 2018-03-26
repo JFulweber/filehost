@@ -32,7 +32,7 @@ var resolvers = {
                             }else{
                                 editedFiles.push({
                                     path: path,
-                                    type: file.substring(file.lastIndexOf('.')) != file ? file.substring(file.lastIndexOf('.')) : "typeless",
+                                    type: file.substring(file.lastIndexOf('.')) != file ? file.substring(file.lastIndexOf('.')) : ".File",
                                     size: fileStats.size
                                 })
                             }
