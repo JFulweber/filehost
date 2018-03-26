@@ -17,21 +17,24 @@ export default class FileList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.state.dir = '';
-        this.state.items = null;
+        this.state.dir = '/';
+        this.state.files = null;
+        this.state.folders = null;
         this.getItems = this.getItems.bind(this);
         this.elementClicked = this.elementClicked.bind(this);
     }
 
     elementClicked(s) {
-        if (s == "..") {
-            this.setState({ dir: this.state.dir.substring(0, this.state.dir.lastIndexOf('/')), items: null });
-        } else {
-            this.setState({ dir: this.state.dir + "/" + s, items: null });
-        }
+
     }
 
-    getItems(){
+    componentDidMount(){
+        getItems();
+    }
+
+    getItems() {
+        var _files = [];
+        var _folders = [];
         var query = `query{
             files(path:"${this.state.dir}" token:"${localStorage.getItem("token")}"){
                 path
@@ -39,68 +42,41 @@ export default class FileList extends React.Component {
                 size
             }
         }`;
-        apolloFetch({query}).then((res) => {
-            res.data.files.forEach(file=>{
-                console.log(file.type);
-            })
-        });
-    }
-
-    /* getItems() {
-        var items = [];
-        if (this.state.dir != "") {
-            items.push(<FileFolder folderName=".." clicked={this.elementClicked} />);
-        }
-        var query = `query{
-            files(path:"${this.state.dir}" token:"${localStorage.getItem("token")}"){
-                path
-                type
-                size
-            }
-        }`;
-        var variables = {
-            name: event.target.username
-        }
-        apolloFetch({ query, variables: variables }).then((res) => {
+        apolloFetch({ query }).then((res) => {
             var i = 0;
             res.data.files.forEach(file => {
-                var size = 0;
-                if (file.size < 1000) {
-                    size = file.size + " B";
-                } else if (file.size < 1000000) {
-                    size = (Math.ceil(file.size / 1000)) + " KB";
-                } else if (file.size < 1000000000) {
-                    size = Math.ceil(file.size / 1000000) + " MB";
-                } else if (file.size < 1000000000000) {
-                    size = Math.ceil(file.size / 1000000000) + " GB";
+                var reg = new RegExp("(?!.*?\/).*");
+                var name = reg.exec(file.path)[0];
+                if (file.type == 'dir') {
+                    folders.push(<FileFolder folderName={name} clicked={this.elementClicked} key={++i} />);
                 } else {
-                    size = undefined;
-                }
-                if (!file.path.includes("..")) {
-                    var reg = new RegExp("(?!.*?\/).*");
                     var reg2 = new RegExp("[^\.]*");
-                    var name = reg.exec(file.path);
-                    name = reg2.exec(name);
-                }
-                var type = "";
-                if (file.type == "typeless") {
-                    type = "File";
-                } else {
-                    type = file.type.substring(1);
-                }
-                if (file.type == "dir") {
-                    items.push(<FileFolder folderName={name} clicked={this.elementClicked} key={++i} />);
-                } else {
-                    items.push(<FileElement fileName={name} fileSize={size} type={type} key={++i} />);
+                    name = reg2.exec(name)[0];
+                    var size = 0;
+                    if (file.size < 1000) {
+                        size = file.size + " B";
+                    } else if (file.size < 1000000) {
+                        size = (Math.ceil(file.size / 1000)) + " KB";
+                    } else if (file.size < 1000000000) {
+                        size = Math.ceil(file.size / 1000000) + " MB";
+                    } else if (file.size < 1000000000000) {
+                        size = Math.ceil(file.size / 1000000000) + " GB";
+                    } else {
+                        size = undefined;
+                    }
+                    var type = 'File';
+                    if (file.type != 'File') {
+                        type = file.type.substring(1);
+                    }
+                    files.push(<FileElement fileName={name} fileSize={size} type={type} key={++i} />);
                 }
             });
-            this.setState({ items: items });
-
-        })
-    } */
+            folders.unshift(<FileFolder folderName='..' clicked={this.elementClicked} key={++i} />);
+        });
+        this.setState({ files: _files,folders: _folders });
+    }
 
     render() {
-        if (this.state.items == null) this.getItems();
         return (
             <div className={styles.fileContainer}>
                 <div className={styles.header}>
@@ -108,7 +84,8 @@ export default class FileList extends React.Component {
                     <h1 className={styles.size}>Size</h1>
                     <h1 className={styles.type}>Type</h1>
                 </div>
-                {this.state.items}
+                {this.state.folders}
+                {this.state.files}
             </div>
         )
     }
