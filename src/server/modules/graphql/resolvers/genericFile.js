@@ -16,20 +16,20 @@ var resolvers = {
                     var gpath = _path.resolve(__dirname + "../../../../../../users/" + info.Username + '/' + args.path);
                     fs.readdir(gpath, (err, files) => {
                         var editedFiles = [];
-                        if(files==undefined) {
+                        if (files == undefined) {
                             resolve({});
                             return;
                         }
                         files.forEach((file) => {
-                            var path = gpath+'/'+file;
+                            var path = gpath + '/' + file;
                             var fileStats = fs.statSync(path);
-                            if(fileStats.isDirectory()){
+                            if (fileStats.isDirectory()) {
                                 editedFiles.push({
                                     path: path,
                                     type: "dir",
                                     size: 0
                                 })
-                            }else{
+                            } else {
                                 editedFiles.push({
                                     path: path,
                                     type: file.substring(file.lastIndexOf('.')) != file ? file.substring(file.lastIndexOf('.')) : ".File",
@@ -55,6 +55,18 @@ var resolvers = {
         addFile: async function (parent, args, { GenericFile }) {
             /* yes */
             return true;
+        },
+        addFolder: async function (parent, args, { GenericFile }) {
+            // path is in terms from user root directory
+            try {
+                fs.mkdirSync(args.path);
+                resolve(true);
+            }
+            catch (e) {
+                throw (e);
+                resolve(false);
+                return;
+            }
         }
     }
 }
