@@ -11,10 +11,10 @@ export default class User extends React.Component {
         return (
             <MasterLayout overflow='visible' backgroundColor={p.colorBlack}>
                 <div className={styles.sideBar}>
-                    <div className= {styles.folderStruc}>
-
+                    <div className={styles.folderStruc}>
+                        <p>Placeholder</p>
                     </div>
-                    <FileTools />
+                    <FileTools className={styles.tools} />
                 </div>
                 <div className={styles.content}>
                     <div className={styles.files}>

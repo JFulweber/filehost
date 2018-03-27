@@ -7,8 +7,15 @@
     background-color: #414141;
     z-index: 5;
     display: flex;
+    flex-direction: column;
+    flex-flow: column;
+    justify-content: flex-start;
     .fileStruc{
-        flex-grow: 3;
+        flex-grow: 8;
+    }
+    .tools{
+        flex-grow: 1;
+        height: 20%;
     }
 }   
 .header{
