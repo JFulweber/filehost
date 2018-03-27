@@ -16,8 +16,9 @@ export default class MasterLayout extends React.Component {
     componentDidMount() {
         document.body.style.overflow = this.state.overflow;
         if (localStorage.getItem('token') == null || localStorage.getItem('token') == undefined) {
-            this.setState({ style: { visibility: "hidden" } });
+            this.setState({ style: { visibility: "hidden" } , myFiles:""});
         } else {
+            this.setState({myFiles: <NavElement text='My Files' dest={'/user/'+localStorage.getItem('username')+'/'}/>})
             this.setState({ style: { visibility: "shown" } });
         }
     }
@@ -31,7 +32,7 @@ export default class MasterLayout extends React.Component {
                         <div className={styles.links}>
                             <NavElement text='Home' dest='/' />
                             <NavElement text='About' dest='/about' />
-                            <NavElement text='My Files' dest='/user/' />
+                            {this.state.myFiles}
                         </div>
                         <div className={styles.logout} style={this.state.style}>
                             <NavElement text='Logout' dest='/logout' />

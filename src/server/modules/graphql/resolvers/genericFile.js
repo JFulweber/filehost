@@ -3,6 +3,7 @@ var fs = require('fs');
 var jwt = require('jsonwebtoken');
 var secret = 'hellohellohellobigpenor';
 var _path = require('path')
+var usersPath = __dirname + "../../../../../../users/";
 // TODO: make secret file
 var resolvers = {
     Query: {
@@ -10,10 +11,11 @@ var resolvers = {
             // given args.path, find all top level files and return array of paths
             //TODO: make this a promise
             return await new Promise((resolve, reject) => {
+                var info;
                 try {
-                    var info = jwt.verify(args.token, secret);
+                    info = jwt.verify(args.token, secret);
                     // goes from this files directory to the root of the workspace directory
-                    var gpath = _path.resolve(__dirname + "../../../../../../users/" + info.Username + '/' + args.path);
+                    var gpath = _path.resolve(usersPath + info.Username + '/' + args.path);
                     fs.readdir(gpath, (err, files) => {
                         var editedFiles = [];
                         if (files == undefined) {
@@ -42,6 +44,7 @@ var resolvers = {
                 }
                 catch (e) {
                     console.log(e);
+                    console.log(info);
                     reject(e);
                 }
             });
@@ -59,13 +62,31 @@ var resolvers = {
         addFolder: async function (parent, args, { GenericFile }) {
             // path is in terms from user root directory
             try {
-                fs.mkdirSync(args.path);
+                var info = jwt.verify(args.token, secret);
+                fs.mkdirSync(usersPath+info.Username+'/'+args.path);
                 resolve(true);
             }
             catch (e) {
                 throw (e);
                 resolve(false);
                 return;
+            }
+        },
+        remove: async function (parent, args, {GenericFile}){
+            try{
+                var info = jwt.verify(args.token,secret);
+                var p = usersPath + args.path;
+                var stats = fs.statSync(p);
+                if(stats.isDirectory()){
+                    fs.rmdirSync(p);
+                }
+                else if(stats.isFile()){
+                    fs.unlinkSync(p);
+                }
+                resolve(true);
+            }
+            catch(e){
+                resolve(false);
             }
         }
     }
