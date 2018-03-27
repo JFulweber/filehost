@@ -18,6 +18,6 @@ export default class FileFolder extends React.Component {
     }
 
     onClick() {
-            this.props.clicked(this.state.folderName==".."?"..":this.state.folderName[0]);
+            this.props.clicked(this.state.folderName==".."?"..":this.state.folderName);
     }
 }

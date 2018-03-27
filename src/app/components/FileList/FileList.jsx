@@ -24,14 +24,6 @@ export default class FileList extends React.Component {
         this.elementClicked = this.elementClicked.bind(this);
     }
 
-    elementClicked(s) {
-
-    }
-
-    componentDidMount(){
-        getItems();
-    }
-
     getItems() {
         var _files = [];
         var _folders = [];
@@ -48,7 +40,7 @@ export default class FileList extends React.Component {
                 var reg = new RegExp("(?!.*?\/).*");
                 var name = reg.exec(file.path)[0];
                 if (file.type == 'dir') {
-                    folders.push(<FileFolder folderName={name} clicked={this.elementClicked} key={++i} />);
+                    _folders.push(<FileFolder folderName={name} clicked={this.elementClicked} key={++i} />);
                 } else {
                     var reg2 = new RegExp("[^\.]*");
                     name = reg2.exec(name)[0];
@@ -68,15 +60,30 @@ export default class FileList extends React.Component {
                     if (file.type != 'File') {
                         type = file.type.substring(1);
                     }
-                    files.push(<FileElement fileName={name} fileSize={size} type={type} key={++i} />);
+                    _files.push(<FileElement fileName={name} fileSize={size} type={type} key={++i} />);
                 }
             });
-            folders.unshift(<FileFolder folderName='..' clicked={this.elementClicked} key={++i} />);
+            if (this.state.dir != '/') {
+                _folders.unshift(<FileFolder folderName='..' clicked={this.elementClicked} key={++i} />);
+            }
+            this.setState({ files: _files, folders: _folders });
         });
-        this.setState({ files: _files,folders: _folders });
+    }
+
+    elementClicked(s) {
+        if (s != '..'){
+            this.setState({ dir: this.state.dir + "/" + s, folders: null, files: null });
+        }else{
+            this.setState({ dir: this.state.dir.substring(0, this.state.dir.lastIndexOf('/')), folders: null, files: null });
+        }
+    }
+
+    componentDidMount() {
+        this.getItems();
     }
 
     render() {
+        if (this.state.files == null && this.state.files == null) this.getItems();
         return (
             <div className={styles.fileContainer}>
                 <div className={styles.header}>

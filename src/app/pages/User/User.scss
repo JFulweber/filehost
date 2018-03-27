@@ -6,6 +6,10 @@
     height: 100%;
     background-color: #414141;
     z-index: 5;
+    display: flex;
+    .fileStruc{
+        flex-grow: 3;
+    }
 }   
 .header{
     background-color: #545454;
