@@ -18,6 +18,7 @@
     }
 
     type Mutation {
-        addFile(new: NewFile!): Boolean!
-        addFolder(path: String!): Boolean!
+        addFile(new: NewFile!, token: String!): Boolean!
+        addFolder(path: String!, token: String!): Boolean!
+        remove(path: String!, token: String!): Boolean!
     }
