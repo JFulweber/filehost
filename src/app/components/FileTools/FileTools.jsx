@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './FileTools.scss';
+import Uploader from '../Uploader/Uploader.jsx';
 
 export default class FileTools extends React.Component {
 
@@ -12,7 +13,7 @@ export default class FileTools extends React.Component {
     render(){
         return(
             <div className={[styles.container, this.state.className].join(' ')}>
-                
+                <Uploader/>
             </div>
         )
     }
