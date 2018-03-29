@@ -17,7 +17,6 @@ export default class Uploader extends React.Component {
         var data = new FormData();
         data.append('file', e.target.files[0]);
         data.append('user', 'jeff');
-        //console.log(e.target.files[0]); <-- this is the file accessible
         fetch('/upload', {
             method: 'post',
             body: data
@@ -31,8 +30,18 @@ export default class Uploader extends React.Component {
         console.log('mmnn cromnch on file yummy thx');
         // access the raw files - upload using the previous 'handleChange' method. 
         // the body must contain the specific dir info, and user token for the server to accept the files.
-        console.log(e.dataTransfer.files) 
-        this.setState({ style: styles.resting });
+        var data = new FormData();
+        data.append('files', e.dataTransfer.files);
+        data.append('token',localStorage.getItem("token"));
+        data.append('fromSite', true);
+        fetch('http://localhost:3000/upload',{
+            method: 'post',
+            body: data
+        }).then(resp =>{
+            this.setState({ style: styles.resting });
+            console.log('uploaded and got response');
+        }).catch(err=>{if(err) throw err})
+        this.setState({style:styles.uploading})
     }
 
     onDragOverCapture(e) {
@@ -48,7 +57,7 @@ export default class Uploader extends React.Component {
     render() {
         //onDragEnter={this.onDragOverCapture} onDragLeave={this.onDragExitCapture} (controls making it look different on file hover)
         return (
-            <div id="container" onDrop={this.onDrop} className={styles.base}>
+            <div id="container" className={styles.base}>
                 <div onDrop={this.onDrop} onDragEnter={this.onDragOverCapture} onDragLeave={this.onDragExitCapture} className={this.state.style} onDragOver={(e)=>{e.preventDefault()}}>
                     <p> files... lemme get ya files... im hungy hungy</p>
                 </div>

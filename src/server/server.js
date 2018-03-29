@@ -69,6 +69,9 @@ app.post('/upload', upload.single('file'), function(req,res){
     else {
         var key = req.body.key;
     }
+    if(true){ // return if it went through or not properly
+        res.send('yeah it went thru');
+    }
 })
 
 var session = require('express-session');

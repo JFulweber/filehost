@@ -1,7 +1,7 @@
 var mongoose = mongo;
 var jwt = require('jsonwebtoken');
 var Promise = require('bluebird');
-var secret = 'hellohellohellobigpenor'
+var secret = require('../../../secret');
 var hasher = require('../../hasher');
 var verify = hasher.verify;
 

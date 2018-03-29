@@ -1,6 +1,6 @@
 var password = require('password-hash');
 var Promise = require('bluebird');
-var secret = "whatever bro";
+var secret = require('../../secret')
 
 var exports = {
     generate: function (pass) {
