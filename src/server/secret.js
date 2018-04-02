@@ -1,4 +1,4 @@
 var fs = require('fs');
-var buf = fs.readFileSync('./secretFile');
+var buf = fs.readFileSync('./src/server/_secret');
 
-module.exports = buf;
+module.exports = buf.toString();

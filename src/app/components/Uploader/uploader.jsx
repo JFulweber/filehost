@@ -34,12 +34,14 @@ export default class Uploader extends React.Component {
         data.append('files', e.dataTransfer.files);
         data.append('token',localStorage.getItem("token"));
         data.append('fromSite', true);
+        console.log(data);
         fetch('http://localhost:3000/upload',{
             method: 'post',
             body: data
         }).then(resp =>{
             this.setState({ style: styles.resting });
             console.log('uploaded and got response');
+            console.log(resp);
         }).catch(err=>{if(err) throw err})
         this.setState({style:styles.uploading})
     }

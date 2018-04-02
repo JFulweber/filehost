@@ -63,7 +63,7 @@ var multer = require('multer');
 var upload = multer()
 
 app.post('/upload', upload.single('file'), function(req,res){
-    if(req.body.fromSite == true){
+    if(req.body.fromSite == 'true'){
         var token = req.body.token;
     }
     else {
