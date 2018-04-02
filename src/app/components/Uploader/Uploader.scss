@@ -4,26 +4,40 @@
     height: 30%; 
     padding: 15% 10% 15% 10%;
     text-align: center;
+    position: relative;
+    .text{
+        position: relative;
+        font-family: 'Ropa Sans';
+        font-size: 22px;
+        color: $color4;
+        z-index: -1;
+    }
     .resting{
+        position: relative;
         height:100%;
         background: transparent;
         border-style: dashed;
         border-width: 3px;
         border-color: $color1;
+        z-index: 3;
     }
     
     .dropHover{
+        position: relative;
         height:100%;
         background: transparent;
         border-style: dashed;
         border-width: 3px;
         border-color: $color4;
+        z-index: 10;
     }
     .uploading{
+        position: relative;
         height:100%;
         background: transparent;
         border-style: dashed;
         border-width: 3px;
         border-color: $color1;
+        z-index: 3;
     }
 }
