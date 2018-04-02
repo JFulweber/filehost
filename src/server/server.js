@@ -75,17 +75,15 @@ app.post('/upload', upload.single('files'), function (req, res) {
                 var uPath = req.body.path;
                 var path = path.resolve('../../users/'+info.username+'/'+uPath);
                 fs.writeFileSync(path, file);
+                res.send('i got et');
             }
         }
         catch (e) {
-            res.send('upload faild. try logging out and logging back in')
+            res.send('it no go through');
         }
     }
     else {
         var key = req.body.key;
-    }
-    if (true) { // return if it went through or not properly
-        res.send('yeah it went thru');
     }
 })
 
