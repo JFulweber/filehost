@@ -1,3 +1,5 @@
+@import '../../palette.scss';
+
 .base{
     height: 30%;
     position: relative;
@@ -7,17 +9,17 @@
     .resting{
         padding-top:50%;
         height:100%;
-        background: blue;
+        background: $color1;
     }
     
     .dropHover{
         padding-top:50%;
         height: 100%;
-        background: green;
+        background: $color4;
     }
     .uploading{
         padding-top:50%;
         height: 100%;
-        background: red;
+        background: $color4;
     }
 }

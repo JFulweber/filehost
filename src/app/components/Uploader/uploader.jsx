@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './uploader.scss';
+import styles from './Uploader.scss';
 
 export default class Uploader extends React.Component {
 
@@ -61,7 +61,7 @@ export default class Uploader extends React.Component {
         return (
             <div id="container" className={styles.base}>
                 <div onDrop={this.onDrop} onDragEnter={this.onDragOverCapture} onDragLeave={this.onDragExitCapture} className={this.state.style} onDragOver={(e)=>{e.preventDefault()}}>
-                    <p> files... lemme get ya files... im hungy hungy</p>
+                    <p>Drop Files Here</p>
                 </div>
             </div>)
     }
