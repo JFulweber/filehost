@@ -10,12 +10,11 @@
     flex-direction: column;
     flex-flow: column;
     justify-content: flex-start;
-    .fileStruc{
-        flex-grow: 8;
+    .folderStruc{
+        flex-grow: 3;
     }
     .tools{
         flex-grow: 1;
-        height: 20%;
     }
 }   
 .header{

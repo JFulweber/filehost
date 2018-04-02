@@ -32,7 +32,6 @@ export default class Uploader extends React.Component {
             return;
         }
         else{
-            console.log('mmnn cromnch on file yummy thx');
             // access the raw files - upload using the previous 'handleChange' method. 
             // the body must contain the specific dir info, and user token for the server to accept the files.
             var data = new FormData();
@@ -46,7 +45,6 @@ export default class Uploader extends React.Component {
             }).then(resp =>{
                 this.setState({ style: styles.resting });
                 console.log('uploaded and got response');
-                console.log(resp);
             }).catch(err=>{if(err) throw err})
             this.setState({style:styles.uploading})
         }

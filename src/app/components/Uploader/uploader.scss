@@ -1,25 +1,29 @@
 @import '../../palette.scss';
 
 .base{
-    height: 30%;
-    position: relative;
-    margin: auto;
-    padding: 10%;
+    height: 30%; 
+    padding: 15% 10% 15% 10%;
     text-align: center;
     .resting{
-        padding-top:50%;
         height:100%;
-        background: $color1;
+        background: transparent;
+        border-style: dashed;
+        border-width: 3px;
+        border-color: $color1;
     }
     
     .dropHover{
-        padding-top:50%;
-        height: 100%;
-        background: $color4;
+        height:100%;
+        background: transparent;
+        border-style: dashed;
+        border-width: 3px;
+        border-color: $color4;
     }
     .uploading{
-        padding-top:50%;
-        height: 100%;
-        background: $color4;
+        height:100%;
+        background: transparent;
+        border-style: dashed;
+        border-width: 3px;
+        border-color: $color1;
     }
 }
