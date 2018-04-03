@@ -14,27 +14,27 @@ export default class Uploader extends React.Component {
 
     onDrop(e) {
         e.preventDefault(); // prevent browser from opening files
-        if(e.dataTransfer.files.length > 1) {
-            this.setState({style:styles.resting});
+        if (e.dataTransfer.files.length > 1) {
+            this.setState({ style: styles.resting });
             return;
         }
-        else{
+        else {
             // access the raw files - upload using the previous 'handleChange' method. 
             // the body must contain the specific dir info, and user token for the server to accept the files.
             var data = new FormData();
             data.append('files', e.dataTransfer.files);
-            data.append('token',localStorage.getItem("token"));
+            data.append('token', localStorage.getItem("token"));
             data.append('path', '/'); // TODO: Send state from FileList into here;
             data.append('fromSite', true);
             console.log(data);
-            fetch('http://localhost:3000/upload',{
+            fetch('http://localhost:3000/upload', {
                 method: 'post',
                 body: data
-            }).then(resp =>{
+            }).then(resp => {
                 this.setState({ style: styles.resting });
                 console.log('uploaded and got response');
-            }).catch(err=>{if(err) throw err})
-            this.setState({style:styles.uploading})
+            }).catch(err => { if (err) throw err })
+            this.setState({ style: styles.uploading })
         }
     }
 
@@ -52,8 +52,11 @@ export default class Uploader extends React.Component {
         //onDragEnter={this.onDragStarted} onDragLeave={this.onDragStopped} (controls making it look different on file hover)
         return (
             <div id="container" className={styles.base}>
-                <div onDrop={this.onDrop} onDragEnter={this.onDragStarted} onDragLeave={this.onDragStopped} className={this.state.style} onDragOver={(e)=>{e.preventDefault()}}>
-                    <p className={styles.text}>Drop Files Here</p>
+                <p className={styles.text}>Drop Files Here</p>
+                <div onDrop={this.onDrop} onDragEnter={this.onDragStarted} onDragLeave={this.onDragStopped} className={this.state.style} onDragOver={(e) => { e.preventDefault() }}>
+                    <div className={styles.loading}>
+
+                    </div>
                 </div>
             </div>)
     }
