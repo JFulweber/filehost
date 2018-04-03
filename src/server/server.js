@@ -65,16 +65,18 @@ var jwt = require('jsonwebtoken');
 var secret = require('./secret');
 var fs = require('fs');
 
-app.post('/upload', upload.single('files'), function (req, res) {
+app.post('/upload', upload.single('file'), function (req, res) {
     if (req.body.fromSite == 'true') {
         var token = req.body.token;
         try {
             var info;
             if (info = jwt.verify(token, secret)) {
-                var file = req.file;
+                var file = req.file
                 var uPath = req.body.path;
-                var path = path.resolve('../../users/'+info.username+'/'+uPath);
-                fs.writeFileSync(path, file);
+                var tpath = path.resolve('./users/'+info.Username+'/'+uPath+'/'+file.originalname);
+                var writeFile = fs.writeFile(tpath, file.buffer, (err, res)=>{
+                    if(err) throw err;
+                 });
                 res.send('i got et');
             }
         }

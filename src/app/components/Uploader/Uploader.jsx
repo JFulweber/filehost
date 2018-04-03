@@ -22,19 +22,35 @@ export default class Uploader extends React.Component {
             // access the raw files - upload using the previous 'handleChange' method. 
             // the body must contain the specific dir info, and user token for the server to accept the files.
             var data = new FormData();
-            data.append('files', e.dataTransfer.files);
+            data.append('file', e.dataTransfer.files[0]);
             data.append('token', localStorage.getItem("token"));
-            data.append('path', '/'); // TODO: Send state from FileList into here;
+            data.append('path', this.state.dir?this.state.dir:'/');
             data.append('fromSite', true);
             console.log(data);
-            fetch('http://localhost:3000/upload', {
-                method: 'post',
-                body: data
-            }).then(resp => {
-                this.setState({ style: styles.resting });
-                console.log('uploaded and got response');
-            }).catch(err => { if (err) throw err })
-            this.setState({ style: styles.uploading })
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://localhost:3000/upload', true);
+            //xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+            xhr.send(data);
+            xhr.onprogress = (e) => {
+                var prog = Math.ceil(((xhr.upload.loaded + e.loaded) / xhr.upload.total) * 100);
+            }
+            xhr.onreadystatechange = (e) => {
+                if (xhr.readyState != XMLHttpRequest.DONE) {
+                    this.setState({ style: styles.uploading })
+                }
+                else {
+                    this.setState({ style: styles.resting });
+                }
+            }
+
+            /*    fetch('http://localhost:3000/upload', {
+                            method: 'post',
+                            body: data
+                        }).then(resp => {
+                            this.setState({ style: styles.resting });
+                            console.log('uploaded and got response');
+                        }).catch(err => { if (err) throw err })
+                         */
         }
     }
 
