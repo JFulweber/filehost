@@ -7,6 +7,18 @@ import FileTools from '../../components/FileTools/FileTools.jsx';
 import p from '../../palette.scss';
 
 export default class User extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {};
+        this.dirChanged = this.dirChanged.bind(this);
+    }
+
+    dirChanged(e){
+        console.log(`dirChanged input:${e}`);
+        console.log(`dirchanged state.dir (prechange) ${this.state.dir}`)
+        this.setState({dir: e});
+    }
+
     render() {
         return (
             <MasterLayout overflow='visible' backgroundColor={p.colorBlack}>
@@ -14,11 +26,11 @@ export default class User extends React.Component {
                     <div className={styles.folderStruc}>
                         <p>Placeholder</p>
                     </div>
-                    <FileTools className={styles.tools} />
+                    <FileTools className={styles.tools} dir = {this.state.dir}/>
                 </div>
                 <div className={styles.content}>
                     <div className={styles.files}>
-                        <FileList />
+                        <FileList dirChanged = {this.dirChanged}/>
                     </div>
                 </div>
             </MasterLayout>

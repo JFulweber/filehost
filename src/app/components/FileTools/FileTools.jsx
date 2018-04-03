@@ -13,7 +13,7 @@ export default class FileTools extends React.Component {
     render(){
         return(
             <div className={[styles.container, this.state.className].join(' ')}>
-                <Uploader/>
+                <Uploader dir={this.props.dir}/>
             </div>
         )
     }
