@@ -50,6 +50,8 @@ export default class Uploader extends React.Component {
 
     render() {
         //onDragEnter={this.onDragStarted} onDragLeave={this.onDragStopped} (controls making it look different on file hover)
+        this.state.dir = this.props.dir ? this.props.dir : '/';
+        console.log(this.state.dir);
         return (
             <div id="container" className={styles.base}>
                 <p className={styles.text}>Drop Files Here</p>

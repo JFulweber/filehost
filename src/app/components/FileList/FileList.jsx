@@ -17,7 +17,7 @@ export default class FileList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.state.dir = '/';
+        this.state.dir = '';
         this.state.files = null;
         this.state.folders = null;
         this.getItems = this.getItems.bind(this);
@@ -63,7 +63,7 @@ export default class FileList extends React.Component {
                     _files.push(<FileElement fileName={name} fileSize={size} type={type} key={++i} />);
                 }
             });
-            if (this.state.dir != '/') {
+            if (this.state.dir != '') {
                 _folders.unshift(<FileFolder folderName='..' clicked={this.elementClicked} key={++i} />);
             }
             this.setState({ files: _files, folders: _folders });
@@ -72,10 +72,13 @@ export default class FileList extends React.Component {
 
     elementClicked(s) {
         if (s != '..'){
+            this.props.dirChanged(this.state.dir + "/" + s);
             this.setState({ dir: this.state.dir + "/" + s, folders: null, files: null });
         }else{
+            this.props.dirChanged(this.state.dir.substring(0, this.state.dir.lastIndexOf('/')));
             this.setState({ dir: this.state.dir.substring(0, this.state.dir.lastIndexOf('/')), folders: null, files: null });
         }
+        
     }
 
     componentDidMount() {
