@@ -1,7 +1,7 @@
 var mongoose = mongo;
 var fs = require('fs');
 var jwt = require('jsonwebtoken');
-var secret = 'hellohellohellobigpenor';
+var secret = require('../../../secret');
 var _path = require('path')
 var usersPath = __dirname + "../../../../../../users/";
 // TODO: make secret file
