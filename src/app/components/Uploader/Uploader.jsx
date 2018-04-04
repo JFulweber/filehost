@@ -8,6 +8,7 @@ export default class Uploader extends React.Component {
         this.state = {};
         this.state.style = styles.resting;
         this.onDrop = this.onDrop.bind(this);
+        this.state.progress = 0;
         this.onDragStarted = this.onDragStarted.bind(this);
         this.onDragStopped = this.onDragStopped.bind(this);
     }
@@ -24,33 +25,28 @@ export default class Uploader extends React.Component {
             var data = new FormData();
             data.append('file', e.dataTransfer.files[0]);
             data.append('token', localStorage.getItem("token"));
-            data.append('path', this.state.dir?this.state.dir:'/');
+            data.append('path', this.state.dir ? this.state.dir : '/');
             data.append('fromSite', true);
-            console.log(data);
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'http://localhost:3000/upload', true);
             //xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+            xhr.upload.addEventListener('progress', (e) => {
+                let progress = 0;
+                if (e.total !== 0) {
+                    progress = parseInt((e.loaded / e.total) * 100, 10);
+                }
+                this.setState({ progress: progress });
+            });
+            xhr.addEventListener('readystatechange', (e) => {
+                if (xhr.readyState == XMLHttpRequest.HEADERS_RECEIVED){
+                    console.log('uploading')
+                    this.setState({style: styles.uploading});
+                }else if(xhr.readyState == XMLHttpRequest.DONE){
+                    console.log('resting')
+                    this.setState({style: styles.resting});
+                }
+            });
             xhr.send(data);
-            xhr.onprogress = (e) => {
-                var prog = Math.ceil(((xhr.upload.loaded + e.loaded) / xhr.upload.total) * 100);
-            }
-            xhr.onreadystatechange = (e) => {
-                if (xhr.readyState != XMLHttpRequest.DONE) {
-                    this.setState({ style: styles.uploading })
-                }
-                else {
-                    this.setState({ style: styles.resting });
-                }
-            }
-
-            /*    fetch('http://localhost:3000/upload', {
-                            method: 'post',
-                            body: data
-                        }).then(resp => {
-                            this.setState({ style: styles.resting });
-                            console.log('uploaded and got response');
-                        }).catch(err => { if (err) throw err })
-                         */
         }
     }
 
@@ -65,15 +61,13 @@ export default class Uploader extends React.Component {
     }
 
     render() {
-        //onDragEnter={this.onDragStarted} onDragLeave={this.onDragStopped} (controls making it look different on file hover)
         this.state.dir = this.props.dir ? this.props.dir : '/';
-        console.log(this.state.dir);
         return (
             <div id="container" className={styles.base}>
                 <p className={styles.text}>Drop Files Here</p>
                 <div onDrop={this.onDrop} onDragEnter={this.onDragStarted} onDragLeave={this.onDragStopped} className={this.state.style} onDragOver={(e) => { e.preventDefault() }}>
                     <div className={styles.loading}>
-
+                        <p>{this.state.progress}</p>
                     </div>
                 </div>
             </div>)
