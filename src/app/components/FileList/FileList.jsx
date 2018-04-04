@@ -49,12 +49,12 @@ export default class FileList extends React.Component {
                     var size = 0;
                     if (file.size < 1000) {
                         size = file.size + " B";
-                    } else if (file.size < 1000000) {
-                        size = (Math.ceil(file.size / 1000)) + " KB";
+                    } else if (file.size < 100000) {
+                        size = (Math.round(file.size / 1000)) + " KB";
                     } else if (file.size < 1000000000) {
-                        size = Math.ceil(file.size / 1000000) + " MB";
+                        size = Math.round(file.size / 1000000) + " MB";
                     } else if (file.size < 1000000000000) {
-                        size = Math.ceil(file.size / 1000000000) + " GB";
+                        size = Math.round(file.size / 1000000000) + " GB";
                     } else {
                         size = undefined;
                     }

@@ -41,12 +41,12 @@
         background: transparent;
         border-style: dashed;
         border-width: 3px;
-        border-color: $color4;
+        border-color: red;
         z-index: 3;
         .loading{
             display: inherit;
             visibility:  visible;
-            background-color: red;
+            background-color: purple;
             width: 100%;
             height: 100%;
         }
