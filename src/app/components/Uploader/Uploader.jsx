@@ -35,12 +35,6 @@ export default class Uploader extends React.Component {
                 if (e.total !== 0) {
                     progress = parseInt((e.loaded / e.total) * 100, 10);
                 }
-<<<<<<< HEAD
-                else {
-                    this.setState({ style: styles.resting });
-                    console.log(this.props);
-                    this.props.updateItems();
-=======
                 this.setState({ progress: progress });
             });
             xhr.addEventListener('readystatechange', (e) => {
@@ -50,7 +44,6 @@ export default class Uploader extends React.Component {
                 }else if(xhr.readyState == XMLHttpRequest.DONE){
                     console.log('resting')
                     this.setState({style: styles.resting});
->>>>>>> 06a3a422db04e6f6b33e2178710bce13d49fd720
                 }
             });
             xhr.send(data);
