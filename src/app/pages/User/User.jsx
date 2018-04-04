@@ -11,6 +11,8 @@ export default class User extends React.Component {
         super(props);
         this.state = {};
         this.dirChanged = this.dirChanged.bind(this);
+        this.updateItems = this.updateItems.bind(this);
+        this.doneUpdating = this.doneUpdating.bind(this);
     }
 
     dirChanged(e){
@@ -26,14 +28,22 @@ export default class User extends React.Component {
                     <div className={styles.folderStruc}>
                         <p>Placeholder</p>
                     </div>
-                    <FileTools className={styles.tools} dir = {this.state.dir}/>
+                    <FileTools className={styles.tools} dir = {this.state.dir} updateItems = {this.updateItems}/>
                 </div>
                 <div className={styles.content}>
                     <div className={styles.files}>
-                        <FileList dirChanged = {this.dirChanged}/>
+                        <FileList dirChanged = {this.dirChanged} needsRefresh={this.state.needsRefresh} doneUpdating = {this.doneUpdating}/>
                     </div>
                 </div>
             </MasterLayout>
         )
+    }
+
+    updateItems(){
+        this.setState({needsRefresh: true});
+    }
+
+    doneUpdating(){
+        this.setState({needsRefresh: false});
     }
 }

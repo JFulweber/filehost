@@ -40,6 +40,8 @@ export default class Uploader extends React.Component {
                 }
                 else {
                     this.setState({ style: styles.resting });
+                    console.log(this.props);
+                    this.props.updateItems();
                 }
             }
 

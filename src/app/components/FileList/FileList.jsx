@@ -4,6 +4,7 @@ import FileElement from '../../components/FileElement/FileElement.jsx';
 import FileFolder from '../../components/FileFolder/FileFolder.jsx';
 import { createApolloFetch } from 'apollo-fetch';
 import Dropzone from 'react-dropzone';
+import Promise from 'bluebird';
 
 const uri = 'http://localhost:3000/graphql';
 const apolloFetch = createApolloFetch({ uri });
@@ -20,6 +21,7 @@ export default class FileList extends React.Component {
         this.state.dir = '';
         this.state.files = null;
         this.state.folders = null;
+        this.state.needsRefresh = this.props.needsRefresh;
         this.getItems = this.getItems.bind(this);
         this.elementClicked = this.elementClicked.bind(this);
     }
@@ -42,7 +44,7 @@ export default class FileList extends React.Component {
                 if (file.type == 'dir') {
                     _folders.push(<FileFolder folderName={name} clicked={this.elementClicked} key={++i} />);
                 } else {
-                    var reg2 = new RegExp("[^\.]*");
+                    var reg2 = new RegExp("[^\.]*"); //TODO: allow files to have dots prior to the extension
                     name = reg2.exec(name)[0];
                     var size = 0;
                     if (file.size < 1000) {
@@ -66,8 +68,8 @@ export default class FileList extends React.Component {
             if (this.state.dir != '') {
                 _folders.unshift(<FileFolder folderName='..' clicked={this.elementClicked} key={++i} />);
             }
-            this.setState({ files: _files, folders: _folders });
-        });
+            this.setState({ files: _files, folders: _folders, needsRefresh: false});
+        })
     }
 
     elementClicked(s) {
@@ -86,7 +88,8 @@ export default class FileList extends React.Component {
     }
 
     render() {
-        if (this.state.files == null && this.state.files == null) this.getItems();
+        console.log('render');
+        if (this.state.files == null && this.state.files == null || this.state.needsRefresh==true) this.getItems();
         return (
             <div className={styles.fileContainer}>
                 <div className={styles.header}>
