@@ -43,7 +43,6 @@ var resolvers = {
                     });
                 }
                 catch (e) {
-                    console.log('catch me baby!!!');
                     reject(e);
                 }
             });

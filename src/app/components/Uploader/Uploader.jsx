@@ -31,7 +31,7 @@ export default class Uploader extends React.Component {
                     this.setState({style: styles.uploading});
                 }else if(xhr.readyState == XMLHttpRequest.DONE){
                     this.setState({style: styles.resting, progress: 0});
-                    //DONE UPLOADING
+                    this.props.updateItems();
                 }
             };
             xhr.open('POST', 'http://localhost:3000/upload', true);

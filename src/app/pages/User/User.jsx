@@ -48,7 +48,6 @@ export default class User extends React.Component {
     }
 
     updateItems(){
-        console.log('called updateItems from Uploader');
         this.setState({needsRefresh: true});
     }
 
