@@ -15,7 +15,7 @@
     }
     .resting{
         position: relative;
-        height: 90%;
+        height: 85%;
         background: transparent;
         border-style: dashed;
         border-width: 3px;
@@ -28,7 +28,7 @@
     
     .dropHover{
         position: relative;
-        height: 90%;
+        height: 85%;
         background: transparent;
         border-style: dashed;
         border-width: 3px;
@@ -37,7 +37,7 @@
     }
     .uploading{
         position: relative;
-        height: 90%;
+        height: 85%;
         background: transparent;
         border-style: dashed;
         border-width: 3px;
@@ -49,6 +49,10 @@
             background-color: purple;
             width: 100%;
             height: 100%;
+        }
+        .temp{
+            margin: 0;
+            padding-top: 20px;
         }
     }
 }
