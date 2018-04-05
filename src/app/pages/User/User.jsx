@@ -16,8 +16,6 @@ export default class User extends React.Component {
     }
 
     dirChanged(e){
-        console.log(`dirChanged input:${e}`);
-        console.log(`dirchanged state.dir (prechange) ${this.state.dir}`)
         this.setState({dir: e});
     }
 
@@ -40,6 +38,7 @@ export default class User extends React.Component {
     }
 
     updateItems(){
+        console.log('called updateItems from Uploader');
         this.setState({needsRefresh: true});
     }
 

@@ -50,11 +50,11 @@ export default class FileList extends React.Component {
                     if (file.size < 1000) {
                         size = file.size + " B";
                     } else if (file.size < 100000) {
-                        size = (Math.round(file.size / 1000)) + " KB";
+                        size = (Math.ceil(file.size / 1000)) + " KB";
                     } else if (file.size < 1000000000) {
-                        size = Math.round(file.size / 1000000) + " MB";
+                        size = Math.ceil(file.size / 1000000) + " MB";
                     } else if (file.size < 1000000000000) {
-                        size = Math.round(file.size / 1000000000) + " GB";
+                        size = Math.ceil(file.size / 1000000000) + " GB";
                     } else {
                         size = undefined;
                     }
@@ -62,13 +62,16 @@ export default class FileList extends React.Component {
                     if (file.type != 'File') {
                         type = file.type.substring(1);
                     }
-                    _files.push(<FileElement fileName={name} fileSize={size} type={type} key={++i} />);
+                    console.log(name);
+                    _files.push(<FileElement fileName={name} fileSize={size} type={type}/>);
+                    console.log(_files[_files.length-1].props.fileName)
                 }
             });
             if (this.state.dir != '') {
-                _folders.unshift(<FileFolder folderName='..' clicked={this.elementClicked} key={++i} />);
+                _folders.unshift(<FileFolder folderName='..' clicked={this.elementClicked} />);
             }
-            this.setState({ files: _files, folders: _folders, needsRefresh: false});
+            if(this.state.needsRefresh==true) this.props.doneUpdating();
+            this.setState({ files: _files, folders: _folders});
         })
     }
 
@@ -88,8 +91,11 @@ export default class FileList extends React.Component {
     }
 
     render() {
-        console.log('render');
-        if (this.state.files == null && this.state.files == null || this.state.needsRefresh==true) this.getItems();
+        this.state.needsRefresh = this.props.needsRefresh;
+        if (this.state.files == null && this.state.files == null || this.state.needsRefresh==true){
+            this.getItems();
+            return null;
+        }
         return (
             <div className={styles.fileContainer}>
                 <div className={styles.header}>
