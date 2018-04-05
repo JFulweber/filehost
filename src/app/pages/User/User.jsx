@@ -21,7 +21,7 @@ export default class User extends React.Component {
 
     render() {
         return (
-            <MasterLayout overflow='visible' backgroundColor={p.colorBlack}>
+            /* <MasterLayout overflow='visible' backgroundColor={p.colorBlack}>
                 <div className={styles.sideBar}>
                     <div className={styles.folderStruc}>
                         <p>Placeholder</p>
@@ -29,6 +29,16 @@ export default class User extends React.Component {
                     <FileTools className={styles.tools} dir = {this.state.dir} updateItems = {this.updateItems}/>
                 </div>
                 <div className={styles.content}>
+                    <div className={styles.files}>
+                        <FileList dirChanged = {this.dirChanged} needsRefresh={this.state.needsRefresh} doneUpdating = {this.doneUpdating}/>
+                    </div>
+                </div>
+            </MasterLayout> */
+            <MasterLayout>
+                <div className={styles.container}>
+                    <div className={styles.sideBar}>
+
+                    </div>
                     <div className={styles.files}>
                         <FileList dirChanged = {this.dirChanged} needsRefresh={this.state.needsRefresh} doneUpdating = {this.doneUpdating}/>
                     </div>

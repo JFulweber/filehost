@@ -44,8 +44,15 @@ export default class FileList extends React.Component {
                 if (file.type == 'dir') {
                     _folders.push(<FileFolder folderName={name} clicked={this.elementClicked} key={++i} />);
                 } else {
-                    var reg2 = new RegExp("[^\.]*"); //TODO: allow files to have dots prior to the extension
-                    name = reg2.exec(name)[0];
+                    var _name = name.split(".")
+                    name = "";
+                    for (let i = 0; i < _name.length - 1; i++) {
+                        if (i == _name.length - 1) {
+                            continue;
+                        }
+                        name += _name[i] + '.';
+                    }
+                    name = name.substring(0, name.lastIndexOf('.'));
                     var size = 0;
                     if (file.size < 1000) {
                         size = file.size + " B";
@@ -62,28 +69,26 @@ export default class FileList extends React.Component {
                     if (file.type != 'File') {
                         type = file.type.substring(1);
                     }
-                    console.log(name);
-                    _files.push(<FileElement fileName={name} fileSize={size} type={type}/>);
-                    console.log(_files[_files.length-1].props.fileName)
+                    _files.push(<FileElement fileName={name} fileSize={size} type={type} key={++i} />); 
                 }
             });
             if (this.state.dir != '') {
-                _folders.unshift(<FileFolder folderName='..' clicked={this.elementClicked} />);
+                _folders.unshift(<FileFolder folderName='..' clicked={this.elementClicked} key={++i} />);
             }
-            if(this.state.needsRefresh==true) this.props.doneUpdating();
-            this.setState({ files: _files, folders: _folders});
+            if (this.state.needsRefresh == true) this.props.doneUpdating();
+            this.setState({ files: _files, folders: _folders });
         })
     }
 
     elementClicked(s) {
-        if (s != '..'){
+        if (s != '..') {
             this.props.dirChanged(this.state.dir + "/" + s);
             this.setState({ dir: this.state.dir + "/" + s, folders: null, files: null });
-        }else{
+        } else {
             this.props.dirChanged(this.state.dir.substring(0, this.state.dir.lastIndexOf('/')));
             this.setState({ dir: this.state.dir.substring(0, this.state.dir.lastIndexOf('/')), folders: null, files: null });
         }
-        
+
     }
 
     componentDidMount() {
@@ -92,7 +97,7 @@ export default class FileList extends React.Component {
 
     render() {
         this.state.needsRefresh = this.props.needsRefresh;
-        if (this.state.files == null && this.state.files == null || this.state.needsRefresh==true){
+        if (this.state.files == null && this.state.files == null || this.state.needsRefresh == true) {
             this.getItems();
             return null;
         }

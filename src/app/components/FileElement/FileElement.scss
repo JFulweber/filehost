@@ -7,6 +7,7 @@
     border-color: #414141;
     border-collapse: separate;
     .name{
+        overflow-x: hidden;
         display: table-cell;
         font-family: 'Ropa Sans';
         font-size: 20px;
