@@ -18,11 +18,3 @@ var mailOptions = {
     text: ' what up lol '
 }
 
-/* transporter.sendMail(mailOptions, function(error, info){
-    if(error){
-        throw error;
-    }
-    else{
-        console.log('email sent :) :'+info.response);
-    }
-}) */

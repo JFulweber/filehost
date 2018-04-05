@@ -4,9 +4,6 @@ var childProcess = require('child_process');
 var mongoose = require('mongoose');
 var email = require('../server/modules/email');
 
-console.log((() => {
-    return false;
-}) ? "true" : "false");
 /*
     SETTING UP MONGO CHILD PROCESS
 */
@@ -109,6 +106,6 @@ app.get('/*', function (req, res) {
 });
 
 app.listen(PORT, function () {
-    console.log('We\'re up and running!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    console.log('hey whats up hewwo')
 })
 

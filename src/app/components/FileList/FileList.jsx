@@ -62,9 +62,7 @@ export default class FileList extends React.Component {
                     if (file.type != 'File') {
                         type = file.type.substring(1);
                     }
-                    console.log(name);
                     _files.push(<FileElement fileName={name} fileSize={size} type={type}/>);
-                    console.log(_files[_files.length-1].props.fileName)
                 }
             });
             if (this.state.dir != '') {

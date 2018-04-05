@@ -145,10 +145,10 @@ class RegisterResponse extends React.Component {
         }
         else{
             if(this.state.response.data.register==true){
-                return <p> Successfully registered </p>
+                return <Title title="Successfully registered" className={styles.responseText}/>
             }
             else if(this.state.response.data.register==false){
-                return <p> Email already exists </p>
+                return <Title title="Email already exists" className={styles.responseText}/>
             }
         }
     }
