@@ -103,11 +103,6 @@ export default class FileList extends React.Component {
         }
         return (
             <div className={styles.fileContainer}>
-                <div className={styles.header}>
-                    <h1 className={styles.name}>Name</h1>
-                    <h1 className={styles.size}>Size</h1>
-                    <h1 className={styles.type}>Type</h1>
-                </div>
                 {this.state.folders}
                 {this.state.files}
             </div>

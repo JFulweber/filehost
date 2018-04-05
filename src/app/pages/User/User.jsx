@@ -7,7 +7,7 @@ import FileTools from '../../components/FileTools/FileTools.jsx';
 import p from '../../palette.scss';
 
 export default class User extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {};
         this.dirChanged = this.dirChanged.bind(this);
@@ -15,8 +15,8 @@ export default class User extends React.Component {
         this.doneUpdating = this.doneUpdating.bind(this);
     }
 
-    dirChanged(e){
-        this.setState({dir: e});
+    dirChanged(e) {
+        this.setState({ dir: e });
     }
 
     render() {
@@ -37,21 +37,31 @@ export default class User extends React.Component {
             <MasterLayout>
                 <div className={styles.container}>
                     <div className={styles.sideBar}>
-
+                        <div className={styles.folderStruc}>
+                            <p>Placeholder</p>
+                        </div>
+                        <div className={styles.upload}>
+                            <FileTools className={styles.tools} dir={this.state.dir} updateItems={this.updateItems} />
+                        </div>
                     </div>
                     <div className={styles.files}>
-                        <FileList dirChanged = {this.dirChanged} needsRefresh={this.state.needsRefresh} doneUpdating = {this.doneUpdating}/>
+                        <div className={styles.header}>
+                            <h1 className={styles.name}>Name</h1>
+                            <h1 className={styles.size}>Size</h1>
+                            <h1 className={styles.type}>Type</h1>
+                        </div>
+                        <FileList dirChanged={this.dirChanged} needsRefresh={this.state.needsRefresh} doneUpdating={this.doneUpdating} />
                     </div>
                 </div>
             </MasterLayout>
         )
     }
 
-    updateItems(){
-        this.setState({needsRefresh: true});
+    updateItems() {
+        this.setState({ needsRefresh: true });
     }
 
-    doneUpdating(){
-        this.setState({needsRefresh: false});
+    doneUpdating() {
+        this.setState({ needsRefresh: false });
     }
 }
