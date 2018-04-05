@@ -83,7 +83,7 @@ export default class Register extends React.Component {
             alert("Username is in use already, please try something else.");
             return;
         }
-        if (this.state.passConf == this.state.pass && this.state.pass.length != 0 && this.state.email.length != 0) {
+    if (this.state.passConf == this.state.pass && this.state.pass.length != 0 && this.state.email.length != 0 && /[a-zA-Z0-9 ]*/.test(this.state.pass)) {
             var query = gql`mutation($email: String!, $username: String!, $pass: String!){
                 register(email:$email, username: $username, password: $pass)
             }
@@ -101,11 +101,12 @@ export default class Register extends React.Component {
             });
         }
         else{
-            alert('Make sure all fields are corectly filled out.');
+            alert('Make sure all fields are corectly filled out and you don\'t have any non-digit or non-letter characters.');
         }
     }
 
     render() {
+        console.log(/[\d\w]*/.test(this.state.pass));
         if (this.state.registerResponse) {
             return <this.state.registerResponse />
         }
