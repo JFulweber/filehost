@@ -4,6 +4,7 @@ import styles from './User.scss';
 import Particle from '../../components/Particle/Particle.jsx';
 import FileList from '../../components/FileList/FileList.jsx';
 import FileTools from '../../components/FileTools/FileTools.jsx';
+import Uploader from '../../components/Uploader/Uploader.jsx';
 import p from '../../palette.scss';
 
 export default class User extends React.Component {
@@ -41,7 +42,7 @@ export default class User extends React.Component {
                             <p>Placeholder</p>
                         </div>
                         <div className={styles.upload}>
-                            <FileTools className={styles.tools} dir={this.state.dir} updateItems={this.updateItems} />
+                            <Uploader dir={this.props.dir} updateItems={this.props.updateItems} />
                         </div>
                     </div>
                     <div className={styles.files}>
@@ -50,7 +51,9 @@ export default class User extends React.Component {
                             <h1 className={styles.size}>Size</h1>
                             <h1 className={styles.type}>Type</h1>
                         </div>
-                        <FileList dirChanged={this.dirChanged} needsRefresh={this.state.needsRefresh} doneUpdating={this.doneUpdating} />
+                        <div className={styles.fileCont}>
+                            <FileList dirChanged={this.dirChanged} needsRefresh={this.state.needsRefresh} doneUpdating={this.doneUpdating} />
+                        </div>
                     </div>
                 </div>
             </MasterLayout>
