@@ -3,7 +3,7 @@
 .container{
     display: flex;
     flex-direction: row;
-    height: 89.203%;
+    height: 100%;
     .sideBar{
         display: flex;
         flex-direction: column;
@@ -26,6 +26,9 @@
         background-color: #676767;
         display: flex;
         flex-direction: column;
+        .fileCont{
+            overflow-y: auto;
+        }
         .header{
             background-color: #545454;
             position: relative;

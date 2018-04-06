@@ -41,6 +41,7 @@ export default class FileList extends React.Component {
             res.data.files.forEach(file => {
                 var reg = new RegExp("(?!.*?\/).*");
                 var name = reg.exec(file.path)[0];
+                var rawName = name;
                 if (file.type == 'dir') {
                     _folders.push(<FileFolder folderName={name} clicked={this.elementClicked} key={++i} />);
                 } else {
@@ -69,11 +70,11 @@ export default class FileList extends React.Component {
                     if (file.type != 'File') {
                         type = file.type.substring(1);
                     }
-                    _files.push(<FileElement fileName={name} fileSize={size} type={type} key={++i} />); 
+                    _files.push(<FileElement fileName={name} fileSize={size} type={type} key={++i} path={this.state.dir} rawName={rawName}/>); 
                 }
             });
             if (this.state.dir != '') {
-                _folders.unshift(<FileFolder folderName='..' clicked={this.elementClicked} key={++i} />);
+                _folders.unshift(<FileFolder folderName='..' clicked={this.elementClicked} key={++i} dir={this.state.dir}/>);
             }
             if (this.state.needsRefresh == true) this.props.doneUpdating();
             this.setState({ files: _files, folders: _folders });

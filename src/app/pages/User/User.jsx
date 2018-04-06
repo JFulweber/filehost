@@ -42,7 +42,7 @@ export default class User extends React.Component {
                             <p>Placeholder</p>
                         </div>
                         <div className={styles.upload}>
-                            <Uploader dir={this.props.dir} updateItems={this.props.updateItems} />
+                            <Uploader dir={this.props.dir} updateItems={this.updateItems} />
                         </div>
                     </div>
                     <div className={styles.files}>
