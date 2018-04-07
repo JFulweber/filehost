@@ -89,32 +89,22 @@ app.post('/upload', upload.single('file'), function (req, res) {
 //app.use(bodyParser.json());
 
 
-app.post('/file', bodyParser.json(), function (req, res) {
+app.get('/filedl', function (req, res) {
     try{
-        var info = jwt.verify(req.body.token, secret);
-        var _path = path.resolve(__dirname+`../../../users/${info.Username}/${req.body.path}/${req.body.rawName}`);
-        res.download(_path);
+        console.log(req.query);
+        var info = jwt.verify(req.query.token, secret);
+        var _path = path.resolve(__dirname+`../../../users/${info.Username}/${req.query.path}/${req.query.rawName}`);
+        res.download(_path, function (err) {
+            if (err) {
+                console.log(err);
+            }
+        });
     }
     catch(e){
         res.send('Sorry, invalid something.')
         console.log(e);
     }
 })
-
-var session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
-app.use(session({
-    secret: 'whatever',
-    saveUninitialized: true,
-    resave: true,
-    cookie: {
-        httpOnly: false
-    },
-    store: new MongoStore({
-        url: 'mongodb://localhost:27017/storedb',
-        ttl: 14 * 24 * 60 * 60 // = 14 days. Default
-    })
-}))
 
 app.get('/*', function (req, res) {
     res.sendFile(path.resolve(__dirname, '../../dist/index.html'));

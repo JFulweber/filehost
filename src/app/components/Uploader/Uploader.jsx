@@ -7,6 +7,7 @@ export default class Uploader extends React.Component {
         super(props);
         this.state = {};
         this.state.style = styles.resting;
+        this.state.dir = this.props.dir;
         this.onDrop = this.onDrop.bind(this);
         this.state.progress = 0;
         this.onDragStarted = this.onDragStarted.bind(this);
@@ -15,6 +16,7 @@ export default class Uploader extends React.Component {
 
     onDrop(e) {
         e.preventDefault();
+        console.log(this.props.dir);
         if (e.dataTransfer.files.length > 1) {
             this.setState({ style: styles.resting });
             return;
@@ -23,7 +25,7 @@ export default class Uploader extends React.Component {
             var data = new FormData();
             data.append('file', e.dataTransfer.files[0]);
             data.append('token', localStorage.getItem("token"));
-            data.append('path', this.state.dir ? this.state.dir : '/');
+            data.append('path', this.props.dir);
             data.append('fromSite', true);
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = (e) => {

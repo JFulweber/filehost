@@ -16,25 +16,8 @@ export default class User extends React.Component {
         this.doneUpdating = this.doneUpdating.bind(this);
     }
 
-    dirChanged(e) {
-        this.setState({ dir: e });
-    }
-
     render() {
         return (
-            /* <MasterLayout overflow='visible' backgroundColor={p.colorBlack}>
-                <div className={styles.sideBar}>
-                    <div className={styles.folderStruc}>
-                        <p>Placeholder</p>
-                    </div>
-                    <FileTools className={styles.tools} dir = {this.state.dir} updateItems = {this.updateItems}/>
-                </div>
-                <div className={styles.content}>
-                    <div className={styles.files}>
-                        <FileList dirChanged = {this.dirChanged} needsRefresh={this.state.needsRefresh} doneUpdating = {this.doneUpdating}/>
-                    </div>
-                </div>
-            </MasterLayout> */
             <MasterLayout>
                 <div className={styles.container}>
                     <div className={styles.sideBar}>
@@ -42,7 +25,7 @@ export default class User extends React.Component {
                             <p>Placeholder</p>
                         </div>
                         <div className={styles.upload}>
-                            <Uploader dir={this.props.dir} updateItems={this.updateItems} />
+                            <Uploader dir={this.state.dir} updateItems={this.updateItems} />
                         </div>
                     </div>
                     <div className={styles.files}>
@@ -58,6 +41,10 @@ export default class User extends React.Component {
                 </div>
             </MasterLayout>
         )
+    }
+
+    dirChanged(e) {
+        this.setState({ dir: e });
     }
 
     updateItems() {
