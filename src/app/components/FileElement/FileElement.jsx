@@ -19,11 +19,19 @@ export default class FileElement extends React.Component {
     render() {
         return (
             <div className={styles.file}>
-                <div>
-                    <img src='/icons/file.png' className={styles.icon}/>
-                </div>
-                <div>
-                    
+                <div className={styles.cont}>
+                    <div className={styles.icon}>
+                        <img src='/icons/file.png' />
+                    </div>
+                    <div className={styles.nameCont}>
+                        <p>{this.props.fileName}</p>
+                    </div>
+                    <div className={styles.sizeCont}>
+                        <p>{this.props.fileSize}</p>
+                    </div>
+                    <div className={styles.typeCont}>
+                        <p>{this.props.type}</p>
+                    </div>
                 </div>
             </div>
         )

@@ -102,7 +102,7 @@ export default class FileList extends React.Component {
         if (this.state.files == null && this.state.files == null || this.state.needsRefresh == true) {
             this.getItems();
             return null;
-        }
+        } 
         return (
             <div className={styles.fileContainer}>
                 {this.state.folders}

@@ -1,0 +1,39 @@
+@import '../../palette.scss';
+
+.file{
+    border-style: solid;
+    border-width: 0 0 2px 0;
+    border-color: #414141;
+    padding: 10px 0 10px 0;
+    table-layout: fixed;
+    display: table-row;
+    .cont{
+        display: table-row;
+        .icon{
+            display: table-cell;
+            width: 32px;
+            height: 32px;
+        }
+        .nameCont{
+            display: table-cell;
+            .name{
+                text-align: left;
+                font-family: 'Ropa Sans';
+                color: $color4;
+                font-size: 20px;
+                text-overflow: clip;
+                white-space: nowrap;
+            }
+        }
+        .size{
+            font-family: 'Ropa Sans';
+            color: $color4;
+            font-size: 20px;
+        }
+        .type{
+            font-family: 'Ropa Sans';
+            color: $color4;
+            font-size: 20px;
+        }
+    }
+}
