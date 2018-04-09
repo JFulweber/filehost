@@ -20,11 +20,10 @@ export default class FileElement extends React.Component {
         return (
             <div className={styles.file}>
                 <div>
-                    <img src='../../../../dist/icons/file.png' className={styles.icon}/>
-                    make me not look like ploopy thanks :)))))
-                    {this.props.fileName}
-                    {this.props.fileSize}
-                    {this.props.type}
+                    <img src='/icons/file.png' className={styles.icon}/>
+                </div>
+                <div>
+                    
                 </div>
             </div>
         )

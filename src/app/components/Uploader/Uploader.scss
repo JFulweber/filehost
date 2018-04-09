@@ -30,6 +30,9 @@
         border-style: dashed;
         border-width: 3px;
         border-color: $color4;
+        .loading{
+            display: none;
+        }
     }
     .uploading{
         position: relative;
