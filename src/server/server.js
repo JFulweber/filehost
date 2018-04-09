@@ -74,11 +74,11 @@ app.post('/upload', upload.single('file'), function (req, res) {
                 var writeFile = fs.writeFile(tpath, file.buffer, (err, res) => {
                     if (err) throw err;
                 });
-                res.send('i got et');
+                res.send('Recived and saved');
             }
         }
         catch (e) {
-            res.send('it no go through');
+            res.send('Denied');
         }
     }
     else {
