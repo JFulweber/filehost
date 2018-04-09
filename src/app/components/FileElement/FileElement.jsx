@@ -9,6 +9,7 @@ export default class FileElement extends React.Component {
         this.state = {};
         this.state.dir = this.props.dir;
         this.onClick = this.onClick.bind(this);
+        console.log(this.props);
     }
 
     onClick(e) {
@@ -20,6 +21,10 @@ export default class FileElement extends React.Component {
             <div className={styles.file}>
                 <div>
                     <img src='../../../../dist/icons/file.png' className={styles.icon}/>
+                    make me not look like ploopy thanks :)))))
+                    {this.props.fileName}
+                    {this.props.fileSize}
+                    {this.props.type}
                 </div>
             </div>
         )

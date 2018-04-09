@@ -70,6 +70,7 @@ export default class FileList extends React.Component {
                     if (file.type != 'File') {
                         type = file.type.substring(1);
                     }
+    
                     _files.push(<FileElement fileName={name} fileSize={size} type={type} key={++i} path={this.state.dir} rawName={rawName}/>); 
                 }
             });
