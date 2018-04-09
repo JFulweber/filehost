@@ -5,6 +5,7 @@ import Particle from '../../components/Particle/Particle.jsx';
 import FileList from '../../components/FileList/FileList.jsx';
 import FileTools from '../../components/FileTools/FileTools.jsx';
 import Uploader from '../../components/Uploader/Uploader.jsx';
+import FolderStructure from '../../components/FolderStructure/FolderStructure.jsx';
 import p from '../../palette.scss';
 
 export default class User extends React.Component {
@@ -22,7 +23,7 @@ export default class User extends React.Component {
                 <div className={styles.container}>
                     <div className={styles.sideBar}>
                         <div className={styles.folderStruc}>
-                            <p>Placeholder</p>
+                            <FolderStructure />
                         </div>
                         <div className={styles.upload}>
                             <Uploader dir={this.state.dir} updateItems={this.updateItems} />
