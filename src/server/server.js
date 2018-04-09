@@ -106,6 +106,14 @@ app.get('/filedl', function (req, res) {
     }
 })
 
+app.get('/registerUser/:hash', function(req,res){
+    User.findOne({registrationHash:req.params.hash}).then((u)=>{
+        console.log(u);
+        u.approved = true;
+        u.save().then((e)=>res.send(`approved ${u.username}`));
+    })
+})
+
 app.get('/*', function (req, res) {
     res.sendFile(path.resolve(__dirname, '../../dist/index.html'));
 });
