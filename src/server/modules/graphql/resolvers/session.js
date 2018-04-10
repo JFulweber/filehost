@@ -29,10 +29,24 @@ var resolvers = {
             return await new Promise((resolve, reject) => {
                 User.findOne({ username: args.username})
                     .then(user => {
+                        console.log('found user!!!');
                         var verifyRes = verify(args.pass, user.hashedPass);
                         if (user == null) {
+                            console.log('resolving null!');
                             resolve(null);
                             return;
+                        }
+                        if(user.approved==false){
+                            var UnapprovedSession = new Session({
+                                Username: args.username,
+                                Token: 'not approved'
+                            })
+                            console.log('resolving unapproved!');
+                            resolve(UnapprovedSession);
+                            return;
+                        }
+                        else{
+                            console.log(user);
                         }
                         if(verifyRes===true){
                             var token = jwt.sign({
