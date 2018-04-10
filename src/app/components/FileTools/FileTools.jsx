@@ -6,14 +6,23 @@ export default class FileTools extends React.Component {
 
     constructor(props){
         super(props);
-        this.state={};
-        this.state.className=this.props.className!=undefined?this.props.className:styles.title;
+        this.downloadFile = this.downloadFile.bind(this);
+        this.shareFile = this.shareFile.bind(this);
+    }
+
+    downloadFile(e) {
+        window.open(`http://localhost:3000/filedl?token=${localStorage.getItem('token')}&path=${this.props.path}&rawName=${this.props.rawName}`);
+    }
+
+    shareFile(){
+        alert("no");
     }
 
     render(){
         return(
-            <div className={[styles.container, this.state.className].join(' ')}>
-                
+            <div className={styles.container}>
+                <img src='/icons/dl.png' className={styles.icon} onClick={this.downloadFile}/>
+                <img src='/icons/link.png' className={styles.icon} onClick={this.shareFile}/>
             </div>
         )
     }

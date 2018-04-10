@@ -12,8 +12,12 @@ export default class FileFolder extends React.Component {
     render() {
         return (
             <div className={styles.file} onClick={this.onClick}>
-                {/* <img src='/icons/file.png' className={styles.icon} /> */}
-                <h1 id='title' className={styles.name}>{this.state.folderName}</h1>
+                <div className={styles.icon}>
+                    <img src='/icons/folder.png' />
+                </div>
+                <div className={styles.nameCont}>
+                    <p className={styles.name}>{this.props.folderName}</p>
+                </div>
             </div>
         )
     }

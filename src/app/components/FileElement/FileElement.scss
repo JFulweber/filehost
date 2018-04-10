@@ -1,16 +1,16 @@
 @import '../../palette.scss';
 
 .file{
-    width: 100%;
+    width: 99.5%;
     border-style: solid;
     border-width: 0 0 2px 0;
     border-color: #414141;
-    padding: 10px 0 10px 0;
+    padding: 10px 0 10px 5px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     .icon{
-        width: 32px;
+        width: 37px;
         height: 32px;
     }
     .nameCont{
@@ -38,7 +38,7 @@
         text-overflow: clip;
         white-space: nowrap;
         height: 32px;
-        width: 33%;
+        width: 23%;
         .size{
             margin: 5px 0 5px 0;
         }
@@ -51,7 +51,7 @@
         text-overflow: clip;
         white-space: nowrap;
         height: 32px;
-        width: 33%;
+        width: 30%;
         .type{
             margin: 5px 0 5px 0;
         }

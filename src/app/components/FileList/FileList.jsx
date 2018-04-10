@@ -37,12 +37,10 @@ export default class FileList extends React.Component {
             }
         }`;
         apolloFetch({ query }).then((res) => {
-            console.log("START======================")
             var i = 0;
             res.data.files.forEach(file => {
                 var reg = new RegExp("(?!.*?\/).*");
                 var name = reg.exec(file.path)[0];
-                console.log(name + "-----FIRST");
                 var rawName = name;
                 if (file.type == 'dir') {
                     _folders.push(<FileFolder folderName={name} clicked={this.elementClicked} key={++i} />);
@@ -55,7 +53,6 @@ export default class FileList extends React.Component {
                             break;
                         }
                         name += _name[i] + '.';
-                        console.log(name + "-----AFTER")
                     }
                     if (_name.length == 1 || _name == undefined) name = _name[0];
                     name = name.substring(0, name.lastIndexOf('.') != -1?name.lastIndexOf('.'):name.length);
