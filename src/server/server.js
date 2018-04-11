@@ -73,18 +73,19 @@ app.post('/upload', upload.single('file'), function (req, res) {
                 var uPath = req.body.path;
                 var tpath = path.resolve('./users/' + info.Username + '/' + uPath + '/' + file.originalname);
                 
-                var writeFile = fs.writeFile(tpath, file.buffer, (err, res) => {
+                var writeFile = fs.writeFile(tpath, file.buffer, (err, result) => {
                     if (err) throw err;
-                    
+                    var mongoFile = new GenericFile({
+                        absolutePath:tpath.substring(0,tpath.length-file.originalname.length),
+                        userRelativePath: uPath,
+                        fileSize: file.size,
+                        name: file.originalname,
+                        uploader: info.Username,
+                    });
+                    mongoFile.save().then((e)=>res.send('Recived and saved'));
                 });
-                var mongoFile = new GenericFile({
-                    absolutePath:tpath,
-                    userRelativePath: uPath,
-                    fileSize: file.size,
-                    uploader: info.Username,
-                });
-                mongoFile.save();
-                res.send('Recived and saved');
+                
+                
             }
         }
         catch (e) {

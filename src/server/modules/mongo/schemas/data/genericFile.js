@@ -5,8 +5,9 @@ let File = new Schema({
     absolutePath: !String,
     userRelativePath: !String,
     uploader: !String,
-    uploadDate: !Date,
+    name: !String,
+    uploadDate:!Date,
     fileSize: Number
 })
 
-module.exports = mongoose.model('File',File);
+module.exports = mongo.model('File',File);
