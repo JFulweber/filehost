@@ -91,7 +91,6 @@ app.post('/upload', upload.single('file'), function (req, res) {
 
 app.get('/filedl', function (req, res) {
     try{
-        console.log(req.query);
         var info = jwt.verify(req.query.token, secret);
         var _path = path.resolve(__dirname+`../../../users/${info.Username}/${req.query.path}/${req.query.rawName}`);
         res.download(_path, function (err) {
@@ -110,6 +109,7 @@ app.get('/registerUser/:hash', function(req,res){
     User.findOne({registrationHash:req.params.hash}).then((u)=>{
         console.log(u);
         u.approved = true;
+        console.log(`APROVED ${u.username}`)
         u.save().then((e)=>res.send(`approved ${u.username}`));
     })
 })
@@ -119,6 +119,6 @@ app.get('/*', function (req, res) {
 });
 
 app.listen(PORT, function () {
-    console.log('hey whats up hewwo')
+    console.log('HEWWO????? 0w0')
 })
 
