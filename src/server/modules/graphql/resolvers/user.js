@@ -40,6 +40,7 @@ var resolvers = {
                     }).catch((err)=>{
                         reject(err);
                     })
+                    email.register(myUser);
                 }).catch((err)=>{
                     reject(err);
                 })

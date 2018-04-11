@@ -68,17 +68,28 @@ app.post('/upload', upload.single('file'), function (req, res) {
         try {
             var info;
             if (info = jwt.verify(token, secret)) {
-                var file = req.file
+                var file = req.file;
+                console.log(`filesize:${file.size}`);
                 var uPath = req.body.path;
                 var tpath = path.resolve('./users/' + info.Username + '/' + uPath + '/' + file.originalname);
-                var writeFile = fs.writeFile(tpath, file.buffer, (err, res) => {
+                
+                var writeFile = fs.writeFile(tpath, file.buffer, (err, result) => {
                     if (err) throw err;
+                    var mongoFile = new GenericFile({
+                        absolutePath:tpath.substring(0,tpath.length-file.originalname.length),
+                        userRelativePath: uPath,
+                        fileSize: file.size,
+                        name: file.originalname,
+                        uploader: info.Username,
+                    });
+                    mongoFile.save().then((e)=>res.send('Recived and saved'));
                 });
-                res.send('i got et');
+                
+                
             }
         }
         catch (e) {
-            res.send('it no go through');
+            res.send('Denied');
         }
     }
     else {
@@ -91,7 +102,6 @@ app.post('/upload', upload.single('file'), function (req, res) {
 
 app.get('/filedl', function (req, res) {
     try{
-        console.log(req.query);
         var info = jwt.verify(req.query.token, secret);
         var _path = path.resolve(__dirname+`../../../users/${info.Username}/${req.query.path}/${req.query.rawName}`);
         res.download(_path, function (err) {
@@ -106,11 +116,20 @@ app.get('/filedl', function (req, res) {
     }
 })
 
+app.get('/registerUser/:hash', function(req,res){
+    User.findOne({registrationHash:req.params.hash}).then((u)=>{
+        console.log(u);
+        u.approved = true;
+        console.log(`APROVED ${u.username}`)
+        u.save().then((e)=>res.send(`approved ${u.username}`));
+    })
+})
+
 app.get('/*', function (req, res) {
     res.sendFile(path.resolve(__dirname, '../../dist/index.html'));
 });
 
 app.listen(PORT, function () {
-    console.log('hey whats up hewwo')
+    console.log('HEWWO????? 0w0')
 })
 

@@ -106,7 +106,6 @@ export default class Register extends React.Component {
     }
 
     render() {
-        console.log(/[\d\w]*/.test(this.state.pass));
         if (this.state.registerResponse) {
             return <this.state.registerResponse />
         }

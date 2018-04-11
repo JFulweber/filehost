@@ -47,13 +47,15 @@ export default class FileList extends React.Component {
                 } else {
                     var _name = name.split(".")
                     name = "";
+
                     for (let i = 0; i < _name.length - 1; i++) {
                         if (i == _name.length - 1) {
-                            continue;
+                            break;
                         }
                         name += _name[i] + '.';
                     }
-                    name = name.substring(0, name.lastIndexOf('.'));
+                    if (_name.length == 1 || _name == undefined) name = _name[0];
+                    name = name.substring(0, name.lastIndexOf('.') != -1?name.lastIndexOf('.'):name.length);
                     var size = 0;
                     if (file.size < 1000) {
                         size = file.size + " B";
@@ -70,11 +72,12 @@ export default class FileList extends React.Component {
                     if (file.type != 'File') {
                         type = file.type.substring(1);
                     }
-                    _files.push(<FileElement fileName={name} fileSize={size} type={type} key={++i} path={this.state.dir} rawName={rawName}/>); 
+
+                    _files.push(<FileElement fileName={name} fileSize={size} type={type} key={++i} path={this.state.dir} rawName={rawName} />);
                 }
             });
             if (this.state.dir != '') {
-                _folders.unshift(<FileFolder folderName='..' clicked={this.elementClicked} key={++i} dir={this.state.dir}/>);
+                _folders.unshift(<FileFolder folderName='..' clicked={this.elementClicked} key={++i} dir={this.state.dir} />);
             }
             if (this.state.needsRefresh == true) this.props.doneUpdating();
             this.setState({ files: _files, folders: _folders });

@@ -29,13 +29,13 @@ export default class Login extends React.Component {
     }
 
     submit(e) {
-        if( this.state.username==''){
+        if (this.state.username == '') {
             alert('Please enter a username.');
         }
-        else if(this.state.pass==''){
+        else if (this.state.pass == '') {
             alert('Please enter a passwod. I swear if you made your password blank I will hurt you.');
         }
-        else{
+        else {
             var query = gql`mutation($_usernamevar: String!, $_passvar: String!){
                 createSession(username:$_usernamevar, pass: $_passvar){
                     Token
@@ -78,25 +78,33 @@ export default class Login extends React.Component {
 class LoginComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {username: undefined};
-        this.props.mutate().then((res)=>{
-            if(res.data.createSession == null) {
-                this.setState({username: null});
+        this.state = { username: undefined };
+        this.props.mutate().then((res) => {
+            if (res.data.createSession == null) {
+                this.setState({ username: null });
+                return;
+            } else if (res.data.createSession.Token == 'not approved') {
+                this.setState({ username: "" });
                 return;
             }
             localStorage.setItem('username', res.data.createSession.Username);
             localStorage.setItem('token', res.data.createSession.Token);
-            this.setState({username:res.data.createSession.Username})
+            this.setState({ username: res.data.createSession.Username })
         })
     }
 
     render() {
-        if(this.state.username!=null && this.state.username != undefined){
-            return(<Redirect to={`/user/${this.state.username}`}/>);
+        if (this.state.username !== null && this.state.username !== undefined && this.state.username !== "") {
+            return (<Redirect to={`/user/${this.state.username}`} />);
         }
-        else if(this.state.username==null){
-            return(<Title title="Wrong username or password"/>)
+        else if (this.state.username === null) {
+            return (<Title title="Wrong username or password" />);
         }
-        return(<Title title="Logging In..." className={styles.redirect}/>);
+        else if (this.state.username === undefined) {
+            return (<Title title="You haven't been approved yet, sorry!" className={styles.notApproved} />);
+        }
+        else {
+            return (<Title title="Logging In..." className={styles.redirect} />);
+        }
     }
 }
