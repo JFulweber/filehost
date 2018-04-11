@@ -21,9 +21,7 @@ export default class FileTools extends React.Component {
     render(){
         return(
             <div className={styles.container}>
-                <i class="far fa-file"/>
-                <img src='/icons/dl.png' className={styles.icon} onClick={this.downloadFile}/>
-                <img src='/icons/link.png' className={styles.icon} onClick={this.shareFile}/>
+                <i class="far fa-file" onClick={this.downloadFile}/>
             </div>
         )
     }

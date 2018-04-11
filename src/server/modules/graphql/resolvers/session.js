@@ -29,14 +29,13 @@ var resolvers = {
             return await new Promise((resolve, reject) => {
                 User.findOne({ username: args.username})
                     .then(user => {
-                        console.log(user.approved+'----------------------------')
                         var verifyRes = verify(args.pass, user.hashedPass);
                         if (user == null) {
                             console.log('resolving null!');
                             resolve(null);
                             return;
                         }
-                        if(user.approved==true/*CHANGE BACK LATER*/){
+                        if(user.approved==false){
                             var UnapprovedSession = new Session({
                                 Username: args.username,
                                 Token: 'not approved'
