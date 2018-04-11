@@ -68,12 +68,22 @@ app.post('/upload', upload.single('file'), function (req, res) {
         try {
             var info;
             if (info = jwt.verify(token, secret)) {
-                var file = req.file
+                var file = req.file;
+                console.log(`filesize:${file.size}`);
                 var uPath = req.body.path;
                 var tpath = path.resolve('./users/' + info.Username + '/' + uPath + '/' + file.originalname);
+                
                 var writeFile = fs.writeFile(tpath, file.buffer, (err, res) => {
                     if (err) throw err;
+                    
                 });
+                var mongoFile = new GenericFile({
+                    absolutePath:tpath,
+                    userRelativePath: uPath,
+                    fileSize: file.size,
+                    uploader: info.Username,
+                });
+                mongoFile.save();
                 res.send('Recived and saved');
             }
         }

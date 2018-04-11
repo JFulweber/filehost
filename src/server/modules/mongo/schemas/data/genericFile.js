@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 var {Schema} = mongoose;
 
 let File = new Schema({
-    filepath: !String,
+    absolutePath: !String,
+    userRelativePath: !String,
     uploader: !String,
     uploadDate: !Date,
     fileSize: Number
