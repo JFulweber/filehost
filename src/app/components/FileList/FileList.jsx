@@ -31,9 +31,10 @@ export default class FileList extends React.Component {
         var _folders = [];
         var query = `query{
             files(path:"${this.state.dir}" token:"${localStorage.getItem("token")}"){
-                path
+                name
+                userRelativePath
                 type
-                size
+                fileSize
             }
         }`;
         apolloFetch({ query }).then((res) => {
@@ -43,9 +44,10 @@ export default class FileList extends React.Component {
                 var name = reg.exec(file.path)[0];
                 var rawName = name;
                 if (file.type == 'dir') {
-                    _folders.push(<FileFolder folderName={name} clicked={this.elementClicked} key={++i} />);
+                    _folders.push(<FileFolder folderName={file.name} clicked={this.elementClicked} key={++i} />);
                 } else {
-                    var _name = name.split(".")
+                    console.log('yeah??');
+                /*     var _name = name.split(".")
                     name = "";
 
                     for (let i = 0; i < _name.length - 1; i++) {
@@ -55,25 +57,25 @@ export default class FileList extends React.Component {
                         name += _name[i] + '.';
                     }
                     if (_name.length == 1 || _name == undefined) name = _name[0];
-                    name = name.substring(0, name.lastIndexOf('.') != -1?name.lastIndexOf('.'):name.length);
+                    name = name.substring(0, name.lastIndexOf('.') != -1 ? name.lastIndexOf('.') : name.length); */
                     var size = 0;
-                    if (file.size < 1000) {
-                        size = file.size + " B";
-                    } else if (file.size < 100000) {
-                        size = (Math.ceil(file.size / 1000)) + " KB";
-                    } else if (file.size < 1000000000) {
-                        size = Math.ceil(file.size / 1000000) + " MB";
-                    } else if (file.size < 1000000000000) {
-                        size = Math.ceil(file.size / 1000000000) + " GB";
+                    if (file.fileSize < 1000) {
+                        size = file.fileSize + " B";
+                    } else if (file.fileSize < 100000) {
+                        size = (Math.ceil(file.fileSize / 1000)) + " KB";
+                    } else if (file.fileSize < 1000000000) {
+                        size = Math.ceil(file.fileSize / 1000000) + " MB";
+                    } else if (file.fileSize < 1000000000000) {
+                        size = Math.ceil(file.fileSize / 1000000000) + " GB";
                     } else {
                         size = undefined;
                     }
                     var type = 'File';
-                    if (file.type != 'File') {
+                    /* if (file.type != 'File') {
                         type = file.type.substring(1);
-                    }
+                    } */
 
-                    _files.push(<FileElement fileName={name} fileSize={size} type={type} key={++i} path={this.state.dir} rawName={rawName} />);
+                    _files.push(<FileElement fileName={file.name} fileSize={size} type={file.type} key={++i} path={this.state.dir} rawName={rawName} />);
                 }
             });
             if (this.state.dir != '') {

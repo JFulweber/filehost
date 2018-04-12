@@ -15,32 +15,12 @@ var resolvers = {
                 try {
                     info = jwt.verify(args.token, secret);
                     // goes from this files directory to the root of the workspace directory
-                    var gpath = _path.resolve(usersPath + info.Username + '/' + args.path);
-                    fs.readdir(gpath, (err, files) => {
-                        var editedFiles = [];
-                        if (files == undefined) {
-                            resolve({});
-                            return;
-                        }
-                        files.forEach((file) => {
-                            var path = gpath + '/' + file;
-                            var fileStats = fs.statSync(path);
-                            if (fileStats.isDirectory()) {
-                                editedFiles.push({
-                                    path: path,
-                                    type: "dir",
-                                    size: 0
-                                })
-                            } else {
-                                editedFiles.push({
-                                    path: path,
-                                    type: file.substring(file.lastIndexOf('.')) != file ? file.substring(file.lastIndexOf('.')) : ".File",
-                                    size: fileStats.size
-                                })
-                            }
-                        })
-                        resolve(editedFiles);
-                    });
+                    //var gpath = _path.resolve(usersPath + info.Username + '/' + args.path);
+                    console.log(args.path);
+                    GenericFile.find({uploader: info.Username, userRelativePath:'/'+args.path}).then((files)=>{
+                        console.log(files);
+                        resolve(files);
+                    })
                 }
                 catch (e) {
                     reject(e);

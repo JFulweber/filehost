@@ -81,11 +81,10 @@ app.post('/upload', upload.single('file'), function (req, res) {
                         fileSize: file.size,
                         name: file.originalname,
                         uploader: info.Username,
+                        type: file.mimetype
                     });
                     mongoFile.save().then((e)=>res.send('Recived and saved'));
                 });
-                
-                
             }
         }
         catch (e) {
