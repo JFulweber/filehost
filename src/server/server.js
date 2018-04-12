@@ -120,6 +120,7 @@ app.get('/registerUser/:hash', function(req,res){
         console.log(u);
         u.approved = true;
         console.log(`APROVED ${u.username}`)
+        fs.mkdir(__dirname+"/../../users"+ u.username);
         u.save().then((e)=>res.send(`approved ${u.username}`));
     })
 })
