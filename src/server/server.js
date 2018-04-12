@@ -73,6 +73,7 @@ app.post('/upload', upload.single('file'), function (req, res) {
                 var uPath = req.body.path;
                 var tpath = path.resolve('./users/' + info.Username + '/' + uPath + '/' + file.originalname);
                 var writeFile = fs.writeFile(tpath, file.buffer, (err, result) => {
+                    //GenericFile.findAndRemove(())
                     if (err) throw err;
                     var mongoFile = new GenericFile({
                         absolutePath:tpath.substring(0,tpath.length-file.originalname.length),
@@ -117,11 +118,9 @@ app.get('/filedl', function (req, res) {
 
 app.get('/registerUser/:hash', function(req,res){
     User.findOne({registrationHash:req.params.hash}).then((u)=>{
-        console.log(u);
         u.approved = true;
-        console.log(`APROVED ${u.username}`)
-        fs.mkdir(__dirname+"/../../users/"+ u.username);
-        u.save().then((e)=>res.send(`approved ${u.username}`));
+        fs.mkdirSync(__dirname+"/../../users/"+ u.username);
+        u.save().then(()=>res.send(`approved ${u.username}`));
     })
 })
 
