@@ -16,9 +16,7 @@ var resolvers = {
                     info = jwt.verify(args.token, secret);
                     // goes from this files directory to the root of the workspace directory
                     //var gpath = _path.resolve(usersPath + info.Username + '/' + args.path);
-                    console.log(args.path);
                     GenericFile.find({uploader: info.Username, userRelativePath:'/'+args.path}).then((files)=>{
-                        console.log(files);
                         resolve(files);
                     })
                 }
@@ -26,6 +24,12 @@ var resolvers = {
                     reject(e);
                 }
             });
+        },
+        folders: async function (parent, args, {GenericFile}){
+            // TODO: make folders seperate??? Or just have them in the same database??
+            return await new Promise((resolve,reject)=>{
+
+            })
         },
         file: async function (parent, args, { GenericFile }) {
 

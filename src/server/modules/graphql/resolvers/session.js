@@ -51,7 +51,7 @@ var resolvers = {
                             var token = jwt.sign({
                                 Username: args.username
                             }, secret, {
-                                    expiresIn: '1h'
+                                    expiresIn: '1d'
                                 });
                             var NewSession = new Session({
                                 Username: args.username,

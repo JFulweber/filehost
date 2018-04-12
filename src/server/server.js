@@ -63,16 +63,15 @@ var secret = require('./secret');
 var fs = require('fs');
 
 app.post('/upload', upload.single('file'), function (req, res) {
+    
     if (req.body.fromSite == 'true') {
         var token = req.body.token;
         try {
             var info;
             if (info = jwt.verify(token, secret)) {
                 var file = req.file;
-                console.log(`filesize:${file.size}`);
                 var uPath = req.body.path;
                 var tpath = path.resolve('./users/' + info.Username + '/' + uPath + '/' + file.originalname);
-                
                 var writeFile = fs.writeFile(tpath, file.buffer, (err, result) => {
                     if (err) throw err;
                     var mongoFile = new GenericFile({
@@ -102,7 +101,8 @@ app.post('/upload', upload.single('file'), function (req, res) {
 app.get('/filedl', function (req, res) {
     try{
         var info = jwt.verify(req.query.token, secret);
-        var _path = path.resolve(__dirname+`../../../users/${info.Username}/${req.query.path}/${req.query.rawName}`);
+        console.log(req.query);
+        var _path = path.resolve(__dirname+`../../../users/${info.Username}/${req.query.path!=undefined?req.query.path:''}/${req.query.rawName}`);
         res.download(_path, function (err) {
             if (err) {
                 console.log(err);
