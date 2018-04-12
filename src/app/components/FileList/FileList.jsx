@@ -46,18 +46,6 @@ export default class FileList extends React.Component {
                 if (file.type == 'dir') {
                     _folders.push(<FileFolder folderName={file.name} clicked={this.elementClicked} key={++i} />);
                 } else {
-                    console.log('yeah??');
-                /*     var _name = name.split(".")
-                    name = "";
-
-                    for (let i = 0; i < _name.length - 1; i++) {
-                        if (i == _name.length - 1) {
-                            break;
-                        }
-                        name += _name[i] + '.';
-                    }
-                    if (_name.length == 1 || _name == undefined) name = _name[0];
-                    name = name.substring(0, name.lastIndexOf('.') != -1 ? name.lastIndexOf('.') : name.length); */
                     var size = 0;
                     if (file.fileSize < 1000) {
                         size = file.fileSize + " B";
@@ -71,11 +59,16 @@ export default class FileList extends React.Component {
                         size = undefined;
                     }
                     var type = 'File';
-                    /* if (file.type != 'File') {
-                        type = file.type.substring(1);
-                    } */
-
-                    _files.push(<FileElement fileName={file.name} fileSize={size} type={file.type} key={++i} path={this.state.dir} rawName={file.name} />);
+                    if (file.name.indexOf('.') == -1) {
+                        type = 'File';
+                    } else {
+                        if (file.name.indexOf('.') == 0) {
+                            type = file.name.substring(1);
+                        }else{
+                            type = file.name.substring(file.name.lastIndexOf('.')+1);
+                        }
+                    }
+                    _files.push(<FileElement fileName={file.name.substring(0,file.name.lastIndexOf('.')==-1?file.name.length:file.name.lastIndexOf('.'))} fileSize={size} type={type} key={++i} path={this.state.dir} rawName={file.name} iconType={file.type} />);
                 }
             });
             if (this.state.dir != '') {

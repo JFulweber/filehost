@@ -9,17 +9,24 @@ export default class FileElement extends React.Component {
         this.state = {};
         this.state.dir = this.props.dir;
         this.onClick = this.onClick.bind(this);
+        this.getIcon = this.getIcon.bind(this);
+        this.state.icon = 'far fa-file-alt'
     }
 
     onClick(e) {
         window.open(`http://localhost:3000/filedl?token=${localStorage.getItem('token')}&path=${this.props.path}&rawName=${this.props.rawName}`) // <-- TRIGGERS FILE SAVE PROMPT
     }
 
+    getIcon(){
+
+    }
+
     render() {
+        this.getIcon();
         return (
             <div className={styles.file}>
                 <div className={styles.icon}>
-                    <img src='/icons/file.png' />
+                    <i className={this.state.icon}/>
                 </div>
                 <div className={styles.nameCont}>
                     <p className={styles.name}>{this.props.fileName}</p>
