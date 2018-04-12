@@ -28,7 +28,7 @@ export default class FileElement extends React.Component {
                     <p className={styles.size}>{this.props.fileSize}</p>
                 </div>
                 <div className={styles.toolCont}>
-                    <FileTools path={this.props.path} rawName={this.props.name} />
+                    <FileTools path={this.props.path} rawName={this.props.rawName} />
                 </div>
                 <div className={styles.typeCont}>
                     <p className={styles.type}>{this.props.type}</p>
