@@ -64,8 +64,8 @@ export default class Uploader extends React.Component {
             <div id="container" className={styles.base}>
                 <p className={styles.text}>Drop Files Here</p>
                 <div onDrop={this.onDrop} onDragEnter={this.onDragStarted} onDragLeave={this.onDragStopped} className={this.state.style} onDragOver={(e) => { e.preventDefault() }}>
-                    <div className={styles.loading}>
-                        <p className={styles.temp}>{this.state.progress}</p>
+                    <div className={styles.loading} style={{height:100-this.state.progress+'%'}}>
+                        <p className={styles.text}>{this.state.progress}%</p>
                     </div>
                 </div>
             </div>)
