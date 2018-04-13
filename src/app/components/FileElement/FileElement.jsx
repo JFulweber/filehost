@@ -10,23 +10,50 @@ export default class FileElement extends React.Component {
         this.state.dir = this.props.dir;
         this.onClick = this.onClick.bind(this);
         this.getIcon = this.getIcon.bind(this);
-        this.state.icon = 'far fa-file-alt'
+        this.state.icon = 'far fa-file-alt';
+        this.state.needsIcosn = true;
+    }
+
+    componentDidMount() {
+        this.getIcon();
     }
 
     onClick(e) {
         window.open(`http://localhost:3000/filedl?token=${localStorage.getItem('token')}&path=${this.props.path}&rawName=${this.props.rawName}`) // <-- TRIGGERS FILE SAVE PROMPT
     }
 
-    getIcon(){
-        
+    getIcon() {
+        var mime = this.props.iconType;
+        var type = mime.split('/')[0];
+        console.log(mime + "---" + type);
+        switch (type) {
+            case "audio":
+                this.setState({ icon: 'far fa-file-audio' });
+                break;
+            case "video":
+                this.setState({ icon: 'far fa-file-audio' });
+                break;
+            case "audio":
+                this.setState({ icon: 'far fa-file-audio' });
+                break;
+            case "audio":
+                this.setState({ icon: 'far fa-file-audio' });
+                break;
+            default:
+                this.setState({ icon: 'far fa-file-alt' });
+                break;
+        }
+        this.setState({ needsIcons: false });
     }
 
     render() {
-        this.getIcon();
+        if (this.state.needsIcons) {
+            thos.getIcon();
+        }
         return (
             <div className={styles.file}>
                 <div className={styles.icon}>
-                    <i className={this.state.icon}/>
+                    <i className={this.state.icon} />
                 </div>
                 <div className={styles.nameCont}>
                     <p className={styles.name}>{this.props.fileName}</p>
