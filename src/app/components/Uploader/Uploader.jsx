@@ -17,22 +17,20 @@ export default class Uploader extends React.Component {
     onDrop(e) {
         e.preventDefault();
         console.log(this.props.dir);
-        if (e.dataTransfer.files.length > 1) {
-            this.setState({ style: styles.resting });
-            return;
-        }
-        else {
+
+        
+        for (var i = 0; i < e.dataTransfer.files.length; i++) {
             var data = new FormData();
-            data.append('file', e.dataTransfer.files[0]);
+            data.append('file', e.dataTransfer.files[i]);
             data.append('token', localStorage.getItem("token"));
             data.append('path', this.state.dir);
             data.append('fromSite', true);
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = (e) => {
-                if (xhr.readyState == XMLHttpRequest.OPENED){
-                    this.setState({style: styles.uploading});
-                }else if(xhr.readyState == XMLHttpRequest.DONE){
-                    this.setState({style: styles.resting, progress: 0});
+                if (xhr.readyState == XMLHttpRequest.OPENED) {
+                    this.setState({ style: styles.uploading });
+                } else if (xhr.readyState == XMLHttpRequest.DONE) {
+                    this.setState({ style: styles.resting, progress: 0 });
                     this.props.updateItems();
                 }
             };
@@ -64,7 +62,7 @@ export default class Uploader extends React.Component {
             <div id="container" className={styles.base}>
                 <p className={styles.text}>Drop Files Here</p>
                 <div onDrop={this.onDrop} onDragEnter={this.onDragStarted} onDragLeave={this.onDragStopped} className={this.state.style} onDragOver={(e) => { e.preventDefault() }}>
-                    <div className={styles.loading} style={{height:100-this.state.progress+'%'}}>
+                    <div className={styles.loading} style={{ height: 100 - this.state.progress + '%' }}>
                         <p className={styles.text}>{this.state.progress}%</p>
                     </div>
                 </div>
