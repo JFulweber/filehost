@@ -52,7 +52,8 @@
         text-overflow: clip;
         white-space: nowrap;
         height: 32px;
-        width: 30%;
+        width: 10%;
+        overflow-x: hidden;
         .type{
             margin: 5px 0 5px 0;
         }

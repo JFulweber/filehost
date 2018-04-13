@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './FileElement.scss';
 import FileTools from '../../components/FileTools/FileTools.jsx';
+import styles from './FileElement.scss';
 
 
 export default class FileElement extends React.Component {
