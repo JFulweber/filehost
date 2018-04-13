@@ -18,7 +18,7 @@ export default class FileElement extends React.Component {
     }
 
     getIcon(){
-
+        
     }
 
     render() {
