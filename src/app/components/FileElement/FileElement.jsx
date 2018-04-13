@@ -10,7 +10,7 @@ export default class FileElement extends React.Component {
         this.state.dir = this.props.dir;
         this.onClick = this.onClick.bind(this);
         this.getIcon = this.getIcon.bind(this);
-        this.state.icon = 'far fa-file-alt';
+        this.state.icon = 'far fa-file';
         this.state.needsIcosn = true;
     }
 
@@ -25,22 +25,104 @@ export default class FileElement extends React.Component {
     getIcon() {
         var mime = this.props.iconType;
         var type = mime.split('/')[0];
-        console.log(mime + "---" + type);
+        var spec = mime.split('/')[1]
+        console.log(mime + "---" + this.props.fileName + "." + this.props.type);
         switch (type) {
             case "audio":
                 this.setState({ icon: 'far fa-file-audio' });
                 break;
             case "video":
-                this.setState({ icon: 'far fa-file-audio' });
+                this.setState({ icon: 'far fa-file-video' });
                 break;
-            case "audio":
-                this.setState({ icon: 'far fa-file-audio' });
-                break;
-            case "audio":
-                this.setState({ icon: 'far fa-file-audio' });
-                break;
-            default:
+            case "text":
                 this.setState({ icon: 'far fa-file-alt' });
+                break;
+            case "image":
+                this.setState({ icon: 'far fa-file-image' });
+                break;
+            case "application":
+                switch (spec) {
+                    case "pdf":
+                        this.setState({ icon: 'far fa-file-pdf' });
+                        break;
+                    case "x-zip-compressed":
+                        this.setState({ icon: 'far fa-file-archive' });
+                        break;
+                    default:
+                        switch (this.props.type) {
+                            case "rar":
+                                this.setState({ icon: 'far fa-file-archive' });
+                                break;
+                            case "7z":
+                                this.setState({ icon: 'far fa-file-archive' });
+                                break;
+                            case "zipx":
+                                this.setState({ icon: 'far fa-file-archive' });
+                                break;
+                            case "gz":
+                                this.setState({ icon: 'far fa-file-archive' });
+                                break;
+                            case "jar":
+                                this.setState({ icon: 'far fa-file-archive' });
+                                break;
+                            case "java":
+                                this.setState({ icon: 'far fa-file-code' });
+                                break;
+                            case "js":
+                                this.setState({ icon: 'far fa-file-code' });
+                                break;
+                            case "py":
+                                this.setState({ icon: 'far fa-file-code' });
+                                break;
+                            case "html":
+                                this.setState({ icon: 'far fa-file-code' });
+                                break;
+                            case "c":
+                                this.setState({ icon: 'far fa-file-code' });
+                                break;
+                            case "cs":
+                                this.setState({ icon: 'far fa-file-code' });
+                                break;
+                            case "css":
+                                this.setState({ icon: 'far fa-file-code' });
+                                break;
+                            case "scss":
+                                this.setState({ icon: 'far fa-file-code' });
+                                break;
+                            case "lua":
+                                this.setState({ icon: 'far fa-file-code' });
+                                break;
+                            case "cpp":
+                                this.setState({ icon: 'far fa-file-code' });
+                                break;
+                            case "class":
+                                this.setState({ icon: 'far fa-file-code' });
+                                break;
+                            case "asm":
+                                this.setState({ icon: 'far fa-file-code' });
+                                break;
+                            case "h":
+                                this.setState({ icon: 'far fa-file-code' });
+                                break;
+                            case "bat":
+                                this.setState({ icon: 'far fa-file-code' });
+                                break;
+                            case "go":
+                                this.setState({ icon: 'far fa-file-code' });
+                                break;
+                            case "json":
+                                this.setState({ icon: 'far fa-file-code' });
+                                break;
+                            default:
+                                this.setState({ icon: 'far fa-file' });
+                                break;
+                        }
+                        break;
+                }
+                break;
+
+            default:
+                this.setState({ icon: 'far fa-file' });
                 break;
         }
         this.setState({ needsIcons: false });
