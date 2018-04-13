@@ -63,29 +63,29 @@ var secret = require('./secret');
 var fs = require('fs');
 
 app.post('/upload', upload.single('file'), function (req, res) {
+    
     if (req.body.fromSite == 'true') {
         var token = req.body.token;
         try {
             var info;
             if (info = jwt.verify(token, secret)) {
                 var file = req.file;
-                console.log(`filesize:${file.size}`);
                 var uPath = req.body.path;
                 var tpath = path.resolve('./users/' + info.Username + '/' + uPath + '/' + file.originalname);
-                
-                var writeFile = fs.writeFile(tpath, file.buffer, (err, result) => {
-                    if (err) throw err;
-                    var mongoFile = new GenericFile({
-                        absolutePath:tpath.substring(0,tpath.length-file.originalname.length),
-                        userRelativePath: uPath,
-                        fileSize: file.size,
-                        name: file.originalname,
-                        uploader: info.Username,
+                GenericFile.remove({name: file.originalname, userRelativePath: uPath}).then(()=>{
+                    var writeFile = fs.writeFile(tpath, file.buffer, (err, result) => {
+                        if (err) throw err;
+                        var mongoFile = new GenericFile({
+                            absolutePath:tpath.substring(0,tpath.length-file.originalname.length),
+                            userRelativePath: uPath,
+                            fileSize: file.size,
+                            name: file.originalname,
+                            uploader: info.Username,
+                            type: file.mimetype
+                        });
+                        mongoFile.save().then((e)=>res.send('Recived and saved'));
                     });
-                    mongoFile.save().then((e)=>res.send('Recived and saved'));
-                });
-                
-                
+                })
             }
         }
         catch (e) {
@@ -103,7 +103,8 @@ app.post('/upload', upload.single('file'), function (req, res) {
 app.get('/filedl', function (req, res) {
     try{
         var info = jwt.verify(req.query.token, secret);
-        var _path = path.resolve(__dirname+`../../../users/${info.Username}/${req.query.path}/${req.query.rawName}`);
+        console.log(req.query);
+        var _path = path.resolve(__dirname+`../../../users/${info.Username}/${req.query.path!=undefined?req.query.path:''}/${req.query.rawName}`);
         res.download(_path, function (err) {
             if (err) {
                 console.log(err);
@@ -118,10 +119,9 @@ app.get('/filedl', function (req, res) {
 
 app.get('/registerUser/:hash', function(req,res){
     User.findOne({registrationHash:req.params.hash}).then((u)=>{
-        console.log(u);
         u.approved = true;
-        console.log(`APROVED ${u.username}`)
-        u.save().then((e)=>res.send(`approved ${u.username}`));
+        fs.mkdirSync(__dirname+"/../../users/"+ u.username);
+        u.save().then(()=>res.send(`approved ${u.username}`));
     })
 })
 

@@ -30,17 +30,18 @@ var resolvers = {
                 User.findOne({ username: args.username})
                     .then(user => {
                         var verifyRes = verify(args.pass, user.hashedPass);
-                        if (user == null) {
+                        if (user == null || user == undefined) {
                             console.log('resolving null!');
                             resolve(null);
                             return;
                         }
-                        if(user.approved==false){
+                        if(user.approved===false){
                             var UnapprovedSession = new Session({
                                 Username: args.username,
                                 Token: 'not approved'
                             })
                             console.log('resolving unapproved!');
+                            console.log(user);
                             resolve(UnapprovedSession);
                             return;
                         }
@@ -51,7 +52,7 @@ var resolvers = {
                             var token = jwt.sign({
                                 Username: args.username
                             }, secret, {
-                                    expiresIn: '1h'
+                                    expiresIn: '1d'
                                 });
                             var NewSession = new Session({
                                 Username: args.username,

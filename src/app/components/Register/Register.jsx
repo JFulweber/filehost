@@ -148,7 +148,7 @@ class RegisterResponse extends React.Component {
                 return <Title title="Successfully registered" className={styles.responseText}/>
             }
             else if(this.state.response.data.register==false){
-                return <Title title="Email already exists" className={styles.responseText}/>
+                return <Title title="Username already exists" className={styles.responseText}/>
             }
         }
     }

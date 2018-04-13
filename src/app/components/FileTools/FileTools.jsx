@@ -8,6 +8,7 @@ export default class FileTools extends React.Component {
         super(props);
         this.downloadFile = this.downloadFile.bind(this);
         this.shareFile = this.shareFile.bind(this);
+        this.deleteFile = this.deleteFile.bind(this);
     }
 
     downloadFile(e) {
@@ -18,10 +19,16 @@ export default class FileTools extends React.Component {
         alert("no");
     }
 
+    deleteFile(){
+        alert('lol fix later')
+    }
+
     render(){
         return(
             <div className={styles.container}>
-                <i class="far fa-file" onClick={this.downloadFile}/>
+                <i className="fas fa-download" onClick={this.downloadFile}/>
+                <i className="fas fa-share-alt" onClick={this.shareFile}/>
+                <i className="far fa-trash-alt" onClick={this.deleteFile}/>
             </div>
         )
     }

@@ -15,37 +15,21 @@ var resolvers = {
                 try {
                     info = jwt.verify(args.token, secret);
                     // goes from this files directory to the root of the workspace directory
-                    var gpath = _path.resolve(usersPath + info.Username + '/' + args.path);
-                    fs.readdir(gpath, (err, files) => {
-                        var editedFiles = [];
-                        if (files == undefined) {
-                            resolve({});
-                            return;
-                        }
-                        files.forEach((file) => {
-                            var path = gpath + '/' + file;
-                            var fileStats = fs.statSync(path);
-                            if (fileStats.isDirectory()) {
-                                editedFiles.push({
-                                    path: path,
-                                    type: "dir",
-                                    size: 0
-                                })
-                            } else {
-                                editedFiles.push({
-                                    path: path,
-                                    type: file.substring(file.lastIndexOf('.')) != file ? file.substring(file.lastIndexOf('.')) : ".File",
-                                    size: fileStats.size
-                                })
-                            }
-                        })
-                        resolve(editedFiles);
-                    });
+                    //var gpath = _path.resolve(usersPath + info.Username + '/' + args.path);
+                    GenericFile.find({ uploader: info.Username, userRelativePath: '/' + args.path }).then((files) => {
+                        resolve(files);
+                    })
                 }
                 catch (e) {
                     reject(e);
                 }
             });
+        },
+        folders: async function (parent, args, { GenericFile }) {
+            // TODO: make folders seperate??? Or just have them in the same database??
+            return await new Promise((resolve, reject) => {
+
+            })
         },
         file: async function (parent, args, { GenericFile }) {
 
@@ -61,8 +45,14 @@ var resolvers = {
             // path is in terms from user root directory
             try {
                 var info = jwt.verify(args.token, secret);
-                fs.mkdirSync(usersPath+info.Username+'/'+args.path);
-                resolve(true);
+                var folder = new GenericFile({
+                    absolutePath: null,
+                    userRelativePath: args.path,
+                    name: args.name,
+                    uploader: info.Username,
+                    type: "dir"
+                })
+                folder.save().then(() => resolve(true)).catch((e) => resolve(false));
             }
             catch (e) {
                 throw (e);
@@ -70,22 +60,25 @@ var resolvers = {
                 return;
             }
         },
-        remove: async function (parent, args, {GenericFile}){
-            try{
-                var info = jwt.verify(args.token,secret);
-                var p = usersPath + args.path;
-                var stats = fs.statSync(p);
-                if(stats.isDirectory()){
-                    fs.rmdirSync(p);
+        remove: async function (parent, args, { GenericFile }) {
+            return await new Promise((resolve, reject) => {
+                try {
+                    var info = jwt.verify(args.token, secret);
+                    var p = usersPath + "/" + info.Username + "/" + args.path+"/"+args.name;
+                    var stats = fs.statSync(p);
+                    if (stats.isDirectory()) {
+                        fs.rmdirSync(p);
+                    }
+                    else if (stats.isFile()) {
+                        fs.unlinkSync(p);
+                    }
+                    GenericFile.remove({ userRelativePath: args.path, name: args.name }).then(() => resolve(true)).catch(() => resolve(false));
                 }
-                else if(stats.isFile()){
-                    fs.unlinkSync(p);
+                catch (e) {
+                    throw(e);
+                    resolve(false);
                 }
-                resolve(true);
-            }
-            catch(e){
-                resolve(false);
-            }
+            })
         }
     }
 }
