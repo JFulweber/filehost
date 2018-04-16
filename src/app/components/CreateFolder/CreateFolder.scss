@@ -1,0 +1,9 @@
+@import '../../palette.scss';
+
+.container{
+    flex-shrink: 10;
+    .button{
+        font-family: 'Ropa Sans';
+        color: $color4;
+    }
+}
