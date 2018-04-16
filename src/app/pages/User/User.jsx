@@ -36,7 +36,7 @@ export default class User extends React.Component {
                             <h1 className={styles.type}>Type</h1>
                         </div>
                         <div className={styles.fileCont}>
-                            <FileList dirChanged={this.dirChanged} needsRefresh={this.state.needsRefresh} doneUpdating={this.doneUpdating} />
+                            <FileList dirChanged={this.dirChanged} needsRefresh={this.state.needsRefresh} doneUpdating={this.doneUpdating} updateItems={this.updateItems} />
                         </div>
                     </div>
                 </div>

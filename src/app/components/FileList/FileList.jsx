@@ -70,7 +70,7 @@ export default class FileList extends React.Component {
                             type = file.name.substring(file.name.lastIndexOf('.')+1);
                         }
                     }
-                    _files.push(<FileElement fileName={file.name.substring(0,file.name.lastIndexOf('.')==-1?file.name.length:file.name.lastIndexOf('.'))} fileSize={size} type={type} key={++i} path={this.state.dir} rawName={file.name} iconType={file.type} />);
+                    _files.push(<FileElement fileName={file.name.substring(0,file.name.lastIndexOf('.')==-1?file.name.length:file.name.lastIndexOf('.'))} fileSize={size} type={type} key={++i} path={this.state.dir} rawName={file.name} iconType={file.type} updateItems ={this.props.updateItems} />);
                 }
             });
             if (this.state.dir != '') {

@@ -1,6 +1,14 @@
 import React from 'react';
 import styles from './FileTools.scss';
 import Uploader from '../Uploader/Uploader.jsx';
+import {createApolloFetch} from 'apollo-fetch';
+
+const uri = 'http://localhost:3000/graphql';
+const apolloFetch = createApolloFetch({ uri });
+
+apolloFetch.use(({ request, options }, next) => {
+    next();
+});
 
 export default class FileTools extends React.Component {
 
@@ -20,7 +28,15 @@ export default class FileTools extends React.Component {
     }
 
     deleteFile(){
-        alert('lol fix later')
+        console.log(this.props.updateItems);
+        var query = `mutation{
+            remove(path:\"${this.props.path}\" token:\"${localStorage.getItem("token")}\" name:\"${this.props.rawName}\")
+        }`;
+        apolloFetch({ query }).then((res) => {
+            if(res.data.remove===true){
+                this.props.updateItems();
+            }
+        });
     }
 
     render(){
