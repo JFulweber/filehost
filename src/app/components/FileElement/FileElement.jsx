@@ -11,7 +11,7 @@ export default class FileElement extends React.Component {
         this.onClick = this.onClick.bind(this);
         this.getIcon = this.getIcon.bind(this);
         this.state.icon = 'far fa-file';
-        this.state.needsIcosn = true;
+        this.state.needsIcons = 0;
     }
 
     componentDidMount() {
@@ -26,7 +26,6 @@ export default class FileElement extends React.Component {
         var mime = this.props.iconType;
         var type = mime.split('/')[0];
         var spec = mime.split('/')[1]
-        console.log(mime + "---" + this.props.fileName + "." + this.props.type);
         switch (type) {
             case "audio":
                 this.setState({ icon: 'far fa-file-audio' });
@@ -125,12 +124,12 @@ export default class FileElement extends React.Component {
                 this.setState({ icon: 'far fa-file' });
                 break;
         }
-        this.setState({ needsIcons: false });
+        this.setState({ needsIcons: this.state.needsIcons+1 });
     }
 
     render() {
-        if (this.state.needsIcons) {
-            thos.getIcon();
+        if (this.state.needsIcons < 2) {
+            this.getIcon();
         }
         return (
             <div className={styles.file}>
@@ -144,7 +143,7 @@ export default class FileElement extends React.Component {
                     <p className={styles.size}>{this.props.fileSize}</p>
                 </div>
                 <div className={styles.toolCont}>
-                    <FileTools path={this.props.path} rawName={this.props.rawName} />
+                    <FileTools path={this.props.path} rawName={this.props.rawName} updateItems={this.props.updateItems} />
                 </div>
                 <div className={styles.typeCont}>
                     <p className={styles.type}>{this.props.type}</p>

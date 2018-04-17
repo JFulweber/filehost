@@ -6,6 +6,7 @@ import FileList from '../../components/FileList/FileList.jsx';
 import FileTools from '../../components/FileTools/FileTools.jsx';
 import Uploader from '../../components/Uploader/Uploader.jsx';
 import FolderStructure from '../../components/FolderStructure/FolderStructure.jsx';
+import CreateFolder from '../../components/CreateFolder/CreateFolder.jsx';
 import p from '../../palette.scss';
 
 export default class User extends React.Component {
@@ -23,6 +24,7 @@ export default class User extends React.Component {
                 <div className={styles.container}>
                     <div className={styles.sideBar}>
                         <div className={styles.folderStruc}>
+                            <CreateFolder />
                             <FolderStructure />
                         </div>
                         <div className={styles.upload}>
@@ -36,7 +38,7 @@ export default class User extends React.Component {
                             <h1 className={styles.type}>Type</h1>
                         </div>
                         <div className={styles.fileCont}>
-                            <FileList dirChanged={this.dirChanged} needsRefresh={this.state.needsRefresh} doneUpdating={this.doneUpdating} />
+                            <FileList dirChanged={this.dirChanged} needsRefresh={this.state.needsRefresh} doneUpdating={this.doneUpdating} updateItems={this.updateItems} />
                         </div>
                     </div>
                 </div>

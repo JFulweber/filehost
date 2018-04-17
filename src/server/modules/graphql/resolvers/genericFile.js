@@ -1,4 +1,4 @@
-var mongoose = mongo;
+var { Query } = require('mongoose');
 var fs = require('fs');
 var jwt = require('jsonwebtoken');
 var secret = require('../../../secret');
@@ -64,18 +64,15 @@ var resolvers = {
             return await new Promise((resolve, reject) => {
                 try {
                     var info = jwt.verify(args.token, secret);
-                    var p = usersPath + "/" + info.Username + "/" + args.path+"/"+args.name;
-                    var stats = fs.statSync(p);
-                    if (stats.isDirectory()) {
-                        fs.rmdirSync(p);
-                    }
-                    else if (stats.isFile()) {
-                        fs.unlinkSync(p);
-                    }
-                    GenericFile.remove({ userRelativePath: args.path, name: args.name }).then(() => resolve(true)).catch(() => resolve(false));
+                    GenericFile.find({ userRelativePath: args.path === '' ? '/' : args.path, name: args.name }).then((res) => {
+                        res.forEach(element => {
+                            fs.unlinkSync(_path.resolve(__dirname+`../../../../../../users/${element.uploader}/${element.path===undefined?'/':element.path}/${element.name}`));
+                            element.remove().then(() => resolve(true));
+                        });
+                    })
                 }
                 catch (e) {
-                    throw(e);
+                    throw (e);
                     resolve(false);
                 }
             })
