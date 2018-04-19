@@ -2,6 +2,7 @@ var { Query } = require('mongoose');
 var fs = require('fs');
 var jwt = require('jsonwebtoken');
 var secret = require('../../../secret');
+var hasher = require('../../hasher')
 var _path = require('path')
 var usersPath = __dirname + "../../../../../../users/";
 var GenericFile = require('../../mongo/schemas/data/genericFile');
@@ -23,6 +24,10 @@ async function removeSubitems(username, path, name) {
             }
         })
     })
+}
+
+async function checkFolderName(name, username, path){
+    GenericFile.find({uploader: username, type:"dir", path: path, })
 }
 
 var resolvers = {
@@ -73,7 +78,13 @@ var resolvers = {
                         uploader: info.Username,
                         type: "dir"
                     })
-                    folder.save().then((e) => { console.log(e); resolve(true) }).catch((e) => resolve(false));
+                    GenericFile.find({ userRelativePath: args.path, name: args.name, uploader: info.Username }).then((res) => {
+                        if (res != null) {
+                            folder.name = folder.name + "_";
+                        }
+                        folder.save().then((e) => { console.log(e); resolve(true) }).catch((e) => resolve(false));
+                    })
+
                 }
                 catch (e) {
                     throw (e);
@@ -115,6 +126,20 @@ var resolvers = {
                     resolve(false);
                 }
             })
+        },
+        generateLink: async function(parent, args, {GenericFile}){
+            return await new Promise((resolve,reject)=>{
+                try{
+                    var info = jwt.verify(args.token, secret);
+                    GenericFile.findOne({uploader:info.Username, path: args.path, name: args.name}).then((file)=>{
+                        var url = hasher.generate(file.name, 16);
+                        file.links.push(url);
+                    })
+                }
+                catch(e){
+                    resolve(false);
+                }
+            });
         }
     }
 }
