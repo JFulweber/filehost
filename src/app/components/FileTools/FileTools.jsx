@@ -28,15 +28,20 @@ export default class FileTools extends React.Component {
     }
 
     deleteFile(){
-        console.log(this.props.updateItems);
+        console.log("clicked");
         var query = `mutation{
             remove(path:\"${this.props.path}\" token:\"${localStorage.getItem("token")}\" name:\"${this.props.rawName}\")
         }`;
         apolloFetch({ query }).then((res) => {
+            console.log(res);
+            console.log('hello???')
             if(res.data.remove===true){
                 this.props.updateItems();
             }
-        });
+        }).catch((e)=>{
+            console.log(e);
+            console.log('error^^^')
+        })
     }
 
     render(){

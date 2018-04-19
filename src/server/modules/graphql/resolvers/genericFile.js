@@ -16,8 +16,7 @@ var resolvers = {
                     info = jwt.verify(args.token, secret);
                     // goes from this files directory to the root of the workspace directory
                     //var gpath = _path.resolve(usersPath + info.Username + '/' + args.path);
-                    GenericFile.find({ uploader: info.Username, userRelativePath: '/' + args.path }).then((files) => {
-                        console.log(files);
+                    GenericFile.find({ uploader: info.Username, userRelativePath: args.path == '' ? '/' : args.path }).then((files) => {
                         resolve(files);
                     })
                 }
@@ -49,12 +48,12 @@ var resolvers = {
                     var info = jwt.verify(args.token, secret);
                     var folder = new GenericFile({
                         absolutePath: null,
-                        userRelativePath: args.path=='undefined'?'/':args.path,
+                        userRelativePath: args.path == 'undefined' ? '/' : args.path,
                         name: args.name,
                         uploader: info.Username,
                         type: "dir"
                     })
-                    folder.save().then((e) => {console.log(e);resolve(true)}).catch((e) => resolve(false));
+                    folder.save().then((e) => { console.log(e); resolve(true) }).catch((e) => resolve(false));
                 }
                 catch (e) {
                     throw (e);
@@ -64,13 +63,41 @@ var resolvers = {
             });
         },
         remove: async function (parent, args, { GenericFile }) {
+            console.log('getting remove??');
             return await new Promise((resolve, reject) => {
                 try {
                     var info = jwt.verify(args.token, secret);
+                    if (args.path == 'undefined') args.path = '';
                     GenericFile.find({ userRelativePath: args.path === '' ? '/' : args.path, name: args.name }).then((res) => {
                         res.forEach(element => {
-                            fs.unlinkSync(_path.resolve(__dirname + `../../../../../../users/${element.uploader}/${element.path === undefined ? '/' : element.path}/${element.name}`));
-                            element.remove().then(() => resolve(true));
+                            if (element.type == 'dir') {
+                                console.log('yes element is dir');
+                                GenericFile.find({ userRelativePath: new RegExp(`/^\/${element.userRelativePath}\/${element.name}\//`,'i')}).then((containedFiles) => {
+                                    if (containedFiles == undefined) {
+                                        element.remove().then(() => resolve(true));
+                                    }
+                                    console.log(containedFiles);
+                                    console.log('this is contained');
+                                    containedFiles.forEach(contained => {
+                                        fs.unlinkSync(_path.resolve(__dirname + `../../../../../../users/${contained.uploader}/${contained.name}`));
+                                        contained.remove();
+                                    })
+                                    element.remove().then(()=>resolve(true));
+                                })
+                                //element.remove();
+                            }
+                            else {
+                                try {
+                                    fs.unlinkSync(_path.resolve(__dirname + `../../../../../../users/${element.uploader}/${element.path === undefined ? '/' : element.path}/${element.name}`));
+                                    element.remove().then(() => resolve(true));
+                                }
+                                catch(e){
+                                    if(e.code=='ENOENT'){
+                                        element.remove().then(()=>resolve(true));
+                                    }
+                                    else resolve(false);
+                                }
+                            }
                         });
                     })
                 }
