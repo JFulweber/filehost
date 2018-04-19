@@ -1,9 +1,24 @@
 @import '../../palette.scss';
 
 .container{
+    margin: auto;
     flex-shrink: 10;
     .button{
+        padding: 10px;
+        border: solid;
+        transition: all ease-in-out .4s;
+        background-image: linear-gradient(to right, $color1 50%, $color5 50%);
+        background-size: 201% 100%;
+        background-repeat: no-repeat;
+        background-position: bottom left;
+        border-color: $color1;
         font-family: 'Ropa Sans';
         color: $color4;
+        &:hover{
+            border-color:$color4;
+            background-position: bottom right;
+            color: $color3;
+        }
     }
+    
 }

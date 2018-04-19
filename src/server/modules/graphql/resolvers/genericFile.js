@@ -17,6 +17,7 @@ var resolvers = {
                     // goes from this files directory to the root of the workspace directory
                     //var gpath = _path.resolve(usersPath + info.Username + '/' + args.path);
                     GenericFile.find({ uploader: info.Username, userRelativePath: '/' + args.path }).then((files) => {
+                        console.log(files);
                         resolve(files);
                     })
                 }
@@ -43,22 +44,24 @@ var resolvers = {
         },
         addFolder: async function (parent, args, { GenericFile }) {
             // path is in terms from user root directory
-            try {
-                var info = jwt.verify(args.token, secret);
-                var folder = new GenericFile({
-                    absolutePath: null,
-                    userRelativePath: args.path,
-                    name: args.name,
-                    uploader: info.Username,
-                    type: "dir"
-                })
-                folder.save().then(() => resolve(true)).catch((e) => resolve(false));
-            }
-            catch (e) {
-                throw (e);
-                resolve(false);
-                return;
-            }
+            return await new Promise((resolve, reject) => {
+                try {
+                    var info = jwt.verify(args.token, secret);
+                    var folder = new GenericFile({
+                        absolutePath: null,
+                        userRelativePath: args.path=='undefined'?'/':args.path,
+                        name: args.name,
+                        uploader: info.Username,
+                        type: "dir"
+                    })
+                    folder.save().then((e) => {console.log(e);resolve(true)}).catch((e) => resolve(false));
+                }
+                catch (e) {
+                    throw (e);
+                    resolve(false);
+                    return;
+                }
+            });
         },
         remove: async function (parent, args, { GenericFile }) {
             return await new Promise((resolve, reject) => {
@@ -66,7 +69,7 @@ var resolvers = {
                     var info = jwt.verify(args.token, secret);
                     GenericFile.find({ userRelativePath: args.path === '' ? '/' : args.path, name: args.name }).then((res) => {
                         res.forEach(element => {
-                            fs.unlinkSync(_path.resolve(__dirname+`../../../../../../users/${element.uploader}/${element.path===undefined?'/':element.path}/${element.name}`));
+                            fs.unlinkSync(_path.resolve(__dirname + `../../../../../../users/${element.uploader}/${element.path === undefined ? '/' : element.path}/${element.name}`));
                             element.remove().then(() => resolve(true));
                         });
                     })

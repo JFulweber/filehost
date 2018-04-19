@@ -40,6 +40,7 @@ export default class FileList extends React.Component {
         apolloFetch({ query }).then((res) => {
             var i = 0;
             var files = res.data.files;
+            console.log(files);
             files.sort((a,b)=>{return a.name.localeCompare(b.name)});
             files.forEach(file => {
                 var reg = new RegExp("(?!.*?\/).*");
