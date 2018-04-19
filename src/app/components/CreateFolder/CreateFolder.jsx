@@ -16,11 +16,12 @@ export default class CreateFolder extends React.Component{
 
     onClick(){
         var query = `mutation{
-            addFolder(path:"${this.props.dir}" token:"${localStorage.getItem("token")}" name:"${this.state.name}")
+            addFolder(path:"${this.props.dir}" token:"${localStorage.getItem("token")}" name:"${this.state.name.trim()==''?undefined:this.state.name}")
         }`;
         apolloFetch({ query }).then((res) => {
-            if(res.data == true){
-                console.log(res);
+            if(res.data.addFolder == true){
+                this.props.updateItems();
+                this.setState({name:''});
             }else{
                 console.log(res);
             }
@@ -30,7 +31,7 @@ export default class CreateFolder extends React.Component{
     render(){
         return(
             <div className={styles.container}>
-                <input type="text" value={this.state.name} onChange={(e)=>{this.setState({name:e.target.value})}}/>
+                <input type="text" value={this.state.name} onChange={(e)=>{this.setState({name:e.target.value})}} placeholder="Don't name two folders the same thing thx"/>
                 <div className={styles.button} onMouseDown={this.onClick}>
                     <p>New Folder</p>
                 </div>

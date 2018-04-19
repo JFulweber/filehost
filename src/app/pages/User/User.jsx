@@ -24,7 +24,7 @@ export default class User extends React.Component {
                 <div className={styles.container}>
                     <div className={styles.sideBar}>
                         <div className={styles.folderStruc}>
-                            <CreateFolder />
+                            <CreateFolder updateItems={this.updateItems}/>
                             <FolderStructure />
                         </div>
                         <div className={styles.upload}>

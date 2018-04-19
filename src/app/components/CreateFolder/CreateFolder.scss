@@ -3,6 +3,10 @@
 .container{
     margin: auto;
     flex-shrink: 10;
+    width: 100%;
+    input{
+        width:100%;
+    }
     .button{
         padding: 10px;
         border: solid;

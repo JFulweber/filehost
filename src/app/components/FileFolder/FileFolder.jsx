@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './FileFolder.scss';
+import FileTools from '../FileTools/FileTools.jsx';
 
 export default class FileFolder extends React.Component {
     constructor(props) {
@@ -11,13 +12,14 @@ export default class FileFolder extends React.Component {
 
     render() {
         return (
-            <div className={styles.file} onClick={this.onClick}>
+            <div className={styles.file}>
                 <div className={styles.icon}>
                     <i className="fas fa-folder"/>
                 </div>
-                <div className={styles.nameCont}>
+                <div className={styles.nameCont} onClick={this.onClick}>
                     <p className={styles.name}>{this.props.folderName}</p>
                 </div>
+                {this.props.folderName!=='..'?<FileTools path={this.props.path} rawName={this.props.folderName} updateItems={this.props.updateItems} />:<div/>}
             </div>
         )
     }
