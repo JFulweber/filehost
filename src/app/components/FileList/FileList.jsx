@@ -47,7 +47,7 @@ export default class FileList extends React.Component {
                 var name = reg.exec(file.path)[0];
                 var rawName = name;
                 if (file.type == 'dir') {
-                    _folders.push(<FileFolder folderName={file.name} clicked={this.elementClicked} key={++i} />);
+                    _folders.push(<FileFolder folderName={file.name} clicked={this.elementClicked} key={++i} updateItems={this.props.updateItems}/>);
                 } else {
                     var size = 0;
                     if (file.fileSize < 1000) {

@@ -4,7 +4,27 @@ var jwt = require('jsonwebtoken');
 var secret = require('../../../secret');
 var _path = require('path')
 var usersPath = __dirname + "../../../../../../users/";
+var GenericFile = require('../../mongo/schemas/data/genericFile');
+
 // TODO: make secret file
+
+async function removeSubitems(username, path, name) {
+    // items in this folder path should all removed - all folders within it should have theirs removed also
+    console.log(path + name + '/');
+    GenericFile.find({ uploader: username, userRelativePath: path + name }).then((files) => {
+        console.log(files)
+        files.forEach((e) => {
+            if (e.type == 'dir') {
+                removeSubitems(`${e.userRelativePath}/${e.name}/`).then(() => e.remove());
+            }
+            else {
+                fs.unlinkSync(_path.resolve(`${usersPath}${username}/${e.name}`));
+                e.remove();
+            }
+        })
+    })
+}
+
 var resolvers = {
     Query: {
         files: async function (parent, args, { GenericFile }) {
@@ -63,7 +83,6 @@ var resolvers = {
             });
         },
         remove: async function (parent, args, { GenericFile }) {
-            console.log('getting remove??');
             return await new Promise((resolve, reject) => {
                 try {
                     var info = jwt.verify(args.token, secret);
@@ -71,29 +90,19 @@ var resolvers = {
                     GenericFile.find({ userRelativePath: args.path === '' ? '/' : args.path, name: args.name }).then((res) => {
                         res.forEach(element => {
                             if (element.type == 'dir') {
-                                console.log('yes element is dir');
-                                GenericFile.find({ userRelativePath: new RegExp(`/^\/${element.userRelativePath}\/${element.name}\//`,'i')}).then((containedFiles) => {
-                                    if (containedFiles == undefined) {
-                                        element.remove().then(() => resolve(true));
-                                    }
-                                    console.log(containedFiles);
-                                    console.log('this is contained');
-                                    containedFiles.forEach(contained => {
-                                        fs.unlinkSync(_path.resolve(__dirname + `../../../../../../users/${contained.uploader}/${contained.name}`));
-                                        contained.remove();
-                                    })
-                                    element.remove().then(()=>resolve(true));
-                                })
-                                //element.remove();
+                                removeSubitems(element.uploader, element.userRelativePath, element.name).then(() => {
+                                    element.remove();
+                                    resolve(true);
+                                });
                             }
                             else {
                                 try {
                                     fs.unlinkSync(_path.resolve(__dirname + `../../../../../../users/${element.uploader}/${element.path === undefined ? '/' : element.path}/${element.name}`));
                                     element.remove().then(() => resolve(true));
                                 }
-                                catch(e){
-                                    if(e.code=='ENOENT'){
-                                        element.remove().then(()=>resolve(true));
+                                catch (e) {
+                                    if (e.code == 'ENOENT') {
+                                        element.remove().then(() => resolve(true));
                                     }
                                     else resolve(false);
                                 }
