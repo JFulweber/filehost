@@ -94,14 +94,16 @@ class LoginComponent extends React.Component {
     }
 
     render() {
+        console.log();
         if (this.state.username !== null && this.state.username !== undefined && this.state.username !== "") {
             return (<Redirect to={`/user/${this.state.username}`} />);
         }
-        else if (this.state.username === null) {
+        else if (this.state["username"]==null) {
             return (<Title title="Wrong username or password" />);
         }
         else if (this.state.username === undefined) {
-            return (<Title title="You haven't been approved yet, sorry!" className={styles.notApproved} />);
+
+            return (<Title title={`You haven't been approved yet, sorry!${this.state.username}`} className={styles.notApproved} />);
         }
         else {
             return (<Title title="Logging In..." className={styles.redirect} />);
