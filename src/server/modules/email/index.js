@@ -3,7 +3,7 @@ var creds = require('./credentials');
 var smtpTransport = require('nodemailer-smtp-transport');
 var realEmails ='adairf625@gmail.com, myleshorn@gmail.com';
 var devEmails = 'fulwejam000@mysbisd.org, hornfre000@mysbisd.org';
-var urlPrefix = 'http://localhost:3000/registerUser/';
+var urlPrefix = 'http://73.166.172.242/registerUser/';
 var uuid = require('uuid');
 
 var transporter = nodemailer.createTransport(smtpTransport({

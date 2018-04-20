@@ -19,7 +19,7 @@ export default class FileElement extends React.Component {
     }
 
     onClick(e) {
-        window.open(`http://localhost:3000/filedl?token=${localStorage.getItem('token')}&path=${this.props.path}&rawName=${this.props.rawName}`) // <-- TRIGGERS FILE SAVE PROMPT
+        window.open(`http://73.166.172.242/filedl?token=${localStorage.getItem('token')}&path=${this.props.path}&rawName=${this.props.rawName}`) // <-- TRIGGERS FILE SAVE PROMPT
     }
 
     getIcon() {

@@ -6,6 +6,7 @@ var hasher = require('../../hasher')
 var _path = require('path')
 var usersPath = __dirname + "../../../../../../users/";
 var GenericFile = require('../../mongo/schemas/data/genericFile');
+var uuid = require('uuid');
 
 // TODO: make secret file
 
@@ -131,9 +132,12 @@ var resolvers = {
             return await new Promise((resolve,reject)=>{
                 try{
                     var info = jwt.verify(args.token, secret);
-                    GenericFile.findOne({uploader:info.Username, path: args.path, name: args.name}).then((file)=>{
-                        var url = hasher.generate(file.name, 16);
-                        file.links.push(url);
+                    console.log(args);
+                    GenericFile.findOne({uploader:info.Username, userRelativePath: args.path==''?'/':args.path, name: args.name}).then((file)=>{
+                        console.log(file);
+                        var url = uuid.v4(3);
+                        file.sharing_links.push(url);
+                        file.save().then((res)=>resolve(url));
                     })
                 }
                 catch(e){

@@ -16,7 +16,7 @@ export default class Uploader extends React.Component {
 
     onDrop(e) {
         e.preventDefault();
-        console.log(this.props.dir);
+        //(this.props.dir);
 
         
         for (var i = 0; i < e.dataTransfer.files.length; i++) {
@@ -34,7 +34,7 @@ export default class Uploader extends React.Component {
                     this.props.updateItems();
                 }
             };
-            xhr.open('POST', 'http://localhost:3000/upload', true);
+            xhr.open('POST', 'http://73.166.172.242/upload', true);
             xhr.upload.addEventListener('progress', (e) => {
                 let progress = 0;
                 if (e.total !== 0) {

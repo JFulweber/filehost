@@ -6,7 +6,7 @@ import { createApolloFetch } from 'apollo-fetch';
 import Dropzone from 'react-dropzone';
 import Promise from 'bluebird';
 
-const uri = 'http://localhost:3000/graphql';
+const uri = 'http://73.166.172.242/graphql';
 const apolloFetch = createApolloFetch({ uri });
 
 apolloFetch.use(({ request, options }, next) => {
@@ -40,7 +40,7 @@ export default class FileList extends React.Component {
         apolloFetch({ query }).then((res) => {
             var i = 0;
             var files = res.data.files;
-            console.log(files);
+            //(files);
             files.sort((a,b)=>{return a.name.localeCompare(b.name)});
             files.forEach(file => {
                 var reg = new RegExp("(?!.*?\/).*");

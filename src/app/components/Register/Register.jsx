@@ -6,7 +6,7 @@ import { graphql } from 'react-apollo';
 import { createApolloFetch } from 'apollo-fetch';
 import p from '../../palette.scss'; 
 
-const uri = 'http://localhost:3000/graphql';
+const uri = 'http://73.166.172.242/graphql';
 const apolloFetch = createApolloFetch({ uri });
 
 apolloFetch.use(({ request, options }, next) => {

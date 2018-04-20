@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './CreateFolder.scss';
 import {createApolloFetch} from 'apollo-fetch';
 
-const uri = 'http://localhost:3000/graphql';
+const uri = 'http://73.166.172.242/graphql';
 const apolloFetch = createApolloFetch({ uri });
 
 export default class CreateFolder extends React.Component{
@@ -23,7 +23,7 @@ export default class CreateFolder extends React.Component{
                 this.props.updateItems();
                 this.setState({name:''});
             }else{
-                console.log(res);
+                //(res);
             }
         });
     }
