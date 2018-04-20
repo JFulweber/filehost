@@ -10,7 +10,7 @@ export default class CreateFolder extends React.Component{
     constructor(props){
         super(props);
         this.state = {};
-        this.state 
+        this.state.name = ''; 
         this.onClick = this.onClick.bind(this);
     }
 

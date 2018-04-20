@@ -29,7 +29,7 @@ export default class FileTools extends React.Component {
         }`;
         apolloFetch({query}).then((res)=>{
             if(res.data.generateLink){
-                alert(`http:/73.166.172.242/f/${res.data.generateLink}`);
+                alert(`http://73.166.172.242/f/${res.data.generateLink}`);
             }
         })
     }

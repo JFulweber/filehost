@@ -128,7 +128,7 @@ app.get('/registerUser/:hash', function(req,res){
 app.get('/f/:hash', function(req,res){
     
     GenericFile.findOne({sharing_links:{$in: [req.params.hash]}}).then((result)=>{
-        if(result.type==dir){
+        if(result.type=='dir'){
             res.send("<p> sorry, can't share folders yet </p>")
         }
         var _path = path.resolve(__dirname + `../../../users/${result.uploader}/${result.name}`);
