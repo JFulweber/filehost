@@ -5,8 +5,9 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import { createApolloFetch } from 'apollo-fetch';
 import p from '../../palette.scss'; 
+import {IP} from '../../const';
 
-const uri = 'http://73.166.172.242/graphql';
+const uri = `${IP}/graphql`;
 const apolloFetch = createApolloFetch({ uri });
 
 apolloFetch.use(({ request, options }, next) => {

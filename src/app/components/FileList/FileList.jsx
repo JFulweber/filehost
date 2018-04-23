@@ -5,9 +5,9 @@ import FileFolder from '../../components/FileFolder/FileFolder.jsx';
 import { createApolloFetch } from 'apollo-fetch';
 import Dropzone from 'react-dropzone';
 import Promise from 'bluebird';
+import {IP} from '../../const';
 
-const uri = 'http://73.166.172.242/graphql';
-const apolloFetch = createApolloFetch({ uri });
+const apolloFetch = createApolloFetch({ uri:IP+'/graphql' });
 
 apolloFetch.use(({ request, options }, next) => {
     next();

@@ -1,9 +1,8 @@
 import React from 'react';
 import styles from './CreateFolder.scss';
 import {createApolloFetch} from 'apollo-fetch';
-
-const uri = 'http://73.166.172.242/graphql';
-const apolloFetch = createApolloFetch({ uri });
+import {IP} from '../../const';
+const apolloFetch = createApolloFetch( {uri:`${IP}/graphql`} );
 
 export default class CreateFolder extends React.Component{
     
@@ -24,6 +23,7 @@ export default class CreateFolder extends React.Component{
                 this.setState({name:''});
             }else{
                 //(res);
+                console.log(res);
             }
         });
     }

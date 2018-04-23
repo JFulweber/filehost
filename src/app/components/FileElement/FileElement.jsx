@@ -1,7 +1,7 @@
 import React from 'react';
 import FileTools from '../../components/FileTools/FileTools.jsx';
 import styles from './FileElement.scss';
-
+import {IP} from '../../const';
 
 export default class FileElement extends React.Component {
     constructor(props) {
@@ -19,7 +19,7 @@ export default class FileElement extends React.Component {
     }
 
     onClick(e) {
-        window.open(`http://73.166.172.242/filedl?token=${localStorage.getItem('token')}&path=${this.props.path}&rawName=${this.props.rawName}`) // <-- TRIGGERS FILE SAVE PROMPT
+        window.open(`${IP}/filedl?token=${localStorage.getItem('token')}&path=${this.props.path}&rawName=${this.props.rawName}`) // <-- TRIGGERS FILE SAVE PROMPT
     }
 
     getIcon() {

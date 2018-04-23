@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './FileTools.scss';
 import Uploader from '../Uploader/Uploader.jsx';
 import {createApolloFetch} from 'apollo-fetch';
+import {IP} from '../../const';
 
-const uri = 'http://73.166.172.242/graphql';
-const apolloFetch = createApolloFetch({ uri });
+const apolloFetch = createApolloFetch({ uri: IP+'/graphql' });
 
 apolloFetch.use(({ request, options }, next) => {
     next();
@@ -20,7 +20,7 @@ export default class FileTools extends React.Component {
     }
 
     downloadFile(e) {
-        window.open(`http://73.166.172.242/filedl?token=${localStorage.getItem('token')}&path=${this.props.path}&rawName=${this.props.rawName}`);
+        window.open(`${IP}/filedl?token=${localStorage.getItem('token')}&path=${this.props.path}&rawName=${this.props.rawName}`);
     }
 
     generateLink(e){
@@ -29,7 +29,7 @@ export default class FileTools extends React.Component {
         }`;
         apolloFetch({query}).then((res)=>{
             if(res.data.generateLink){
-                alert(`http://73.166.172.242/f/${res.data.generateLink}`);
+                alert(`${IP}/f/${res.data.generateLink}`);
             }
         })
     }

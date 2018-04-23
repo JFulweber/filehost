@@ -11,9 +11,10 @@ import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import {IP} from './const';
 
 const createClient = (initialState = {}) => new ApolloClient({
-    link: new HttpLink({ uri: "http://73.166.172.242/graphql" }),
+    link: new HttpLink({ uri: `${IP}/graphql` }),
     cache: new InMemoryCache().restore(initialState)
 });
 

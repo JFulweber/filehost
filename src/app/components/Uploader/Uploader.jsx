@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Uploader.scss';
+import {IP} from '../../const';
 
 export default class Uploader extends React.Component {
 
@@ -34,7 +35,7 @@ export default class Uploader extends React.Component {
                     this.props.updateItems();
                 }
             };
-            xhr.open('POST', 'http://73.166.172.242/upload', true);
+            xhr.open('POST', `${IP}/upload`, true);
             xhr.upload.addEventListener('progress', (e) => {
                 let progress = 0;
                 if (e.total !== 0) {
