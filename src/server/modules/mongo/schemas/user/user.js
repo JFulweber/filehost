@@ -12,6 +12,10 @@ let User = new Schema({
     creationDate: !Date,
     approved: {
         type: Boolean, default: false
+    }, 
+    apiKey: {
+        type: String,
+        default: function(){ return `${uuid.v4()}`}
     }
 })
 

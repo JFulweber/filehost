@@ -2,11 +2,14 @@ var mongoose = mongo;
 var hasher = require('../../hasher');
 var verify = hasher.verify;
 var email = require('../../email');
+var jwt = require('jsonwebtoken');
+var secret = require('../../../secret');
+
 var resolvers = {
     Query: {
-        users: async function (parent, args, {User}){
-            return await new Promise((resolve,reject)=>{
-                User.find({}).then(res=>{
+        users: async function (parent, args, { User }) {
+            return await new Promise((resolve, reject) => {
+                User.find({}).then(res => {
                     resolve(res);
                 })
             })
@@ -17,17 +20,33 @@ var resolvers = {
             return await new Promise((resolve, reject) => {
                 User.findOne({ username: args.UserID }).then(result => {
                     resolve(result);
-                }).catch((err)=>{
+                }).catch((err) => {
                     reject(err);
                 });
-            }) 
+            })
+        },
+        getApiKey: async function (parent, args, { User }) {
+            return await new Promise((resolve, reject) => {
+                try {
+                    var info = jwt.verify(args.token, secret);
+                    var username = info.Username;
+                    User.findOne({ username: username }).then((u) => {
+                        if (u === null || u === undefined) {
+                            resolve('null');
+                        }
+                        else resolve(u.apiKey);
+                    })
+                } catch (e) {
+                    resolve('error');
+                }
+            });
         }
     },
     Mutation: {
-        register: async function (parent, args, {User}) {
+        register: async function (parent, args, { User }) {
             return await new Promise((resolve, reject) => {
-                User.findOne({ email: args.email }).then((user)=>{
-                    if(user){
+                User.findOne({ email: args.email }).then((user) => {
+                    if (user) {
                         resolve(false);
                         return;
                     }
@@ -35,39 +54,39 @@ var resolvers = {
                     userargs.creationDate = Date.now();
                     userargs.hashedPass = hasher.generate(args.password);
                     var myUser = new User(userargs);
-                    myUser.save().then(()=>{
+                    myUser.save().then(() => {
                         resolve(true)
-                    }).catch((err)=>{
+                    }).catch((err) => {
                         reject(err);
                     })
                     email.register(myUser);
-                }).catch((err)=>{
+                }).catch((err) => {
                     reject(err);
                 })
             });
         },
-        changeInfo: async function (parent,args,{User}){
-            return await new Promise((resolve,reject)=>{
-                if(!args.email || !args.password){
+        changeInfo: async function (parent, args, { User }) {
+            return await new Promise((resolve, reject) => {
+                if (!args.email || !args.password) {
                     resolve(false);
                     return;
                 }
-                User.findOne({email:args.email}).then(user=>{
+                User.findOne({ email: args.email }).then(user => {
                     var verifyRes = verify(args.pass, user.hashedPass);
-                    if(verifyRes == true){
-                        if(args.newPass){
-                            user.hashedPass =  hasher.generate(args.newPass);
+                    if (verifyRes == true) {
+                        if (args.newPass) {
+                            user.hashedPass = hasher.generate(args.newPass);
                         }
-                        if(args.newEmail){
+                        if (args.newEmail) {
                             user.email = args.newEmail;
                         }
 
                     }
-                    else{
+                    else {
                         resolve(false);
                         return;
                     }
-                    user.save().then(()=>resolve(true));
+                    user.save().then(() => resolve(true));
                 })
             })
         },

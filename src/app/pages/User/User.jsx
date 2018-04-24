@@ -8,6 +8,10 @@ import Uploader from '../../components/Uploader/Uploader.jsx';
 import FolderStructure from '../../components/FolderStructure/FolderStructure.jsx';
 import CreateFolder from '../../components/CreateFolder/CreateFolder.jsx';
 import p from '../../palette.scss';
+import {createApolloFetch} from 'apollo-fetch';
+import {IP} from '../../const';
+import gql from 'graphql-tag';
+const apolloFetch = createApolloFetch( {uri:`${IP}/graphql`} );
 
 export default class User extends React.Component {
     constructor(props) {
@@ -25,6 +29,17 @@ export default class User extends React.Component {
                     <div className={styles.sideBar}>
                         <div className={styles.folderStruc}>
                             <CreateFolder updateItems={this.updateItems}/>
+                            <input type="button" value="Third Party API Key" onClick={(e)=>{
+                                e.preventDefault();
+                                var query = `query{
+                                    getApiKey(token:"${localStorage.getItem('token')}")
+                                }`
+                                apolloFetch({query}).then((res)=>{
+                                    if(res.data.getApiKey !== 'null' || res.data.getApiKey !== 'undefined'){
+                                        alert(`Do NOT share your API key with anyone. Use it for third party use: ${res.data.getApiKey}`)
+                                    }
+                                })
+                            }}/>
                             <FolderStructure />
                         </div>
                         <div className={styles.upload}>
