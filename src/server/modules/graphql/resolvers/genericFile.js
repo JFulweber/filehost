@@ -135,7 +135,7 @@ var resolvers = {
                     console.log(args);
                     GenericFile.findOne({uploader:info.Username, userRelativePath: args.path==''?'/':args.path, name: args.name}).then((file)=>{
                         console.log(file);
-                        var url = uuid.v4(3);
+                        var url = uuid.v4();
                         file.sharing_links.push(url);
                         file.save().then((res)=>resolve(url));
                     })

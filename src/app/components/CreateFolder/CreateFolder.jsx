@@ -21,9 +21,8 @@ export default class CreateFolder extends React.Component{
             if(res.data.addFolder == true){
                 this.props.updateItems();
                 this.setState({name:''});
-            }else{
-                //(res);
-                console.log(res);
+            }else{ 
+                
             }
         });
     }

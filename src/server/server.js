@@ -15,6 +15,7 @@ global.mongo = mongoose.createConnection('mongodb://localhost:27017');
 var express = require('express');
 
 var PORT = 80;
+var IP = `localhost${PORT!=80?`:${PORT}`:''}`
 
 var app = express();
 const corsOptions = {
@@ -62,13 +63,10 @@ var jwt = require('jsonwebtoken');
 var secret = require('./secret');
 var fs = require('fs');
 
-app.get('/upload1', function (req, res) {
-    console.log('hello')
-    res.send(`<div> <form name="jeff" method="POST" action="/upload"> <input type="file"/> </form> </div>`)
-})
+var uuid = require('uuid');
 
 app.post('/upload', upload.single('file'), function (req, res) {
-        if (req.body.fromSite == 'true') {
+    if (req.body.fromSite == 'true') {
         var token = req.body.token;
         try {
             var info;
@@ -87,7 +85,7 @@ app.post('/upload', upload.single('file'), function (req, res) {
                             uploader: info.Username,
                             type: file.mimetype
                         });
-                        mongoFile.save().then((e) => res.send('Recived and saved'));
+                        mongoFile.save().then(()=>res.send('Done'));
                     });
                 })
             }
@@ -97,24 +95,27 @@ app.post('/upload', upload.single('file'), function (req, res) {
         }
     }
     else {
-        console.log('hello!!!');
         var key = req.body.apiKey;
         var file = req.file;
         User.findOne({ apiKey: key }).then((u) => {
-            console.log(u);
             var tpath = path.resolve('./users/' + u.username + '/' + file.originalname);
-            GenericFile.remove({ name: file.originalname,userRelativePath: ''}).then(() => {
-                var writeFile = fs.writeFile(tpath , file.buffer, (err, result) => {
+            GenericFile.remove({ name: file.originalname, userRelativePath: '/' }).then(() => {
+                var writeFile = fs.writeFile(tpath, file.buffer, (err, result) => {
                     if (err) throw err;
                     var mongoFile = new GenericFile({
                         absolutePath: tpath,
-                        userRelativePath: '',
+                        userRelativePath: '/',
                         fileSize: file.size,
                         name: file.originalname,
                         uploader: u.username,
                         type: file.mimetype
                     });
-                    mongoFile.save().then((e) => res.send('Recived and saved'));
+                    var url = uuid.v4();
+                    mongoFile.sharing_links.push(url);
+                    mongoFile.save().then(()=>res.send({
+                        url: `${IP}/f/${url}`,
+                        thumb: `${IP}/f/${url}`
+                    }));
                 });
             })
         })
@@ -160,12 +161,7 @@ app.get('/f/:hash', function (req, res) {
     })
 })
 
-app.get('/form.html', (req, res) => {
-    console.log('what the FUCK')
-    res.sendFile(path.resolve('../../dist/form.html'))
-})
 app.get('/*', function (req, res) {
-    console.log('what is happening')
     res.sendFile(path.resolve(__dirname, '../../dist/index.html'));
 });
 
